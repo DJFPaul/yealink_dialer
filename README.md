@@ -9,7 +9,7 @@ Download the latest version from Releases. <br>
 https://github.com/DJFPaul/yealink_dialer/releases <br>
 <br>
 Unzip folder to a directory of choice. <br>
-It is recommended not to use a directory that required admin write permissions. <br>
+It is recommended not to use a directory that requires admin write permissions. <br>
 If you choose such, you will need to launch the utility as admin when ever you change settings. <br>
 <br>
 To registers the application for the first time, run `register.bat`. <br>
