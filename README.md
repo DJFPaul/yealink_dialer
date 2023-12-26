@@ -47,3 +47,15 @@ Look at your phones screen and confirm that you want to allow remote access. <br
 <br>
 If you do not see any message on your Yealink Device, and it does not dial anything, check your settings again. <br>
 <br>
+If everything is setup correctly, you should now be able to click on callto: and tel: links and it should open up Yealink Dialer. <br>
+
+![image](https://github.com/DJFPaul/yealink_dialer/assets/35642602/868973ba-d89e-45eb-b88a-e67ee1ad97fd)
+<br>
+
+# Optional Options
+In the data folder, you can find a `config.ini` with some additional options.<br>
+<br>
+`autoclose=true` The dial window will auto close after a set time. <br>
+`closedelay=8` Specifies the delay after which to auto close. <br>
+`autodial=false` Setting this to true will automatically try to call any number you click. <br>
+`dialdelay` Specifies the time to way until autodial will forward the call request. <br>
