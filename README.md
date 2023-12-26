@@ -20,7 +20,7 @@ This will setup all nesseary registry entries to handle the callto links <br>
 If you ever move the folder, run this again to update the paths. <br>
 <br>
 After running register.bat, Yealink Dialer should open it self. <br>
-When launching the application without a callto link, it will present the cofing interface. <br>
+When launching the application without a callto link, it will present the confing interface. <br>
 
 ![image](https://github.com/DJFPaul/yealink_dialer/assets/35642602/0079859b-43bb-420e-8a45-8b1c9a188362)
 <br>
