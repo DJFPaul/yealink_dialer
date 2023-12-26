@@ -98,7 +98,7 @@ Partial Class Form1
         Me.RichTextBox1.ScrollBars = System.Windows.Forms.RichTextBoxScrollBars.None
         Me.RichTextBox1.Size = New System.Drawing.Size(238, 58)
         Me.RichTextBox1.TabIndex = 9
-        Me.RichTextBox1.Text = ""
+        Me.RichTextBox1.Text = "PHONEIP=192.168.1.100" & Global.Microsoft.VisualBasic.ChrW(10) & "SIPACCOUNT=10@192.168.1.1" & Global.Microsoft.VisualBasic.ChrW(10) & "USERNAME=admin" & Global.Microsoft.VisualBasic.ChrW(10) & "PASSWORD=admin" & Global.Microsoft.VisualBasic.ChrW(10)
         Me.RichTextBox1.Visible = False
         '
         'Button2
