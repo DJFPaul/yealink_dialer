@@ -27,7 +27,23 @@ When launching the application without a callto link, it will present the cofing
 Change these settings to reflect the correct settings of your Yealink device. <br>
 <br>
 `PHONEIP`  Specify the IP of the YeaLink Phone that the calls should be dialed with. <br>
-`SIPACCOUNT`  Specify the SIP account the call should be made with. The format is USER@IP <br>
+`SIPACCOUNT`  Specify the SIP account the call should be made with. The format is USERNAME@SIPSERVERIP <br>
 `USERNAME`   The username used to login to your Yealink phone's web interface. <br>
 `PASSWORD`   The password used to login to your Yealink phone's web interface. <br>
+<br>
+You can now hit save. <br>
+<br>
+For this utility to work, you need to enable the CSTA control on your Yealink Device. <br>
+You can find it here.<br>
+
+![image](https://github.com/DJFPaul/yealink_dialer/assets/35642602/0dfcd5dd-3de8-424e-99c6-eb58cade41d5)
+<br>
+You can either specify your PC IP and limit it to just you, or use a wildcards in the IP field. <br>
+<br>
+After this step is done, you can hit the test button. <br>
+It will ask you to confirm the test and will try to make a call to 012345767890 once you do. <br>
+The first time you do this, or when ever you change the CSTA settings, your Yealink Phone will ask you for permission. <br>
+Look at your phones screen and confirm that you want to allow remote access. <br>
+<br>
+If you do not see any message on your Yealink Device, and it does not dial anything, check your settings again. <br>
 <br>
