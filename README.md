@@ -33,10 +33,9 @@ Change these settings to reflect the correct settings of your Yealink device. <b
 <br>
 You can now hit save. <br>
 <br>
-For this utility to work, you need to enable the CSTA control on your Yealink Device. <br>
-You can find it here.<br>
+For this utility to work, you need to configure the Action URI Allow IP List <br>
 
-![image](https://github.com/DJFPaul/yealink_dialer/assets/35642602/0dfcd5dd-3de8-424e-99c6-eb58cade41d5)
+![image](https://github.com/DJFPaul/yealink_dialer/assets/35642602/18bb20c9-dc72-439f-b1b5-fddcc090b5cb)
 <br>
 You can either specify your PC IP and limit it to just you, or use a wildcards in the IP field. <br>
 <br>
