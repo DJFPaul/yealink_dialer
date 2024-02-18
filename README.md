@@ -41,7 +41,7 @@ You can either specify your PC IP and limit it to just you, or use a wildcards i
 <br>
 After this step is done, you can hit the test button. <br>
 It will ask you to confirm the test and will try to make a call to 012345767890 once you do. <br>
-The first time you do this, or when ever you change the CSTA settings, your Yealink Phone will ask you for permission. <br>
+The first time you do this, or when ever you change the these settings, your Yealink Phone will ask you for permission. <br>
 Look at your phones screen and confirm that you want to allow remote access. <br>
 <br>
 If you do not see any message on your Yealink Device, and it does not dial anything, check your settings again. <br>
