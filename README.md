@@ -1,5 +1,6 @@
 # Yealink Dialer
 This utility provides a interface for handling CALLTO links and forwarding them to Yealink SIP Phones. <br>
+Additionally can directly be passed a number via command line. <br>
 
 ![image](https://github.com/DJFPaul/yealink_dialer/assets/35642602/868973ba-d89e-45eb-b88a-e67ee1ad97fd)
 <br>
