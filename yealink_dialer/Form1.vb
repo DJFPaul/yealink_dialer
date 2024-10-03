@@ -2,6 +2,7 @@
 Imports System.IO
 Imports System.Text
 Imports System.Management
+Imports System.Windows.Forms.VisualStyles.VisualStyleElement
 Public Class Form1
     Inherits System.Windows.Forms.Form
 
@@ -44,18 +45,17 @@ Public Class Form1
             CRDTA = System.Text.Encoding.UTF8.GetString(data, 0, i)
             cs.Close()
             rd.Clear()
-            RichTextBox1.Text = CRDTA
+            PhoneConfigBox.Text = CRDTA
 
         Catch ex As Exception
-
         Finally
         End Try
 
         'Configure parameters
-        PHONEIP = RichTextBox1.Lines(0).Replace("PHONEIP=", "")
-        SIPACCOUNT = RichTextBox1.Lines(1).Replace("SIPACCOUNT=", "")
-        USERNAME = RichTextBox1.Lines(2).Replace("USERNAME=", "")
-        PASSWORD = RichTextBox1.Lines(3).Replace("PASSWORD=", "")
+        PHONEIP = PhoneConfigBox.Lines(0).Replace("PHONEIP=", "")
+        SIPACCOUNT = PhoneConfigBox.Lines(1).Replace("SIPACCOUNT=", "")
+        USERNAME = PhoneConfigBox.Lines(2).Replace("USERNAME=", "")
+        PASSWORD = PhoneConfigBox.Lines(3).Replace("PASSWORD=", "")
 
 
 
@@ -64,75 +64,29 @@ Public Class Form1
             DIAL = My.Application.CommandLineArgs(0).Replace("tel:", "")
             DIAL = DIAL.Replace("/", "")
             DIAL = DIAL.Replace("-", "")
-            Label1.Text = "Calling: " & DIAL
+            TelNumberBox.Text = DIAL
 
             'Start timers depending on config file.
             If RichTextBox2.Lines(0).Replace("autoclose=", "") = "true" Then CloseTimer.Start()
             If RichTextBox2.Lines(2).Replace("autodial=", "") = "true" Then CallDelay.Start()
         Catch
-            Label1.Text = ""
+            TelNumberBox.Text = ""
             Button2.Show()
-            Button1.Text = "Save"
-            RichTextBox1.Show()
             DIAL = "012345678910"
         Finally
-            Label2.Text = "Phone IP: " & PHONEIP
+            IPLabel.Text = "Phone IP: " & PHONEIP
         End Try
+
+        SettingsPanel.Size = New Size(205, 362)
     End Sub
 
-    Private Sub Button1_Click_1(sender As Object, e As EventArgs) Handles Button1.Click
-        'This button serves 2 functions, depending on the mode.
+    Private Sub Button1_Click_1(sender As Object, e As EventArgs) Handles CallButton.Click
 
-        If Button1.Text = "Save" Then
-
-            'If application was not launched by a callto link, this saves the configuration with encryption.
-
-            'Generate new random crypto password and save it.
-
-            CFGSecret = RandomString(250, 256)
-            Using writer As New System.IO.StreamWriter(Application.StartupPath() & "\data\secret.cfg")
-                For Each line In "A"
-                    writer.Write(CFGSecret)
-                Next
-            End Using
-
-
-            'Encrypt config with generated string.
-
-            Dim rd As New RijndaelManaged
-            Dim md5 As New MD5CryptoServiceProvider
-            Dim key() As Byte = md5.ComputeHash(Encoding.UTF8.GetBytes(CFGSecret))
-            md5.Clear()
-            rd.Key = key
-            rd.GenerateIV()
-            Dim iv() As Byte = rd.IV
-            Dim ms As New MemoryStream
-            ms.Write(iv, 0, iv.Length)
-            Dim cs As New CryptoStream(ms, rd.CreateEncryptor, CryptoStreamMode.Write)
-            Dim data() As Byte = System.Text.Encoding.UTF8.GetBytes(RichTextBox1.Text)
-            cs.Write(data, 0, data.Length)
-            cs.FlushFinalBlock()
-            Dim encdata() As Byte = ms.ToArray()
-            CRDTA = Convert.ToBase64String(encdata)
-            cs.Close()
-            rd.Clear()
-
-            'Save encrypted data.
-            Using writer As New System.IO.StreamWriter(Application.StartupPath() & "\data\phone.cfg")
-                For Each line In "A"
-                    writer.Write(CRDTA)
-                Next
-            End Using
-
-        Else
-
+        If CallButton.Enabled Then
             'If launched with callto link, this button instead is the CALL button and initiates the call once pressed.
-
+            DIAL = TelNumberBox.Text
             CloseTimer.Stop()
             WebBrowser1.Navigate("http://" & USERNAME & ":" & PASSWORD & "@" & PHONEIP & "/servlet?key=number=" & DIAL & "&outgoing_uri=" & SIPACCOUNT & "")
-            Closer.Start()
-            Me.Hide()
-
         End If
     End Sub
 
@@ -160,18 +114,14 @@ Public Class Form1
         Result = MessageBox.Show("Initiate test call?" & vbNewLine & "(Calls 01234567890)", "Test call?", Buttons, MessageBoxIcon.Information)
 
         If Result = DialogResult.Yes Then
-            PHONEIP = RichTextBox1.Lines(0).Replace("PHONEIP=", "")
-            SIPACCOUNT = RichTextBox1.Lines(1).Replace("SIPACCOUNT=", "")
-            USERNAME = RichTextBox1.Lines(2).Replace("USERNAME=", "")
-            PASSWORD = RichTextBox1.Lines(3).Replace("PASSWORD=", "")
+            PHONEIP = PhoneConfigBox.Lines(0).Replace("PHONEIP=", "")
+            SIPACCOUNT = PhoneConfigBox.Lines(1).Replace("SIPACCOUNT=", "")
+            USERNAME = PhoneConfigBox.Lines(2).Replace("USERNAME=", "")
+            PASSWORD = PhoneConfigBox.Lines(3).Replace("PASSWORD=", "")
 
             WebBrowser1.Navigate("http://" & USERNAME & ":" & PASSWORD & "@" & PHONEIP & "/servlet?key=number=" & DIAL & "&outgoing_uri=" & SIPACCOUNT & "")
 
         End If
-    End Sub
-
-    Private Sub Closer_Tick(sender As Object, e As EventArgs) Handles Closer.Tick
-        Close()
     End Sub
 
     'This function generated the random string to use for encrypting the config file.
@@ -196,4 +146,109 @@ Public Class Form1
         Next
         Return computerinfo.GetHashCode
     End Function
+
+    Private Sub Button3_Click(sender As Object, e As EventArgs) Handles Button3.Click
+        Process.Start("explorer.exe", Application.StartupPath & "\data")
+    End Sub
+
+    Private Sub Button4_Click(sender As Object, e As EventArgs) Handles Button4.Click
+        'Generate new random crypto password and save it.
+
+        CFGSecret = RandomString(250, 256)
+        Using writer As New System.IO.StreamWriter(Application.StartupPath() & "\data\secret.cfg")
+            For Each line In "A"
+                writer.Write(CFGSecret)
+            Next
+        End Using
+
+
+        'Encrypt config with generated string.
+
+        Dim rd As New RijndaelManaged
+        Dim md5 As New MD5CryptoServiceProvider
+        Dim key() As Byte = md5.ComputeHash(Encoding.UTF8.GetBytes(CFGSecret))
+        md5.Clear()
+        rd.Key = key
+        rd.GenerateIV()
+        Dim iv() As Byte = rd.IV
+        Dim ms As New MemoryStream
+        ms.Write(iv, 0, iv.Length)
+        Dim cs As New CryptoStream(ms, rd.CreateEncryptor, CryptoStreamMode.Write)
+        Dim data() As Byte = System.Text.Encoding.UTF8.GetBytes(PhoneConfigBox.Text)
+        cs.Write(data, 0, data.Length)
+        cs.FlushFinalBlock()
+        Dim encdata() As Byte = ms.ToArray()
+        CRDTA = Convert.ToBase64String(encdata)
+        cs.Close()
+        rd.Clear()
+
+        'Save encrypted data.
+        Using writer As New System.IO.StreamWriter(Application.StartupPath() & "\data\phone.cfg")
+            For Each line In "A"
+                writer.Write(CRDTA)
+            Next
+        End Using
+        SettingsPanel.Hide()
+    End Sub
+
+    Private Sub TextBox1_TextChanged(sender As Object, e As EventArgs) Handles TelNumberBox.TextChanged
+        'If numberfield is not empty, enable call button.
+        If TelNumberBox.Text = "" Then
+            CallButton.Enabled = False
+        Else
+            CallButton.Enabled = True
+        End If
+    End Sub
+
+    Private Sub Dial1_Click(sender As Object, e As EventArgs) Handles Dial1.Click
+        TelNumberBox.Text = TelNumberBox.Text & "1"
+    End Sub
+
+    Private Sub Button5_Click(sender As Object, e As EventArgs) Handles Dial2.Click
+        TelNumberBox.Text = TelNumberBox.Text & "2"
+    End Sub
+
+    Private Sub Button6_Click(sender As Object, e As EventArgs) Handles Dial3.Click
+        TelNumberBox.Text = TelNumberBox.Text & "3"
+    End Sub
+
+    Private Sub Dial4_Click(sender As Object, e As EventArgs) Handles Dial4.Click
+        TelNumberBox.Text = TelNumberBox.Text & "4"
+    End Sub
+
+    Private Sub Button8_Click(sender As Object, e As EventArgs) Handles Dial5.Click
+        TelNumberBox.Text = TelNumberBox.Text & "5"
+    End Sub
+
+    Private Sub Dial6_Click(sender As Object, e As EventArgs) Handles Dial6.Click
+        TelNumberBox.Text = TelNumberBox.Text & "6"
+    End Sub
+
+    Private Sub Dial7_Click(sender As Object, e As EventArgs) Handles Dial7.Click
+        TelNumberBox.Text = TelNumberBox.Text & "7"
+    End Sub
+
+    Private Sub Dial8_Click(sender As Object, e As EventArgs) Handles Dial8.Click
+        TelNumberBox.Text = TelNumberBox.Text & "8"
+    End Sub
+
+    Private Sub Dial9_Click(sender As Object, e As EventArgs) Handles Dial9.Click
+        TelNumberBox.Text = TelNumberBox.Text & "9"
+    End Sub
+
+    Private Sub Dial0_Click(sender As Object, e As EventArgs) Handles Dial0.Click
+        TelNumberBox.Text = TelNumberBox.Text & "0"
+    End Sub
+
+    Private Sub Button15_Click(sender As Object, e As EventArgs) Handles Button15.Click
+        If TelNumberBox.Text.Length > 0 Then TelNumberBox.Text = TelNumberBox.Text.Substring(0, TelNumberBox.Text.Length - 1)
+    End Sub
+
+    Private Sub Button13_Click(sender As Object, e As EventArgs) Handles Button13.Click
+        TelNumberBox.Text = TelNumberBox.Text & "+"
+    End Sub
+
+    Private Sub SettingsLabel_Click(sender As Object, e As EventArgs) Handles SettingsLabel.Click
+        SettingsPanel.Show()
+    End Sub
 End Class

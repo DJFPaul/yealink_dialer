@@ -24,64 +24,123 @@ Partial Class Form1
     Private Sub InitializeComponent()
         Me.components = New System.ComponentModel.Container()
         Dim resources As System.ComponentModel.ComponentResourceManager = New System.ComponentModel.ComponentResourceManager(GetType(Form1))
-        Me.Label1 = New System.Windows.Forms.Label()
-        Me.Panel1 = New System.Windows.Forms.Panel()
+        Me.SettingsPanel = New System.Windows.Forms.Panel()
+        Me.Button3 = New System.Windows.Forms.Button()
+        Me.Button4 = New System.Windows.Forms.Button()
         Me.WebBrowser1 = New System.Windows.Forms.WebBrowser()
-        Me.Label2 = New System.Windows.Forms.Label()
-        Me.Button1 = New System.Windows.Forms.Button()
+        Me.PhoneConfigBox = New System.Windows.Forms.RichTextBox()
+        Me.Button2 = New System.Windows.Forms.Button()
+        Me.RichTextBox2 = New System.Windows.Forms.RichTextBox()
+        Me.IPLabel = New System.Windows.Forms.Label()
+        Me.CallButton = New System.Windows.Forms.Button()
         Me.CloseTimer = New System.Windows.Forms.Timer(Me.components)
         Me.CallDelay = New System.Windows.Forms.Timer(Me.components)
-        Me.RichTextBox1 = New System.Windows.Forms.RichTextBox()
-        Me.Button2 = New System.Windows.Forms.Button()
-        Me.Closer = New System.Windows.Forms.Timer(Me.components)
-        Me.RichTextBox2 = New System.Windows.Forms.RichTextBox()
-        Me.Panel1.SuspendLayout()
+        Me.Dial1 = New System.Windows.Forms.Button()
+        Me.Dial2 = New System.Windows.Forms.Button()
+        Me.Dial3 = New System.Windows.Forms.Button()
+        Me.Dial4 = New System.Windows.Forms.Button()
+        Me.Dial5 = New System.Windows.Forms.Button()
+        Me.Dial6 = New System.Windows.Forms.Button()
+        Me.Dial7 = New System.Windows.Forms.Button()
+        Me.Dial8 = New System.Windows.Forms.Button()
+        Me.Dial9 = New System.Windows.Forms.Button()
+        Me.Button13 = New System.Windows.Forms.Button()
+        Me.Dial0 = New System.Windows.Forms.Button()
+        Me.Button15 = New System.Windows.Forms.Button()
+        Me.TelNumberBox = New System.Windows.Forms.TextBox()
+        Me.SettingsLabel = New System.Windows.Forms.Label()
+        Me.SettingsPanel.SuspendLayout()
         Me.SuspendLayout()
         '
-        'Label1
+        'SettingsPanel
         '
-        Me.Label1.Font = New System.Drawing.Font("Microsoft Sans Serif", 15.75!, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
-        Me.Label1.Location = New System.Drawing.Point(0, -1)
-        Me.Label1.Name = "Label1"
-        Me.Label1.Size = New System.Drawing.Size(341, 34)
-        Me.Label1.TabIndex = 1
-        Me.Label1.Text = "No number provided"
-        Me.Label1.TextAlign = System.Drawing.ContentAlignment.MiddleCenter
+        Me.SettingsPanel.Controls.Add(Me.Button3)
+        Me.SettingsPanel.Controls.Add(Me.Button4)
+        Me.SettingsPanel.Controls.Add(Me.WebBrowser1)
+        Me.SettingsPanel.Controls.Add(Me.PhoneConfigBox)
+        Me.SettingsPanel.Controls.Add(Me.Button2)
+        Me.SettingsPanel.Controls.Add(Me.RichTextBox2)
+        Me.SettingsPanel.Location = New System.Drawing.Point(12, 12)
+        Me.SettingsPanel.Name = "SettingsPanel"
+        Me.SettingsPanel.Size = New System.Drawing.Size(205, 53)
+        Me.SettingsPanel.TabIndex = 4
+        Me.SettingsPanel.Visible = False
         '
-        'Panel1
+        'Button3
         '
-        Me.Panel1.Controls.Add(Me.WebBrowser1)
-        Me.Panel1.Location = New System.Drawing.Point(12, 106)
-        Me.Panel1.Name = "Panel1"
-        Me.Panel1.Size = New System.Drawing.Size(273, 168)
-        Me.Panel1.TabIndex = 4
+        Me.Button3.Font = New System.Drawing.Font("Microsoft Sans Serif", 15.75!, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
+        Me.Button3.Location = New System.Drawing.Point(3, 123)
+        Me.Button3.Name = "Button3"
+        Me.Button3.Size = New System.Drawing.Size(199, 50)
+        Me.Button3.TabIndex = 11
+        Me.Button3.Text = "Config Folder"
+        Me.Button3.UseVisualStyleBackColor = True
+        '
+        'Button4
+        '
+        Me.Button4.Font = New System.Drawing.Font("Microsoft Sans Serif", 15.75!, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
+        Me.Button4.Location = New System.Drawing.Point(3, 309)
+        Me.Button4.Name = "Button4"
+        Me.Button4.Size = New System.Drawing.Size(199, 50)
+        Me.Button4.TabIndex = 11
+        Me.Button4.Text = "Save"
+        Me.Button4.UseVisualStyleBackColor = True
         '
         'WebBrowser1
         '
-        Me.WebBrowser1.Dock = System.Windows.Forms.DockStyle.Fill
-        Me.WebBrowser1.Location = New System.Drawing.Point(0, 0)
+        Me.WebBrowser1.Location = New System.Drawing.Point(10000, 0)
         Me.WebBrowser1.MinimumSize = New System.Drawing.Size(20, 20)
         Me.WebBrowser1.Name = "WebBrowser1"
-        Me.WebBrowser1.Size = New System.Drawing.Size(273, 168)
+        Me.WebBrowser1.Size = New System.Drawing.Size(20, 168)
         Me.WebBrowser1.TabIndex = 0
         '
-        'Label2
+        'PhoneConfigBox
         '
-        Me.Label2.ImageAlign = System.Drawing.ContentAlignment.MiddleLeft
-        Me.Label2.Location = New System.Drawing.Point(16, 48)
-        Me.Label2.Name = "Label2"
-        Me.Label2.Size = New System.Drawing.Size(150, 15)
-        Me.Label2.TabIndex = 7
-        Me.Label2.Text = "no account"
+        Me.PhoneConfigBox.Location = New System.Drawing.Point(3, 3)
+        Me.PhoneConfigBox.Name = "PhoneConfigBox"
+        Me.PhoneConfigBox.ScrollBars = System.Windows.Forms.RichTextBoxScrollBars.None
+        Me.PhoneConfigBox.Size = New System.Drawing.Size(238, 58)
+        Me.PhoneConfigBox.TabIndex = 9
+        Me.PhoneConfigBox.Text = "PHONEIP=192.168.1.100" & Global.Microsoft.VisualBasic.ChrW(10) & "SIPACCOUNT=10@192.168.1.1" & Global.Microsoft.VisualBasic.ChrW(10) & "USERNAME=admin" & Global.Microsoft.VisualBasic.ChrW(10) & "PASSWORD=admin" & Global.Microsoft.VisualBasic.ChrW(10)
         '
-        'Button1
+        'Button2
         '
-        Me.Button1.Location = New System.Drawing.Point(246, 31)
-        Me.Button1.Name = "Button1"
-        Me.Button1.Size = New System.Drawing.Size(93, 32)
-        Me.Button1.TabIndex = 8
-        Me.Button1.Text = "Call"
-        Me.Button1.UseVisualStyleBackColor = True
+        Me.Button2.Font = New System.Drawing.Font("Microsoft Sans Serif", 15.75!, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
+        Me.Button2.Location = New System.Drawing.Point(3, 67)
+        Me.Button2.Name = "Button2"
+        Me.Button2.Size = New System.Drawing.Size(199, 50)
+        Me.Button2.TabIndex = 10
+        Me.Button2.Text = "Test"
+        Me.Button2.UseVisualStyleBackColor = True
+        '
+        'RichTextBox2
+        '
+        Me.RichTextBox2.Location = New System.Drawing.Point(6, 3)
+        Me.RichTextBox2.Name = "RichTextBox2"
+        Me.RichTextBox2.ScrollBars = System.Windows.Forms.RichTextBoxScrollBars.None
+        Me.RichTextBox2.Size = New System.Drawing.Size(181, 58)
+        Me.RichTextBox2.TabIndex = 11
+        Me.RichTextBox2.Text = ""
+        Me.RichTextBox2.Visible = False
+        '
+        'IPLabel
+        '
+        Me.IPLabel.ImageAlign = System.Drawing.ContentAlignment.MiddleLeft
+        Me.IPLabel.Location = New System.Drawing.Point(13, 359)
+        Me.IPLabel.Name = "IPLabel"
+        Me.IPLabel.Size = New System.Drawing.Size(150, 15)
+        Me.IPLabel.TabIndex = 7
+        Me.IPLabel.Text = "no account"
+        '
+        'CallButton
+        '
+        Me.CallButton.Enabled = False
+        Me.CallButton.Location = New System.Drawing.Point(12, 324)
+        Me.CallButton.Name = "CallButton"
+        Me.CallButton.Size = New System.Drawing.Size(204, 32)
+        Me.CallButton.TabIndex = 8
+        Me.CallButton.Text = "Call"
+        Me.CallButton.UseVisualStyleBackColor = True
         '
         'CloseTimer
         '
@@ -91,71 +150,203 @@ Partial Class Form1
         '
         Me.CallDelay.Interval = 3000
         '
-        'RichTextBox1
+        'Dial1
         '
-        Me.RichTextBox1.Location = New System.Drawing.Point(5, 6)
-        Me.RichTextBox1.Name = "RichTextBox1"
-        Me.RichTextBox1.ScrollBars = System.Windows.Forms.RichTextBoxScrollBars.None
-        Me.RichTextBox1.Size = New System.Drawing.Size(238, 58)
-        Me.RichTextBox1.TabIndex = 9
-        Me.RichTextBox1.Text = "PHONEIP=192.168.1.100" & Global.Microsoft.VisualBasic.ChrW(10) & "SIPACCOUNT=10@192.168.1.1" & Global.Microsoft.VisualBasic.ChrW(10) & "USERNAME=admin" & Global.Microsoft.VisualBasic.ChrW(10) & "PASSWORD=admin" & Global.Microsoft.VisualBasic.ChrW(10)
-        Me.RichTextBox1.Visible = False
+        Me.Dial1.Font = New System.Drawing.Font("Consolas", 24.0!, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
+        Me.Dial1.Location = New System.Drawing.Point(12, 44)
+        Me.Dial1.Name = "Dial1"
+        Me.Dial1.Size = New System.Drawing.Size(64, 64)
+        Me.Dial1.TabIndex = 12
+        Me.Dial1.Text = "1"
+        Me.Dial1.UseVisualStyleBackColor = True
         '
-        'Button2
+        'Dial2
         '
-        Me.Button2.Location = New System.Drawing.Point(246, 5)
-        Me.Button2.Name = "Button2"
-        Me.Button2.Size = New System.Drawing.Size(93, 24)
-        Me.Button2.TabIndex = 10
-        Me.Button2.Text = "Test"
-        Me.Button2.UseVisualStyleBackColor = True
-        Me.Button2.Visible = False
+        Me.Dial2.Font = New System.Drawing.Font("Consolas", 24.0!, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
+        Me.Dial2.Location = New System.Drawing.Point(82, 44)
+        Me.Dial2.Name = "Dial2"
+        Me.Dial2.Size = New System.Drawing.Size(64, 64)
+        Me.Dial2.TabIndex = 13
+        Me.Dial2.Text = "2"
+        Me.Dial2.UseVisualStyleBackColor = True
         '
-        'Closer
+        'Dial3
         '
-        Me.Closer.Interval = 5000
+        Me.Dial3.Font = New System.Drawing.Font("Consolas", 24.0!, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
+        Me.Dial3.Location = New System.Drawing.Point(152, 44)
+        Me.Dial3.Name = "Dial3"
+        Me.Dial3.Size = New System.Drawing.Size(64, 64)
+        Me.Dial3.TabIndex = 14
+        Me.Dial3.Text = "3"
+        Me.Dial3.UseVisualStyleBackColor = True
         '
-        'RichTextBox2
+        'Dial4
         '
-        Me.RichTextBox2.Location = New System.Drawing.Point(12, 118)
-        Me.RichTextBox2.Name = "RichTextBox2"
-        Me.RichTextBox2.ScrollBars = System.Windows.Forms.RichTextBoxScrollBars.None
-        Me.RichTextBox2.Size = New System.Drawing.Size(181, 58)
-        Me.RichTextBox2.TabIndex = 11
-        Me.RichTextBox2.Text = ""
-        Me.RichTextBox2.Visible = False
+        Me.Dial4.Font = New System.Drawing.Font("Consolas", 24.0!, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
+        Me.Dial4.Location = New System.Drawing.Point(12, 114)
+        Me.Dial4.Name = "Dial4"
+        Me.Dial4.Size = New System.Drawing.Size(64, 64)
+        Me.Dial4.TabIndex = 15
+        Me.Dial4.Text = "4"
+        Me.Dial4.UseVisualStyleBackColor = True
+        '
+        'Dial5
+        '
+        Me.Dial5.Font = New System.Drawing.Font("Consolas", 24.0!, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
+        Me.Dial5.Location = New System.Drawing.Point(82, 114)
+        Me.Dial5.Name = "Dial5"
+        Me.Dial5.Size = New System.Drawing.Size(64, 64)
+        Me.Dial5.TabIndex = 16
+        Me.Dial5.Text = "5"
+        Me.Dial5.UseVisualStyleBackColor = True
+        '
+        'Dial6
+        '
+        Me.Dial6.Font = New System.Drawing.Font("Consolas", 24.0!, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
+        Me.Dial6.Location = New System.Drawing.Point(152, 114)
+        Me.Dial6.Name = "Dial6"
+        Me.Dial6.Size = New System.Drawing.Size(64, 64)
+        Me.Dial6.TabIndex = 17
+        Me.Dial6.Text = "6"
+        Me.Dial6.UseVisualStyleBackColor = True
+        '
+        'Dial7
+        '
+        Me.Dial7.Font = New System.Drawing.Font("Consolas", 24.0!, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
+        Me.Dial7.Location = New System.Drawing.Point(12, 184)
+        Me.Dial7.Name = "Dial7"
+        Me.Dial7.Size = New System.Drawing.Size(64, 64)
+        Me.Dial7.TabIndex = 18
+        Me.Dial7.Text = "7"
+        Me.Dial7.UseVisualStyleBackColor = True
+        '
+        'Dial8
+        '
+        Me.Dial8.Font = New System.Drawing.Font("Consolas", 24.0!, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
+        Me.Dial8.Location = New System.Drawing.Point(82, 184)
+        Me.Dial8.Name = "Dial8"
+        Me.Dial8.Size = New System.Drawing.Size(64, 64)
+        Me.Dial8.TabIndex = 19
+        Me.Dial8.Text = "8"
+        Me.Dial8.UseVisualStyleBackColor = True
+        '
+        'Dial9
+        '
+        Me.Dial9.Font = New System.Drawing.Font("Consolas", 24.0!, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
+        Me.Dial9.Location = New System.Drawing.Point(152, 184)
+        Me.Dial9.Name = "Dial9"
+        Me.Dial9.Size = New System.Drawing.Size(64, 64)
+        Me.Dial9.TabIndex = 20
+        Me.Dial9.Text = "9"
+        Me.Dial9.UseVisualStyleBackColor = True
+        '
+        'Button13
+        '
+        Me.Button13.Font = New System.Drawing.Font("Consolas", 24.0!, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
+        Me.Button13.Location = New System.Drawing.Point(12, 254)
+        Me.Button13.Name = "Button13"
+        Me.Button13.Size = New System.Drawing.Size(64, 64)
+        Me.Button13.TabIndex = 21
+        Me.Button13.Text = "+"
+        Me.Button13.UseVisualStyleBackColor = True
+        '
+        'Dial0
+        '
+        Me.Dial0.Font = New System.Drawing.Font("Consolas", 24.0!, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
+        Me.Dial0.Location = New System.Drawing.Point(82, 254)
+        Me.Dial0.Name = "Dial0"
+        Me.Dial0.Size = New System.Drawing.Size(64, 64)
+        Me.Dial0.TabIndex = 22
+        Me.Dial0.Text = "0"
+        Me.Dial0.UseVisualStyleBackColor = True
+        '
+        'Button15
+        '
+        Me.Button15.Font = New System.Drawing.Font("Consolas", 24.0!, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
+        Me.Button15.Location = New System.Drawing.Point(152, 254)
+        Me.Button15.Name = "Button15"
+        Me.Button15.Size = New System.Drawing.Size(64, 64)
+        Me.Button15.TabIndex = 23
+        Me.Button15.Text = "C"
+        Me.Button15.UseVisualStyleBackColor = True
+        '
+        'TelNumberBox
+        '
+        Me.TelNumberBox.Font = New System.Drawing.Font("Consolas", 12.0!, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
+        Me.TelNumberBox.Location = New System.Drawing.Point(12, 12)
+        Me.TelNumberBox.MaxLength = 22
+        Me.TelNumberBox.Name = "TelNumberBox"
+        Me.TelNumberBox.Size = New System.Drawing.Size(204, 26)
+        Me.TelNumberBox.TabIndex = 24
+        '
+        'SettingsLabel
+        '
+        Me.SettingsLabel.AutoSize = True
+        Me.SettingsLabel.Cursor = System.Windows.Forms.Cursors.Hand
+        Me.SettingsLabel.Font = New System.Drawing.Font("Microsoft Sans Serif", 8.25!, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
+        Me.SettingsLabel.ForeColor = System.Drawing.Color.RoyalBlue
+        Me.SettingsLabel.Location = New System.Drawing.Point(163, 359)
+        Me.SettingsLabel.Name = "SettingsLabel"
+        Me.SettingsLabel.Size = New System.Drawing.Size(53, 13)
+        Me.SettingsLabel.TabIndex = 25
+        Me.SettingsLabel.Text = "Settings"
         '
         'Form1
         '
         Me.AutoScaleDimensions = New System.Drawing.SizeF(6.0!, 13.0!)
         Me.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font
-        Me.ClientSize = New System.Drawing.Size(344, 69)
-        Me.Controls.Add(Me.RichTextBox1)
-        Me.Controls.Add(Me.RichTextBox2)
-        Me.Controls.Add(Me.Panel1)
-        Me.Controls.Add(Me.Button2)
-        Me.Controls.Add(Me.Button1)
-        Me.Controls.Add(Me.Label2)
-        Me.Controls.Add(Me.Label1)
+        Me.ClientSize = New System.Drawing.Size(229, 381)
+        Me.Controls.Add(Me.SettingsPanel)
+        Me.Controls.Add(Me.TelNumberBox)
+        Me.Controls.Add(Me.Button15)
+        Me.Controls.Add(Me.Dial0)
+        Me.Controls.Add(Me.Button13)
+        Me.Controls.Add(Me.Dial9)
+        Me.Controls.Add(Me.Dial8)
+        Me.Controls.Add(Me.Dial7)
+        Me.Controls.Add(Me.Dial6)
+        Me.Controls.Add(Me.Dial5)
+        Me.Controls.Add(Me.Dial4)
+        Me.Controls.Add(Me.Dial3)
+        Me.Controls.Add(Me.Dial2)
+        Me.Controls.Add(Me.Dial1)
+        Me.Controls.Add(Me.CallButton)
+        Me.Controls.Add(Me.IPLabel)
+        Me.Controls.Add(Me.SettingsLabel)
         Me.FormBorderStyle = System.Windows.Forms.FormBorderStyle.FixedToolWindow
         Me.Icon = CType(resources.GetObject("$this.Icon"), System.Drawing.Icon)
         Me.MaximizeBox = False
         Me.Name = "Form1"
         Me.Text = " Yealink Dialer"
         Me.TopMost = True
-        Me.Panel1.ResumeLayout(False)
+        Me.SettingsPanel.ResumeLayout(False)
         Me.ResumeLayout(False)
+        Me.PerformLayout()
 
     End Sub
-    Friend WithEvents Label1 As Label
-    Friend WithEvents Panel1 As Panel
+    Friend WithEvents SettingsPanel As Panel
     Friend WithEvents WebBrowser1 As WebBrowser
-    Friend WithEvents Label2 As Label
-    Friend WithEvents Button1 As Button
+    Friend WithEvents IPLabel As Label
+    Friend WithEvents CallButton As Button
     Friend WithEvents CloseTimer As Timer
     Friend WithEvents CallDelay As Timer
-    Friend WithEvents RichTextBox1 As RichTextBox
+    Friend WithEvents PhoneConfigBox As RichTextBox
     Friend WithEvents Button2 As Button
-    Friend WithEvents Closer As Timer
     Friend WithEvents RichTextBox2 As RichTextBox
+    Friend WithEvents Button3 As Button
+    Friend WithEvents Button4 As Button
+    Friend WithEvents Dial1 As Button
+    Friend WithEvents Dial2 As Button
+    Friend WithEvents Dial3 As Button
+    Friend WithEvents Dial4 As Button
+    Friend WithEvents Dial5 As Button
+    Friend WithEvents Dial6 As Button
+    Friend WithEvents Dial7 As Button
+    Friend WithEvents Dial8 As Button
+    Friend WithEvents Dial9 As Button
+    Friend WithEvents Button13 As Button
+    Friend WithEvents Dial0 As Button
+    Friend WithEvents Button15 As Button
+    Friend WithEvents TelNumberBox As TextBox
+    Friend WithEvents SettingsLabel As Label
 End Class
