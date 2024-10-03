@@ -61,9 +61,7 @@ Public Class Form1
 
         'Grab command line args and sanitize them.
         Try
-            DIAL = My.Application.CommandLineArgs(0).Replace("tel:", "")
-            DIAL = DIAL.Replace("/", "")
-            DIAL = DIAL.Replace("-", "")
+            DIAL = My.Application.CommandLineArgs(0).Replace("tel:", "").Replace("phone:", "").Replace("sip:", "").Replace("callto:", "").Replace("/", "").Replace("-", "")
             TelNumberBox.Text = DIAL
 
             'Start timers depending on config file.
