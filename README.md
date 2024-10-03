@@ -22,7 +22,7 @@ This will setup all nesseary registry entries to handle the callto links <br>
 If you ever move the folder, run this again to update the paths. <br>
 <br>
 After running register.bat, Yealink Dialer should open it self. <br>
-When launching for the first time, open the settings menu that you can find at the bottm right of the application window.
+When launching for the first time, open the settings menu that you can find at the bottm right of the application window.<br>
 ![image](https://github.com/user-attachments/assets/d6a6b7de-d8d1-4c12-96b7-ffee81448024)
 
 <br>
