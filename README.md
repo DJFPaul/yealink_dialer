@@ -1,8 +1,9 @@
 # Yealink Dialer
 This utility provides a interface for handling CALLTO links and forwarding them to Yealink SIP Phones. <br>
-Additionally can directly be passed a number via command line. <br>
+Manual dialing of a number is also possible.<br>
+(This is __NOT__ a SoftPhone)<br>
 
-![image](https://github.com/DJFPaul/yealink_dialer/assets/35642602/868973ba-d89e-45eb-b88a-e67ee1ad97fd)
+![image](https://github.com/user-attachments/assets/d365cf15-e576-43e1-9ff2-422d9b860978)
 <br>
 <br>
 # How to use
@@ -21,9 +22,9 @@ This will setup all nesseary registry entries to handle the callto links <br>
 If you ever move the folder, run this again to update the paths. <br>
 <br>
 After running register.bat, Yealink Dialer should open it self. <br>
-When launching the application without a callto link, it will present the config interface. <br>
+When launching for the first time, open the settings menu that you can find at the bottm right of the application window.
+![image](https://github.com/user-attachments/assets/d6a6b7de-d8d1-4c12-96b7-ffee81448024)
 
-![image](https://github.com/DJFPaul/yealink_dialer/assets/35642602/0079859b-43bb-420e-8a45-8b1c9a188362)
 <br>
 Change these settings to reflect the correct settings of your Yealink device. <br>
 <br>
@@ -47,9 +48,7 @@ Look at your phones screen and confirm that you want to allow remote access. <br
 <br>
 If you do not see any message on your Yealink Device, and it does not dial anything, check your settings again. <br>
 <br>
-If everything is setup correctly, you should now be able to click on callto: and tel: links and it should open up Yealink Dialer. <br>
-
-![image](https://github.com/DJFPaul/yealink_dialer/assets/35642602/868973ba-d89e-45eb-b88a-e67ee1ad97fd)
+If everything is setup correctly, you should now be able to use callto: tel: sip: and phone: links or you can initiate a call by using the manual dial. <br>
 <br>
 
 # Optional Options
