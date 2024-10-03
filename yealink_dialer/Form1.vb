@@ -67,16 +67,51 @@ Public Class Form1
             'Start timers depending on config file.
             If RichTextBox2.Lines(0).Replace("autoclose=", "") = "true" Then CloseTimer.Start()
             If RichTextBox2.Lines(2).Replace("autodial=", "") = "true" Then CallDelay.Start()
+            SmallMode()
         Catch
             TelNumberBox.Text = ""
             Button2.Show()
             DIAL = "012345678910"
+            NormalMode()
+
         Finally
             IPLabel.Text = "Phone IP: " & PHONEIP
         End Try
-
+        SettingsPanel.Location = New Point(12, 12)
         SettingsPanel.Size = New Size(205, 362)
     End Sub
+    Private Function SmallMode()
+        BottomPanel.Location = New Point(0, 44)
+        Dial1.Hide()
+        Dial2.Hide()
+        Dial3.Hide()
+        Dial4.Hide()
+        Dial5.Hide()
+        Dial6.Hide()
+        Dial7.Hide()
+        Dial8.Hide()
+        Dial9.Hide()
+        Dial0.Hide()
+        DialPlus.Hide()
+        DialErase.Hide()
+        Me.Size = New Size(245, 140)
+    End Function
+    Private Function NormalMode()
+        BottomPanel.Location = New Point(0, 324)
+        Dial1.Show()
+        Dial2.Show()
+        Dial3.Show()
+        Dial4.Show()
+        Dial5.Show()
+        Dial6.Show()
+        Dial7.Show()
+        Dial8.Show()
+        Dial9.Show()
+        Dial0.Show()
+        DialPlus.Show()
+        DialErase.Show()
+        Me.Size = New Size(245, 420)
+    End Function
 
     Private Sub Button1_Click_1(sender As Object, e As EventArgs) Handles CallButton.Click
 
@@ -238,15 +273,16 @@ Public Class Form1
         TelNumberBox.Text = TelNumberBox.Text & "0"
     End Sub
 
-    Private Sub Button15_Click(sender As Object, e As EventArgs) Handles Button15.Click
+    Private Sub Button15_Click(sender As Object, e As EventArgs) Handles DialErase.Click
         If TelNumberBox.Text.Length > 0 Then TelNumberBox.Text = TelNumberBox.Text.Substring(0, TelNumberBox.Text.Length - 1)
     End Sub
 
-    Private Sub Button13_Click(sender As Object, e As EventArgs) Handles Button13.Click
+    Private Sub Button13_Click(sender As Object, e As EventArgs) Handles DialPlus.Click
         TelNumberBox.Text = TelNumberBox.Text & "+"
     End Sub
 
     Private Sub SettingsLabel_Click(sender As Object, e As EventArgs) Handles SettingsLabel.Click
+        NormalMode()
         SettingsPanel.Show()
     End Sub
 End Class

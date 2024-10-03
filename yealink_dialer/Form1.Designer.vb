@@ -44,12 +44,14 @@ Partial Class Form1
         Me.Dial7 = New System.Windows.Forms.Button()
         Me.Dial8 = New System.Windows.Forms.Button()
         Me.Dial9 = New System.Windows.Forms.Button()
-        Me.Button13 = New System.Windows.Forms.Button()
+        Me.DialPlus = New System.Windows.Forms.Button()
         Me.Dial0 = New System.Windows.Forms.Button()
-        Me.Button15 = New System.Windows.Forms.Button()
+        Me.DialErase = New System.Windows.Forms.Button()
         Me.TelNumberBox = New System.Windows.Forms.TextBox()
         Me.SettingsLabel = New System.Windows.Forms.Label()
+        Me.BottomPanel = New System.Windows.Forms.Panel()
         Me.SettingsPanel.SuspendLayout()
+        Me.BottomPanel.SuspendLayout()
         Me.SuspendLayout()
         '
         'SettingsPanel
@@ -60,9 +62,9 @@ Partial Class Form1
         Me.SettingsPanel.Controls.Add(Me.PhoneConfigBox)
         Me.SettingsPanel.Controls.Add(Me.Button2)
         Me.SettingsPanel.Controls.Add(Me.RichTextBox2)
-        Me.SettingsPanel.Location = New System.Drawing.Point(12, 12)
+        Me.SettingsPanel.Location = New System.Drawing.Point(222, 3)
         Me.SettingsPanel.Name = "SettingsPanel"
-        Me.SettingsPanel.Size = New System.Drawing.Size(205, 53)
+        Me.SettingsPanel.Size = New System.Drawing.Size(205, 366)
         Me.SettingsPanel.TabIndex = 4
         Me.SettingsPanel.Visible = False
         '
@@ -126,7 +128,7 @@ Partial Class Form1
         'IPLabel
         '
         Me.IPLabel.ImageAlign = System.Drawing.ContentAlignment.MiddleLeft
-        Me.IPLabel.Location = New System.Drawing.Point(13, 359)
+        Me.IPLabel.Location = New System.Drawing.Point(15, 39)
         Me.IPLabel.Name = "IPLabel"
         Me.IPLabel.Size = New System.Drawing.Size(150, 15)
         Me.IPLabel.TabIndex = 7
@@ -135,7 +137,7 @@ Partial Class Form1
         'CallButton
         '
         Me.CallButton.Enabled = False
-        Me.CallButton.Location = New System.Drawing.Point(12, 324)
+        Me.CallButton.Location = New System.Drawing.Point(13, 4)
         Me.CallButton.Name = "CallButton"
         Me.CallButton.Size = New System.Drawing.Size(204, 32)
         Me.CallButton.TabIndex = 8
@@ -240,15 +242,15 @@ Partial Class Form1
         Me.Dial9.Text = "9"
         Me.Dial9.UseVisualStyleBackColor = True
         '
-        'Button13
+        'DialPlus
         '
-        Me.Button13.Font = New System.Drawing.Font("Consolas", 24.0!, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
-        Me.Button13.Location = New System.Drawing.Point(12, 254)
-        Me.Button13.Name = "Button13"
-        Me.Button13.Size = New System.Drawing.Size(64, 64)
-        Me.Button13.TabIndex = 21
-        Me.Button13.Text = "+"
-        Me.Button13.UseVisualStyleBackColor = True
+        Me.DialPlus.Font = New System.Drawing.Font("Consolas", 24.0!, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
+        Me.DialPlus.Location = New System.Drawing.Point(12, 254)
+        Me.DialPlus.Name = "DialPlus"
+        Me.DialPlus.Size = New System.Drawing.Size(64, 64)
+        Me.DialPlus.TabIndex = 21
+        Me.DialPlus.Text = "+"
+        Me.DialPlus.UseVisualStyleBackColor = True
         '
         'Dial0
         '
@@ -260,15 +262,15 @@ Partial Class Form1
         Me.Dial0.Text = "0"
         Me.Dial0.UseVisualStyleBackColor = True
         '
-        'Button15
+        'DialErase
         '
-        Me.Button15.Font = New System.Drawing.Font("Consolas", 24.0!, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
-        Me.Button15.Location = New System.Drawing.Point(152, 254)
-        Me.Button15.Name = "Button15"
-        Me.Button15.Size = New System.Drawing.Size(64, 64)
-        Me.Button15.TabIndex = 23
-        Me.Button15.Text = "C"
-        Me.Button15.UseVisualStyleBackColor = True
+        Me.DialErase.Font = New System.Drawing.Font("Consolas", 24.0!, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
+        Me.DialErase.Location = New System.Drawing.Point(152, 254)
+        Me.DialErase.Name = "DialErase"
+        Me.DialErase.Size = New System.Drawing.Size(64, 64)
+        Me.DialErase.TabIndex = 23
+        Me.DialErase.Text = "C"
+        Me.DialErase.UseVisualStyleBackColor = True
         '
         'TelNumberBox
         '
@@ -285,11 +287,21 @@ Partial Class Form1
         Me.SettingsLabel.Cursor = System.Windows.Forms.Cursors.Hand
         Me.SettingsLabel.Font = New System.Drawing.Font("Microsoft Sans Serif", 8.25!, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
         Me.SettingsLabel.ForeColor = System.Drawing.Color.RoyalBlue
-        Me.SettingsLabel.Location = New System.Drawing.Point(163, 359)
+        Me.SettingsLabel.Location = New System.Drawing.Point(164, 39)
         Me.SettingsLabel.Name = "SettingsLabel"
         Me.SettingsLabel.Size = New System.Drawing.Size(53, 13)
         Me.SettingsLabel.TabIndex = 25
         Me.SettingsLabel.Text = "Settings"
+        '
+        'BottomPanel
+        '
+        Me.BottomPanel.Controls.Add(Me.CallButton)
+        Me.BottomPanel.Controls.Add(Me.IPLabel)
+        Me.BottomPanel.Controls.Add(Me.SettingsLabel)
+        Me.BottomPanel.Location = New System.Drawing.Point(0, 324)
+        Me.BottomPanel.Name = "BottomPanel"
+        Me.BottomPanel.Size = New System.Drawing.Size(230, 58)
+        Me.BottomPanel.TabIndex = 26
         '
         'Form1
         '
@@ -298,9 +310,10 @@ Partial Class Form1
         Me.ClientSize = New System.Drawing.Size(229, 381)
         Me.Controls.Add(Me.SettingsPanel)
         Me.Controls.Add(Me.TelNumberBox)
-        Me.Controls.Add(Me.Button15)
+        Me.Controls.Add(Me.BottomPanel)
+        Me.Controls.Add(Me.DialErase)
         Me.Controls.Add(Me.Dial0)
-        Me.Controls.Add(Me.Button13)
+        Me.Controls.Add(Me.DialPlus)
         Me.Controls.Add(Me.Dial9)
         Me.Controls.Add(Me.Dial8)
         Me.Controls.Add(Me.Dial7)
@@ -310,9 +323,6 @@ Partial Class Form1
         Me.Controls.Add(Me.Dial3)
         Me.Controls.Add(Me.Dial2)
         Me.Controls.Add(Me.Dial1)
-        Me.Controls.Add(Me.CallButton)
-        Me.Controls.Add(Me.IPLabel)
-        Me.Controls.Add(Me.SettingsLabel)
         Me.FormBorderStyle = System.Windows.Forms.FormBorderStyle.FixedToolWindow
         Me.Icon = CType(resources.GetObject("$this.Icon"), System.Drawing.Icon)
         Me.MaximizeBox = False
@@ -320,6 +330,8 @@ Partial Class Form1
         Me.Text = " Yealink Dialer"
         Me.TopMost = True
         Me.SettingsPanel.ResumeLayout(False)
+        Me.BottomPanel.ResumeLayout(False)
+        Me.BottomPanel.PerformLayout()
         Me.ResumeLayout(False)
         Me.PerformLayout()
 
@@ -344,9 +356,10 @@ Partial Class Form1
     Friend WithEvents Dial7 As Button
     Friend WithEvents Dial8 As Button
     Friend WithEvents Dial9 As Button
-    Friend WithEvents Button13 As Button
+    Friend WithEvents DialPlus As Button
     Friend WithEvents Dial0 As Button
-    Friend WithEvents Button15 As Button
+    Friend WithEvents DialErase As Button
     Friend WithEvents TelNumberBox As TextBox
     Friend WithEvents SettingsLabel As Label
+    Friend WithEvents BottomPanel As Panel
 End Class
