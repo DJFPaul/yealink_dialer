@@ -35,9 +35,6 @@ Change these settings to reflect the correct settings of your Yealink device. <b
 <br>
 `Autoclose` When launched trough a callto link, the dial window will auto close after the set time. <br>
 `Autodial` Checking this box will automatically initiate the call after a set delay, when launched by a callto link. <br>
-
-<br>
-You can now hit save. <br>
 <br>
 For this utility to work, you need to configure the Action URI Allow IP List <br>
 
@@ -53,4 +50,5 @@ Look at your phones screen and confirm that you want to allow remote access. <br
 If you do not see any message on your Yealink Device, and it does not dial anything, check your settings again. <br>
 <br>
 If everything is setup correctly, you should now be able to use callto: tel: sip: and phone: links or you can initiate a call by using the manual dial. <br>
+Hit save and try it out.
 <br>
