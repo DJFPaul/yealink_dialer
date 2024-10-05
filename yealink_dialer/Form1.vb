@@ -1,30 +1,29 @@
-﻿Imports System.Security.Cryptography
-Imports System.IO
-Imports System.Text
+﻿Imports System.IO
 Imports System.Management
-Imports System.Windows.Forms.VisualStyles.VisualStyleElement
+Imports System.Security.Cryptography
+Imports System.Text
 Public Class Form1
     Inherits System.Windows.Forms.Form
 
-    Dim CFGSecret As String = My.Computer.FileSystem.ReadAllText(Application.StartupPath() & "\data\secret.cfg")
+    Dim CFGSecret As String
 
     Dim DIAL As String
     Dim PHONEIP As String
     Dim SIPACCOUNT As String
-    Dim USERNAME As String
-    Dim PASSWORD As String
+    Dim SIPUSERNAME As String
+    Dim SIPPASSWORD As String
     Dim CTime As Integer = 8
+    Dim DTime As Integer = 3
     Dim CRDTA As String
 
     Private Sub Form1_Load(sender As Object, e As EventArgs) Handles MyBase.Load
 
-        'Load application settings.
-        Dim ConfigContent As String = My.Computer.FileSystem.ReadAllText(Application.StartupPath() & "\data\config.ini")
-        RichTextBox2.Text = ConfigContent
-        CTime = RichTextBox2.Lines(1).Replace("closedelay=", "") - 1
-        CallDelay.Interval = RichTextBox2.Lines(3).Replace("dialdelay=", "") & "000"
-
         'Load phone configuration file and decrypt it.
+        Try
+            CFGSecret = My.Computer.FileSystem.ReadAllText(Application.StartupPath() & "\data\secret.cfg")
+        Catch ex As Exception
+            CFGSecret = "SJKGSLD3529ASDGksgjsdlkgjSFASF!%!"
+        End Try
         Try
             Dim PhoneContent As String = My.Computer.FileSystem.ReadAllText(Application.StartupPath() & "\data\phone.cfg")
 
@@ -47,17 +46,41 @@ Public Class Form1
             rd.Clear()
             PhoneConfigBox.Text = CRDTA
 
+            'Load application settings.
+            CTime = PhoneConfigBox.Lines(5).Replace("closedelay=", "")
+            DTime = PhoneConfigBox.Lines(7).Replace("dialdelay=", "")
+
+
+            If PhoneConfigBox.Lines(4).Replace("autoclose=", "") = "True" Then
+                AutoCloseCheckBox.Checked = True
+            Else
+                AutoCloseCheckBox.Checked = False
+            End If
+            If PhoneConfigBox.Lines(6).Replace("autodial=", "") = "True" Then
+                AutoDialCheckBox.Checked = True
+            Else
+                AutoDialCheckBox.Checked = False
+            End If
         Catch ex As Exception
+            NormalMode()
+            SettingsPanel.Show()
         Finally
         End Try
 
         'Configure parameters
         PHONEIP = PhoneConfigBox.Lines(0).Replace("PHONEIP=", "")
         SIPACCOUNT = PhoneConfigBox.Lines(1).Replace("SIPACCOUNT=", "")
-        USERNAME = PhoneConfigBox.Lines(2).Replace("USERNAME=", "")
-        PASSWORD = PhoneConfigBox.Lines(3).Replace("PASSWORD=", "")
+        SIPUSERNAME = PhoneConfigBox.Lines(2).Replace("USERNAME=", "")
+        SIPPASSWORD = PhoneConfigBox.Lines(3).Replace("PASSWORD=", "")
 
+        PhoneIPBox.Text = PHONEIP
+        SipAccountBox.Text = SIPACCOUNT
+        SipUsernameBox.Text = SIPUSERNAME
+        SipPasswordBox.Text = SIPPASSWORD
 
+        AutoCloseDelayBox.Value = CTime
+        AutoDialDelayBox.Value = DTime
+        CallDelay.Interval = DTime * 1000
 
         'Grab command line args and sanitize them.
         Try
@@ -65,20 +88,19 @@ Public Class Form1
             TelNumberBox.Text = DIAL
 
             'Start timers depending on config file.
-            If RichTextBox2.Lines(0).Replace("autoclose=", "") = "true" Then CloseTimer.Start()
-            If RichTextBox2.Lines(2).Replace("autodial=", "") = "true" Then CallDelay.Start()
+            If AutoCloseCheckBox.Checked = True Then CloseTimer.Start()
+            If AutoCloseCheckBox.Checked = True Then CallDelay.Start()
             SmallMode()
         Catch
             TelNumberBox.Text = ""
             Button2.Show()
             DIAL = "012345678910"
             NormalMode()
-
         Finally
             IPLabel.Text = "Phone IP: " & PHONEIP
         End Try
         SettingsPanel.Location = New Point(12, 12)
-        SettingsPanel.Size = New Size(205, 362)
+        SettingsPanel.Size = New Size(205, 364)
     End Sub
     Private Function SmallMode()
         BottomPanel.Location = New Point(0, 44)
@@ -119,13 +141,13 @@ Public Class Form1
             'If launched with callto link, this button instead is the CALL button and initiates the call once pressed.
             DIAL = TelNumberBox.Text
             CloseTimer.Stop()
-            WebBrowser1.Navigate("http://" & USERNAME & ":" & PASSWORD & "@" & PHONEIP & "/servlet?key=number=" & DIAL & "&outgoing_uri=" & SIPACCOUNT & "")
+            WebBrowser1.Navigate("http://" & SIPUSERNAME & ":" & SIPPASSWORD & "@" & PHONEIP & "/servlet?key=number=" & DIAL & "&outgoing_uri=" & SIPACCOUNT & "")
         End If
     End Sub
 
     'Autoclose after delay, if autoclose is enabled.
     Private Sub CloseTimer_Tick(sender As Object, e As EventArgs) Handles CloseTimer.Tick
-        If CTime > 0 Then
+        If CTime > 1 Then
             CTime = CTime - 1
         Else
             Close()
@@ -134,25 +156,28 @@ Public Class Form1
 
     'Execute call after delay, if autocall is enabled.
     Private Sub CallDelay_Tick(sender As Object, e As EventArgs) Handles CallDelay.Tick
-        WebBrowser1.Navigate("http://" & USERNAME & ":" & PASSWORD & "@" & PHONEIP & "/servlet?key=number=" & DIAL & "&outgoing_uri=" & SIPACCOUNT & "")
+        WebBrowser1.Navigate("http://" & SIPUSERNAME & ":" & SIPPASSWORD & "@" & PHONEIP & "/servlet?key=number=" & DIAL & "&outgoing_uri=" & SIPACCOUNT & "")
         CallDelay.Stop()
     End Sub
 
     Private Sub Button2_Click(sender As Object, e As EventArgs) Handles Button2.Click
 
+        'Assemble config file
+        PhoneConfigBox.Text = "PHONEIP=" & PhoneIPBox.Text & vbNewLine & "SIPACCOUNT=" & SipAccountBox.Text & vbNewLine & "USERNAME=" & SipUsernameBox.Text & vbNewLine & "PASSWORD=" & SipPasswordBox.Text & vbNewLine & "autoclose=" & AutoCloseCheckBox.Checked & vbNewLine & "closedelay=" & AutoCloseDelayBox.Value & vbNewLine & "autodial=" & AutoDialCheckBox.Checked & vbNewLine & "dialdelay=" & AutoDialDelayBox.Value & vbNewLine
+
         'Test Call Button
 
         Dim Buttons As MessageBoxButtons = MessageBoxButtons.YesNo
         Dim Result As DialogResult
-        Result = MessageBox.Show("Initiate test call?" & vbNewLine & "(Calls 01234567890)", "Test call?", Buttons, MessageBoxIcon.Information)
+        Result = MessageBox.Show("Initiate test call?" & vbNewLine & "(Calls 01234567890)" & vbNewLine & vbNewLine & "Phone IP: " & PhoneIPBox.Text & vbNewLine & "Account: " & SipAccountBox.Text & vbNewLine & "Username: " & SipUsernameBox.Text & vbNewLine & "Password: " & SipPasswordBox.Text, "Test call?", Buttons, MessageBoxIcon.Information)
 
         If Result = DialogResult.Yes Then
             PHONEIP = PhoneConfigBox.Lines(0).Replace("PHONEIP=", "")
             SIPACCOUNT = PhoneConfigBox.Lines(1).Replace("SIPACCOUNT=", "")
-            USERNAME = PhoneConfigBox.Lines(2).Replace("USERNAME=", "")
-            PASSWORD = PhoneConfigBox.Lines(3).Replace("PASSWORD=", "")
+            SIPUSERNAME = PhoneConfigBox.Lines(2).Replace("USERNAME=", "")
+            SIPPASSWORD = PhoneConfigBox.Lines(3).Replace("PASSWORD=", "")
 
-            WebBrowser1.Navigate("http://" & USERNAME & ":" & PASSWORD & "@" & PHONEIP & "/servlet?key=number=" & DIAL & "&outgoing_uri=" & SIPACCOUNT & "")
+            WebBrowser1.Navigate("http://" & SIPUSERNAME & ":" & SIPPASSWORD & "@" & PHONEIP & "/servlet?key=number=" & DIAL & "&outgoing_uri=" & SIPACCOUNT & "")
 
         End If
     End Sub
@@ -180,11 +205,14 @@ Public Class Form1
         Return computerinfo.GetHashCode
     End Function
 
-    Private Sub Button3_Click(sender As Object, e As EventArgs) Handles Button3.Click
+    Private Sub Button3_Click(sender As Object, e As EventArgs)
         Process.Start("explorer.exe", Application.StartupPath & "\data")
     End Sub
 
     Private Sub Button4_Click(sender As Object, e As EventArgs) Handles Button4.Click
+        'Assemble config file
+        PhoneConfigBox.Text = "PHONEIP=" & PhoneIPBox.Text & vbNewLine & "SIPACCOUNT=" & SipAccountBox.Text & vbNewLine & "USERNAME=" & SipUsernameBox.Text & vbNewLine & "PASSWORD=" & SipPasswordBox.Text & vbNewLine & "autoclose=" & AutoCloseCheckBox.Checked & vbNewLine & "closedelay=" & AutoCloseDelayBox.Value & vbNewLine & "autodial=" & AutoDialCheckBox.Checked & vbNewLine & "dialdelay=" & AutoDialDelayBox.Value & vbNewLine
+
         'Generate new random crypto password and save it.
 
         CFGSecret = RandomString(250, 256)
