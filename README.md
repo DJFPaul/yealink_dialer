@@ -43,7 +43,7 @@ For this utility to work, you need to configure the Action URI Allow IP List <br
 
 ![image](https://github.com/DJFPaul/yealink_dialer/assets/35642602/18bb20c9-dc72-439f-b1b5-fddcc090b5cb)
 <br>
-You can either specify your PC IP and limit it to just you, or use a wildcards in the IP field. <br>
+You can either specify your PC IP and limit it to just you, or use a wildcard in the IP field. <br>
 <br>
 After this step is done, you can hit the test button. <br>
 It will ask you to confirm the test and will try to make a call to 012345767890 once you do. <br>
