@@ -143,6 +143,7 @@ Partial Class Form1
         Me.SipPasswordBox.Name = "SipPasswordBox"
         Me.SipPasswordBox.Size = New System.Drawing.Size(195, 20)
         Me.SipPasswordBox.TabIndex = 19
+        Me.SipPasswordBox.UseSystemPasswordChar = True
         '
         'Label4
         '
