@@ -34,7 +34,7 @@ Change these settings to reflect the correct settings of your Yealink device. <b
 `Sip Password`   The password used to login to your Yealink phone's web interface. <br>
 <br>
 `Autoclose` When launched trough a callto link, the dial window will auto close after the set time. <br>
-`Autodial` Checking this box will automatically initiate the call when launched by a callto link. <br>
+`Autodial` Checking this box will automatically initiate the call after a set delay, when launched by a callto link. <br>
 
 <br>
 You can now hit save. <br>
