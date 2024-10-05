@@ -56,4 +56,4 @@ In the data folder, you can find a `config.ini` with some additional options.<br
 `autoclose=true` The dial window will auto close after a set time. <br>
 `closedelay=8` Specifies the delay after which to auto close. <br>
 `autodial=false` Setting this to true will automatically try to call any number you click. <br>
-`dialdelay` Specifies the time to way until autodial will forward the call request. <br>
+`dialdelay=3` Specifies the time to way until autodial will forward the call request. <br>
