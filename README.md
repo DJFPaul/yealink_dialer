@@ -1,6 +1,6 @@
 # Yealink Dialer
 This utility provides a interface for handling CALLTO links and forwarding them to Yealink SIP Phones. <br>
-Manual dialing of a number is also possible.(This is __NOT__ a SoftPhone)<br>
+Manual dialing of a number is also possible. (This is __NOT__ a SoftPhone)<br>
 
 ![image](https://github.com/user-attachments/assets/9cf0563a-d393-4c38-a1b5-4ffa13a2f83f)
 <br>
