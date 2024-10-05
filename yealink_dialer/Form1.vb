@@ -15,7 +15,6 @@ Public Class Form1
     Dim CTime As Integer = 8
     Dim DTime As Integer = 3
     Dim CRDTA As String
-
     Private Sub Form1_Load(sender As Object, e As EventArgs) Handles MyBase.Load
 
         'Load phone configuration file and decrypt it.
@@ -49,7 +48,6 @@ Public Class Form1
             'Load application settings.
             CTime = PhoneConfigBox.Lines(5).Replace("closedelay=", "")
             DTime = PhoneConfigBox.Lines(7).Replace("dialdelay=", "")
-
 
             If PhoneConfigBox.Lines(4).Replace("autoclose=", "") = "True" Then
                 AutoCloseCheckBox.Checked = True
