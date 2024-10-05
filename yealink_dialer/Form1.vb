@@ -86,8 +86,8 @@ Public Class Form1
             TelNumberBox.Text = DIAL
 
             'Start timers depending on config file.
+            If AutoDialCheckBox.Checked = True Then CallDelay.Start()
             If AutoCloseCheckBox.Checked = True Then CloseTimer.Start()
-            If AutoCloseCheckBox.Checked = True Then CallDelay.Start()
             SmallMode()
         Catch
             TelNumberBox.Text = ""
