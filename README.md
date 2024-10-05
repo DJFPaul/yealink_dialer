@@ -23,17 +23,16 @@ If you ever move the folder, run this again to update the paths. <br>
 After running register.bat, Yealink Dialer should open it self. <br>
 When launching for the first time, the settings menu should automatically open. <br>
 If not then you can find them at the bottom right of the call window.<br>
-![image](https://github.com/user-attachments/assets/2d94f2f3-2d7a-4cc1-be28-acd9355d4048) 
+![image](https://github.com/user-attachments/assets/6ff2caba-6642-4ab6-8074-6dde44db2ff9)
 <br>
-
-
 <br>
 Change these settings to reflect the correct settings of your Yealink device. <br>
 <br>
-`PHONEIP` Specify the IP of the YeaLink Phone that the calls should be dialed with. <br>
-`SIPACCOUNT`  Specify the SIP account the call should be made with. The format is USERNAME@SIPSERVERIP <br>
-`USERNAME`   The username used to login to your Yealink phone's web interface. <br>
-`PASSWORD`   The password used to login to your Yealink phone's web interface. <br>
+`Phone IP` Specify the IP of the YeaLink Phone that the calls should be dialed with. <br>
+`Sip Account`  Specify the SIP account the call should be made with. The format is USERNAME@SIPSERVERIP <br>
+`Sip Username`   The username used to login to your Yealink phone's web interface. <br>
+`Sip Password`   The password used to login to your Yealink phone's web interface. <br>
+<br>
 `Autoclose` When launched trough a callto link, the dial window will auto close after the set time. <br>
 `Autodial` Checking this box will automatically initiate the call when launched by a callto link. <br>
 
