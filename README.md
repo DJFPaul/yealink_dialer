@@ -29,7 +29,7 @@ If not then you can find them at the bottom right of the call window.<br>
 Change these settings to reflect the correct settings of your Yealink device. <br>
 <br>
 `Phone IP` Specify the IP of the YeaLink Phone that the calls should be dialed with. <br>
-`Sip Account`  Specify the SIP account the call should be made with. The format is USERNAME@SIPSERVERIP <br>
+`Sip Account`  Specify the SIP account the call should be made with. The format is `USERNAME@SIPSERVERIP` <br>
 `Sip Username`   The username used to login to your Yealink phone's web interface. <br>
 `Sip Password`   The password used to login to your Yealink phone's web interface. <br>
 <br>
