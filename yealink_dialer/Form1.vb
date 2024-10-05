@@ -310,5 +310,7 @@ Public Class Form1
     Private Sub SettingsLabel_Click(sender As Object, e As EventArgs) Handles SettingsLabel.Click
         NormalMode()
         SettingsPanel.Show()
+        CallDelay.Stop()
+        CloseTimer.Stop()
     End Sub
 End Class
