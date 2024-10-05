@@ -1,8 +1,8 @@
 # Yealink Dialer
 This utility provides a interface for handling CALLTO links and forwarding them to Yealink SIP Phones. <br>
-Additionally can directly be passed a number via command line. <br>
+Manual dialing of a number is also possible.(This is __NOT__ a SoftPhone)<br>
 
-![image](https://github.com/DJFPaul/yealink_dialer/assets/35642602/868973ba-d89e-45eb-b88a-e67ee1ad97fd)
+![image](https://github.com/user-attachments/assets/9cf0563a-d393-4c38-a1b5-4ffa13a2f83f)
 <br>
 <br>
 # How to use
@@ -21,16 +21,22 @@ This will setup all nesseary registry entries to handle the callto links <br>
 If you ever move the folder, run this again to update the paths. <br>
 <br>
 After running register.bat, Yealink Dialer should open it self. <br>
-When launching the application without a callto link, it will present the config interface. <br>
+When launching for the first time, the settings menu should automatically open. <br>
+If not then you can find them at the bottom right of the call window.<br>
+![image](https://github.com/user-attachments/assets/2d94f2f3-2d7a-4cc1-be28-acd9355d4048) 
+<br>
 
-![image](https://github.com/DJFPaul/yealink_dialer/assets/35642602/0079859b-43bb-420e-8a45-8b1c9a188362)
+
 <br>
 Change these settings to reflect the correct settings of your Yealink device. <br>
 <br>
-`PHONEIP`  Specify the IP of the YeaLink Phone that the calls should be dialed with. <br>
+`PHONEIP` Specify the IP of the YeaLink Phone that the calls should be dialed with. <br>
 `SIPACCOUNT`  Specify the SIP account the call should be made with. The format is USERNAME@SIPSERVERIP <br>
 `USERNAME`   The username used to login to your Yealink phone's web interface. <br>
 `PASSWORD`   The password used to login to your Yealink phone's web interface. <br>
+`Autoclose` When launched trough a callto link, the dial window will auto close after the set time. <br>
+`Autodial` Checking this box will automatically initiate the call when launched by a callto link. <br>
+
 <br>
 You can now hit save. <br>
 <br>
@@ -47,15 +53,5 @@ Look at your phones screen and confirm that you want to allow remote access. <br
 <br>
 If you do not see any message on your Yealink Device, and it does not dial anything, check your settings again. <br>
 <br>
-If everything is setup correctly, you should now be able to click on callto: and tel: links and it should open up Yealink Dialer. <br>
-
-![image](https://github.com/DJFPaul/yealink_dialer/assets/35642602/868973ba-d89e-45eb-b88a-e67ee1ad97fd)
+If everything is setup correctly, you should now be able to use callto: tel: sip: and phone: links or you can initiate a call by using the manual dial. <br>
 <br>
-
-# Optional Options
-In the data folder, you can find a `config.ini` with some additional options.<br>
-<br>
-`autoclose=true` The dial window will auto close after a set time. <br>
-`closedelay=8` Specifies the delay after which to auto close. <br>
-`autodial=false` Setting this to true will automatically try to call any number you click. <br>
-`dialdelay` Specifies the time to way until autodial will forward the call request. <br>
