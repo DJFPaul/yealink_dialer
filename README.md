@@ -17,7 +17,7 @@ To registers the application for the first time, run `register.bat`. <br>
 
 ![image](https://github.com/DJFPaul/yealink_dialer/assets/35642602/d146a6ff-914f-4717-aea5-1f7a56bba78f)
 <br>
-This will setup all nesseary registry entries to handle the callto links <br>
+This will setup all necessary registry entries to handle the callto links <br>
 If you ever move the folder, run this again to update the paths. <br>
 <br>
 After running register.bat, Yealink Dialer should open it self. <br>
