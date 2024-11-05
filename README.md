@@ -13,7 +13,7 @@ Unzip folder to a directory of choice. <br>
 It is recommended not to use a directory that requires admin write permissions. <br>
 If you choose such, you will need to launch the utility as admin when ever you change settings. <br>
 <br>
-To registers the application for the first time, run `register.bat`. <br>
+To register the application for the first time, run `register.bat`. <br>
 
 ![image](https://github.com/DJFPaul/yealink_dialer/assets/35642602/d146a6ff-914f-4717-aea5-1f7a56bba78f)
 <br>
