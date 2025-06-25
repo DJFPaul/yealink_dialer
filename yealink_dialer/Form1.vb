@@ -1,11 +1,8 @@
-﻿Imports System.Drawing.Imaging
-Imports System.IO
+﻿Imports System.IO
 Imports System.Management
 Imports System.Net
-Imports System.Security.Authentication
 Imports System.Security.Cryptography
 Imports System.Text
-Imports System.Windows.Forms.VisualStyles.VisualStyleElement
 Public Class Form1
     Inherits System.Windows.Forms.Form
 
