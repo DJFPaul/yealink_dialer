@@ -1,7 +1,11 @@
-﻿Imports System.IO
+﻿Imports System.Drawing.Imaging
+Imports System.IO
 Imports System.Management
+Imports System.Net
+Imports System.Security.Authentication
 Imports System.Security.Cryptography
 Imports System.Text
+Imports System.Windows.Forms.VisualStyles.VisualStyleElement
 Public Class Form1
     Inherits System.Windows.Forms.Form
 
@@ -17,68 +21,15 @@ Public Class Form1
     Dim CRDTA As String
     Private Sub Form1_Load(sender As Object, e As EventArgs) Handles MyBase.Load
 
-        'Load phone configuration file and decrypt it.
+        'Read config secret key.
         Try
             CFGSecret = My.Computer.FileSystem.ReadAllText(Application.StartupPath() & "\data\secret.cfg")
         Catch ex As Exception
             CFGSecret = "SJKGSLD3529ASDGksgjsdlkgjSFASF!%!"
         End Try
-        Try
-            Dim PhoneContent As String = My.Computer.FileSystem.ReadAllText(Application.StartupPath() & "\data\phone.cfg")
 
-            Dim rd As New RijndaelManaged
-            Dim rijndaelIvLength As Integer = 16
-            Dim md5 As New MD5CryptoServiceProvider
-            Dim key() As Byte = md5.ComputeHash(Encoding.UTF8.GetBytes(CFGSecret))
-            md5.Clear()
-            Dim encdata() As Byte = Convert.FromBase64String(PhoneContent)
-            Dim ms As New MemoryStream(encdata)
-            Dim iv(15) As Byte
-            ms.Read(iv, 0, rijndaelIvLength)
-            rd.IV = iv
-            rd.Key = key
-            Dim cs As New CryptoStream(ms, rd.CreateDecryptor, CryptoStreamMode.Read)
-            Dim data(ms.Length - rijndaelIvLength) As Byte
-            Dim i As Integer = cs.Read(data, 0, data.Length)
-            CRDTA = System.Text.Encoding.UTF8.GetString(data, 0, i)
-            cs.Close()
-            rd.Clear()
-            PhoneConfigBox.Text = CRDTA
-
-            'Load application settings.
-            CTime = PhoneConfigBox.Lines(5).Replace("closedelay=", "")
-            DTime = PhoneConfigBox.Lines(7).Replace("dialdelay=", "")
-
-            If PhoneConfigBox.Lines(4).Replace("autoclose=", "") = "True" Then
-                AutoCloseCheckBox.Checked = True
-            Else
-                AutoCloseCheckBox.Checked = False
-            End If
-            If PhoneConfigBox.Lines(6).Replace("autodial=", "") = "True" Then
-                AutoDialCheckBox.Checked = True
-            Else
-                AutoDialCheckBox.Checked = False
-            End If
-        Catch ex As Exception
-            NormalMode()
-            SettingsPanel.Show()
-        Finally
-        End Try
-
-        'Configure parameters
-        PHONEIP = PhoneConfigBox.Lines(0).Replace("PHONEIP=", "")
-        SIPACCOUNT = PhoneConfigBox.Lines(1).Replace("SIPACCOUNT=", "")
-        SIPUSERNAME = PhoneConfigBox.Lines(2).Replace("USERNAME=", "")
-        SIPPASSWORD = PhoneConfigBox.Lines(3).Replace("PASSWORD=", "")
-
-        PhoneIPBox.Text = PHONEIP
-        SipAccountBox.Text = SIPACCOUNT
-        SipUsernameBox.Text = SIPUSERNAME
-        SipPasswordBox.Text = SIPPASSWORD
-
-        AutoCloseDelayBox.Value = CTime
-        AutoDialDelayBox.Value = DTime
-        CallDelay.Interval = DTime * 1000
+        'Load phone configuration file and decrypt it.
+        LoadConfigFile(Application.StartupPath() & "\data\phone.cfg", CFGSecret)
 
         'Grab command line args and sanitize them.
         Try
@@ -139,7 +90,7 @@ Public Class Form1
             'If launched with callto link, this button instead is the CALL button and initiates the call once pressed.
             DIAL = TelNumberBox.Text
             CloseTimer.Stop()
-            WebBrowser1.Navigate("http://" & SIPUSERNAME & ":" & SIPPASSWORD & "@" & PHONEIP & "/servlet?key=number=" & DIAL & "&outgoing_uri=" & SIPACCOUNT & "")
+            SendRequestToPhone(SIPUSERNAME, SIPPASSWORD, PHONEIP & "/servlet?key=number=" & DIAL & "&outgoing_uri=" & SIPACCOUNT & "")
         End If
     End Sub
 
@@ -154,7 +105,7 @@ Public Class Form1
 
     'Execute call after delay, if autocall is enabled.
     Private Sub CallDelay_Tick(sender As Object, e As EventArgs) Handles CallDelay.Tick
-        WebBrowser1.Navigate("http://" & SIPUSERNAME & ":" & SIPPASSWORD & "@" & PHONEIP & "/servlet?key=number=" & DIAL & "&outgoing_uri=" & SIPACCOUNT & "")
+        SendRequestToPhone(SIPUSERNAME, SIPPASSWORD, PHONEIP & "/servlet?key=number=" & DIAL & "&outgoing_uri=" & SIPACCOUNT & "")
         CallDelay.Stop()
     End Sub
 
@@ -175,7 +126,7 @@ Public Class Form1
             SIPUSERNAME = PhoneConfigBox.Lines(2).Replace("USERNAME=", "")
             SIPPASSWORD = PhoneConfigBox.Lines(3).Replace("PASSWORD=", "")
 
-            WebBrowser1.Navigate("http://" & SIPUSERNAME & ":" & SIPPASSWORD & "@" & PHONEIP & "/servlet?key=number=" & DIAL & "&outgoing_uri=" & SIPACCOUNT & "")
+            SendRequestToPhone(SIPUSERNAME, SIPPASSWORD, PHONEIP & "/servlet?key=number=" & DIAL & "&outgoing_uri=" & SIPACCOUNT & "")
 
         End If
     End Sub
@@ -193,39 +144,75 @@ Public Class Form1
         Return sb.ToString()
     End Function
 
-    'Generate uinque computer ID for encryption (currently unused)
-    Public Shared Function GetComputerID() As Long
-        Dim objMOS As New ManagementObjectSearcher("Select * From Win32_Processor")
-        Dim computerinfo As String = My.Computer.Name
-        For Each objMO As Management.ManagementObject In objMOS.Get
-            computerinfo &= objMO("ProcessorID")
-        Next
-        Return computerinfo.GetHashCode
+
+    'Load config and configure app with their data.
+    Private Function LoadConfigFile(ByVal FileToLoad As String, ByVal SecretToUse As String)
+        Try
+            Dim PhoneContent As String = My.Computer.FileSystem.ReadAllText(FileToLoad)
+
+            Dim rd As New RijndaelManaged
+            Dim rijndaelIvLength As Integer = 16
+            Dim md5 As New MD5CryptoServiceProvider
+            Dim key() As Byte = md5.ComputeHash(Encoding.UTF8.GetBytes(SecretToUse))
+            md5.Clear()
+            Dim encdata() As Byte = Convert.FromBase64String(PhoneContent)
+            Dim ms As New MemoryStream(encdata)
+            Dim iv(15) As Byte
+            ms.Read(iv, 0, rijndaelIvLength)
+            rd.IV = iv
+            rd.Key = key
+            Dim cs As New CryptoStream(ms, rd.CreateDecryptor, CryptoStreamMode.Read)
+            Dim data(ms.Length - rijndaelIvLength) As Byte
+            Dim i As Integer = cs.Read(data, 0, data.Length)
+            CRDTA = System.Text.Encoding.UTF8.GetString(data, 0, i)
+            cs.Close()
+            rd.Clear()
+            PhoneConfigBox.Text = CRDTA
+
+            'Load application settings.
+            CTime = PhoneConfigBox.Lines(5).Replace("closedelay=", "")
+            DTime = PhoneConfigBox.Lines(7).Replace("dialdelay=", "")
+
+            If PhoneConfigBox.Lines(4).Replace("autoclose=", "") = "True" Then
+                AutoCloseCheckBox.Checked = True
+            Else
+                AutoCloseCheckBox.Checked = False
+            End If
+            If PhoneConfigBox.Lines(6).Replace("autodial=", "") = "True" Then
+                AutoDialCheckBox.Checked = True
+            Else
+                AutoDialCheckBox.Checked = False
+            End If
+        Catch ex As Exception
+            NormalMode()
+            SettingsPanel.Show()
+        Finally
+        End Try
+
+        'Configure parameters
+        PHONEIP = PhoneConfigBox.Lines(0).Replace("PHONEIP=", "")
+        SIPACCOUNT = PhoneConfigBox.Lines(1).Replace("SIPACCOUNT=", "")
+        SIPUSERNAME = PhoneConfigBox.Lines(2).Replace("USERNAME=", "")
+        SIPPASSWORD = PhoneConfigBox.Lines(3).Replace("PASSWORD=", "")
+
+        PhoneIPBox.Text = PHONEIP
+        SipAccountBox.Text = SIPACCOUNT
+        SipUsernameBox.Text = SIPUSERNAME
+        SipPasswordBox.Text = SIPPASSWORD
+
+        AutoCloseDelayBox.Value = CTime
+        AutoDialDelayBox.Value = DTime
+        CallDelay.Interval = DTime * 1000
     End Function
 
-    Private Sub Button3_Click(sender As Object, e As EventArgs)
-        Process.Start("explorer.exe", Application.StartupPath & "\data")
-    End Sub
-
-    Private Sub Button4_Click(sender As Object, e As EventArgs) Handles Button4.Click
-        'Assemble config file
+    Private Function SaveConfigFile(ByVal FileToSave As String, ByVal SecretToUse As String)
+        'Assemble config file.
         PhoneConfigBox.Text = "PHONEIP=" & PhoneIPBox.Text & vbNewLine & "SIPACCOUNT=" & SipAccountBox.Text & vbNewLine & "USERNAME=" & SipUsernameBox.Text & vbNewLine & "PASSWORD=" & SipPasswordBox.Text & vbNewLine & "autoclose=" & AutoCloseCheckBox.Checked & vbNewLine & "closedelay=" & AutoCloseDelayBox.Value & vbNewLine & "autodial=" & AutoDialCheckBox.Checked & vbNewLine & "dialdelay=" & AutoDialDelayBox.Value & vbNewLine
 
-        'Generate new random crypto password and save it.
-
-        CFGSecret = RandomString(250, 256)
-        Using writer As New System.IO.StreamWriter(Application.StartupPath() & "\data\secret.cfg")
-            For Each line In "A"
-                writer.Write(CFGSecret)
-            Next
-        End Using
-
-
-        'Encrypt config with generated string.
-
+        'Encrypt config with secret.
         Dim rd As New RijndaelManaged
         Dim md5 As New MD5CryptoServiceProvider
-        Dim key() As Byte = md5.ComputeHash(Encoding.UTF8.GetBytes(CFGSecret))
+        Dim key() As Byte = md5.ComputeHash(Encoding.UTF8.GetBytes(SecretToUse))
         md5.Clear()
         rd.Key = key
         rd.GenerateIV()
@@ -242,11 +229,39 @@ Public Class Form1
         rd.Clear()
 
         'Save encrypted data.
-        Using writer As New System.IO.StreamWriter(Application.StartupPath() & "\data\phone.cfg")
+        Using writer As New System.IO.StreamWriter(FileToSave)
             For Each line In "A"
                 writer.Write(CRDTA)
             Next
         End Using
+    End Function
+
+    'Generate uinque computer ID for encryption (currently unused)
+    Public Shared Function GetComputerID() As Long
+        Dim objMOS As New ManagementObjectSearcher("Select * From Win32_Processor")
+        Dim computerinfo As String = My.Computer.Name
+        For Each objMO As Management.ManagementObject In objMOS.Get
+            computerinfo &= objMO("ProcessorID")
+        Next
+        Return computerinfo.GetHashCode
+    End Function
+
+    Private Sub Button3_Click(sender As Object, e As EventArgs)
+        Process.Start("explorer.exe", Application.StartupPath & "\data")
+    End Sub
+
+    Private Sub Button4_Click(sender As Object, e As EventArgs) Handles Button4.Click
+
+        'Generate new random crypto secret and save it.
+        CFGSecret = RandomString(250, 256)
+        Using writer As New System.IO.StreamWriter(Application.StartupPath() & "\data\secret.cfg")
+            For Each line In "A"
+                writer.Write(CFGSecret)
+            Next
+        End Using
+
+        'Save config with new secret
+        SaveConfigFile(Application.StartupPath() & "\data\phone.cfg", CFGSecret)
         SettingsPanel.Hide()
     End Sub
 
@@ -313,4 +328,36 @@ Public Class Form1
         CallDelay.Stop()
         CloseTimer.Stop()
     End Sub
+
+    Private Sub Button1_Click(sender As Object, e As EventArgs) Handles Button1.Click
+        'LoadConfigFile(Application.StartupPath() & "\data\phone.cfg", CFGSecret)
+    End Sub
+
+    Private Sub Button3_Click_1(sender As Object, e As EventArgs) Handles Button3.Click
+        'SaveConfigFile(Application.StartupPath() & "\data\phone.cfg", CFGSecret)
+    End Sub
+
+    Private Function SendRequestToPhone(ByVal SENDSIPUSER As String, ByVal SENDSIPPASSWORD As String, ByVal APIURL As String)
+        'Make a Webrequest to the phones API URL
+        Try
+            Dim encoding As New UTF8Encoding
+            Dim makeapirequest As HttpWebRequest = DirectCast(HttpWebRequest.Create("http://" & APIURL), HttpWebRequest)
+            makeapirequest.Method = "GET"
+            makeapirequest.Timeout = 5000
+            makeapirequest.UserAgent = "YealinkDialer"
+            makeapirequest.ContentType = "application/json"
+
+            'Create header with the crendetials to use for the requests authorization.
+            makeapirequest.Headers.Add("Authorization", "Basic " + System.Convert.ToBase64String(encoding.GetEncoding("ISO-8859-1").GetBytes(SENDSIPUSER + ":" + SENDSIPPASSWORD)))
+
+            'Read response to properly finish the request, but discard result as we do not need it.
+            Dim postresponse As HttpWebResponse
+            postresponse = DirectCast(makeapirequest.GetResponse, HttpWebResponse)
+            Dim postreqreader As New StreamReader(postresponse.GetResponseStream())
+            Dim respondetstring As String = postreqreader.ReadToEnd
+            respondetstring = ""
+        Catch ex As Exception
+            MsgBox(ex.Message)
+        End Try
+    End Function
 End Class

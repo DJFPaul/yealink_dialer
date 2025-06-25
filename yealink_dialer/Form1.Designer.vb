@@ -24,23 +24,6 @@ Partial Class Form1
     Private Sub InitializeComponent()
         Me.components = New System.ComponentModel.Container()
         Dim resources As System.ComponentModel.ComponentResourceManager = New System.ComponentModel.ComponentResourceManager(GetType(Form1))
-        Me.SettingsPanel = New System.Windows.Forms.Panel()
-        Me.AutoDialDelayBox = New System.Windows.Forms.NumericUpDown()
-        Me.AutoCloseDelayBox = New System.Windows.Forms.NumericUpDown()
-        Me.AutoDialCheckBox = New System.Windows.Forms.CheckBox()
-        Me.AutoCloseCheckBox = New System.Windows.Forms.CheckBox()
-        Me.PhoneConfigBox = New System.Windows.Forms.RichTextBox()
-        Me.SipPasswordBox = New System.Windows.Forms.TextBox()
-        Me.Label4 = New System.Windows.Forms.Label()
-        Me.SipUsernameBox = New System.Windows.Forms.TextBox()
-        Me.Label3 = New System.Windows.Forms.Label()
-        Me.SipAccountBox = New System.Windows.Forms.TextBox()
-        Me.Label2 = New System.Windows.Forms.Label()
-        Me.PhoneIPBox = New System.Windows.Forms.TextBox()
-        Me.Label1 = New System.Windows.Forms.Label()
-        Me.Button4 = New System.Windows.Forms.Button()
-        Me.WebBrowser1 = New System.Windows.Forms.WebBrowser()
-        Me.Button2 = New System.Windows.Forms.Button()
         Me.IPLabel = New System.Windows.Forms.Label()
         Me.CallButton = New System.Windows.Forms.Button()
         Me.CloseTimer = New System.Windows.Forms.Timer(Me.components)
@@ -60,175 +43,29 @@ Partial Class Form1
         Me.TelNumberBox = New System.Windows.Forms.TextBox()
         Me.SettingsLabel = New System.Windows.Forms.Label()
         Me.BottomPanel = New System.Windows.Forms.Panel()
-        Me.SettingsPanel.SuspendLayout()
-        CType(Me.AutoDialDelayBox, System.ComponentModel.ISupportInitialize).BeginInit()
-        CType(Me.AutoCloseDelayBox, System.ComponentModel.ISupportInitialize).BeginInit()
+        Me.Button2 = New System.Windows.Forms.Button()
+        Me.Button4 = New System.Windows.Forms.Button()
+        Me.Label1 = New System.Windows.Forms.Label()
+        Me.PhoneIPBox = New System.Windows.Forms.TextBox()
+        Me.Label2 = New System.Windows.Forms.Label()
+        Me.SipAccountBox = New System.Windows.Forms.TextBox()
+        Me.Label3 = New System.Windows.Forms.Label()
+        Me.SipUsernameBox = New System.Windows.Forms.TextBox()
+        Me.Label4 = New System.Windows.Forms.Label()
+        Me.SipPasswordBox = New System.Windows.Forms.TextBox()
+        Me.PhoneConfigBox = New System.Windows.Forms.RichTextBox()
+        Me.AutoCloseCheckBox = New System.Windows.Forms.CheckBox()
+        Me.AutoDialCheckBox = New System.Windows.Forms.CheckBox()
+        Me.AutoCloseDelayBox = New System.Windows.Forms.NumericUpDown()
+        Me.AutoDialDelayBox = New System.Windows.Forms.NumericUpDown()
+        Me.Button1 = New System.Windows.Forms.Button()
+        Me.Button3 = New System.Windows.Forms.Button()
+        Me.SettingsPanel = New System.Windows.Forms.Panel()
         Me.BottomPanel.SuspendLayout()
+        CType(Me.AutoCloseDelayBox, System.ComponentModel.ISupportInitialize).BeginInit()
+        CType(Me.AutoDialDelayBox, System.ComponentModel.ISupportInitialize).BeginInit()
+        Me.SettingsPanel.SuspendLayout()
         Me.SuspendLayout()
-        '
-        'SettingsPanel
-        '
-        Me.SettingsPanel.Controls.Add(Me.AutoDialDelayBox)
-        Me.SettingsPanel.Controls.Add(Me.AutoCloseDelayBox)
-        Me.SettingsPanel.Controls.Add(Me.AutoDialCheckBox)
-        Me.SettingsPanel.Controls.Add(Me.AutoCloseCheckBox)
-        Me.SettingsPanel.Controls.Add(Me.PhoneConfigBox)
-        Me.SettingsPanel.Controls.Add(Me.SipPasswordBox)
-        Me.SettingsPanel.Controls.Add(Me.Label4)
-        Me.SettingsPanel.Controls.Add(Me.SipUsernameBox)
-        Me.SettingsPanel.Controls.Add(Me.Label3)
-        Me.SettingsPanel.Controls.Add(Me.SipAccountBox)
-        Me.SettingsPanel.Controls.Add(Me.Label2)
-        Me.SettingsPanel.Controls.Add(Me.PhoneIPBox)
-        Me.SettingsPanel.Controls.Add(Me.Label1)
-        Me.SettingsPanel.Controls.Add(Me.Button4)
-        Me.SettingsPanel.Controls.Add(Me.WebBrowser1)
-        Me.SettingsPanel.Controls.Add(Me.Button2)
-        Me.SettingsPanel.Location = New System.Drawing.Point(11, 5)
-        Me.SettingsPanel.Name = "SettingsPanel"
-        Me.SettingsPanel.Size = New System.Drawing.Size(391, 227)
-        Me.SettingsPanel.TabIndex = 4
-        Me.SettingsPanel.Visible = False
-        '
-        'AutoDialDelayBox
-        '
-        Me.AutoDialDelayBox.Location = New System.Drawing.Point(166, 185)
-        Me.AutoDialDelayBox.Name = "AutoDialDelayBox"
-        Me.AutoDialDelayBox.Size = New System.Drawing.Size(35, 20)
-        Me.AutoDialDelayBox.TabIndex = 23
-        '
-        'AutoCloseDelayBox
-        '
-        Me.AutoCloseDelayBox.Location = New System.Drawing.Point(166, 160)
-        Me.AutoCloseDelayBox.Name = "AutoCloseDelayBox"
-        Me.AutoCloseDelayBox.Size = New System.Drawing.Size(35, 20)
-        Me.AutoCloseDelayBox.TabIndex = 22
-        '
-        'AutoDialCheckBox
-        '
-        Me.AutoDialCheckBox.AutoSize = True
-        Me.AutoDialCheckBox.Location = New System.Drawing.Point(6, 184)
-        Me.AutoDialCheckBox.Name = "AutoDialCheckBox"
-        Me.AutoDialCheckBox.Size = New System.Drawing.Size(64, 17)
-        Me.AutoDialCheckBox.TabIndex = 21
-        Me.AutoDialCheckBox.Text = "Autodial"
-        Me.AutoDialCheckBox.UseVisualStyleBackColor = True
-        '
-        'AutoCloseCheckBox
-        '
-        Me.AutoCloseCheckBox.AutoSize = True
-        Me.AutoCloseCheckBox.Checked = True
-        Me.AutoCloseCheckBox.CheckState = System.Windows.Forms.CheckState.Checked
-        Me.AutoCloseCheckBox.Location = New System.Drawing.Point(6, 161)
-        Me.AutoCloseCheckBox.Name = "AutoCloseCheckBox"
-        Me.AutoCloseCheckBox.Size = New System.Drawing.Size(73, 17)
-        Me.AutoCloseCheckBox.TabIndex = 20
-        Me.AutoCloseCheckBox.Text = "Autoclose"
-        Me.AutoCloseCheckBox.UseVisualStyleBackColor = True
-        '
-        'PhoneConfigBox
-        '
-        Me.PhoneConfigBox.Location = New System.Drawing.Point(3, 3)
-        Me.PhoneConfigBox.Name = "PhoneConfigBox"
-        Me.PhoneConfigBox.ScrollBars = System.Windows.Forms.RichTextBoxScrollBars.None
-        Me.PhoneConfigBox.Size = New System.Drawing.Size(199, 112)
-        Me.PhoneConfigBox.TabIndex = 9
-        Me.PhoneConfigBox.Text = "PHONEIP=192.168.1.100" & Global.Microsoft.VisualBasic.ChrW(10) & "SIPACCOUNT=10@192.168.1.1" & Global.Microsoft.VisualBasic.ChrW(10) & "USERNAME=admin" & Global.Microsoft.VisualBasic.ChrW(10) & "PASSWORD=admin" & Global.Microsoft.VisualBasic.ChrW(10) & "aut" &
-    "oclose=true" & Global.Microsoft.VisualBasic.ChrW(10) & "closedelay=8" & Global.Microsoft.VisualBasic.ChrW(10) & "autodial=false" & Global.Microsoft.VisualBasic.ChrW(10) & "dialdelay=3"
-        Me.PhoneConfigBox.Visible = False
-        '
-        'SipPasswordBox
-        '
-        Me.SipPasswordBox.Location = New System.Drawing.Point(6, 134)
-        Me.SipPasswordBox.Name = "SipPasswordBox"
-        Me.SipPasswordBox.Size = New System.Drawing.Size(195, 20)
-        Me.SipPasswordBox.TabIndex = 19
-        Me.SipPasswordBox.UseSystemPasswordChar = True
-        '
-        'Label4
-        '
-        Me.Label4.AutoSize = True
-        Me.Label4.Location = New System.Drawing.Point(4, 118)
-        Me.Label4.Name = "Label4"
-        Me.Label4.Size = New System.Drawing.Size(71, 13)
-        Me.Label4.TabIndex = 18
-        Me.Label4.Text = "Sip Password"
-        '
-        'SipUsernameBox
-        '
-        Me.SipUsernameBox.Location = New System.Drawing.Point(6, 95)
-        Me.SipUsernameBox.Name = "SipUsernameBox"
-        Me.SipUsernameBox.Size = New System.Drawing.Size(195, 20)
-        Me.SipUsernameBox.TabIndex = 17
-        '
-        'Label3
-        '
-        Me.Label3.AutoSize = True
-        Me.Label3.Location = New System.Drawing.Point(4, 79)
-        Me.Label3.Name = "Label3"
-        Me.Label3.Size = New System.Drawing.Size(73, 13)
-        Me.Label3.TabIndex = 16
-        Me.Label3.Text = "Sip Username"
-        '
-        'SipAccountBox
-        '
-        Me.SipAccountBox.Location = New System.Drawing.Point(6, 56)
-        Me.SipAccountBox.Name = "SipAccountBox"
-        Me.SipAccountBox.Size = New System.Drawing.Size(195, 20)
-        Me.SipAccountBox.TabIndex = 15
-        '
-        'Label2
-        '
-        Me.Label2.AutoSize = True
-        Me.Label2.Location = New System.Drawing.Point(4, 40)
-        Me.Label2.Name = "Label2"
-        Me.Label2.Size = New System.Drawing.Size(65, 13)
-        Me.Label2.TabIndex = 14
-        Me.Label2.Text = "Sip Account"
-        '
-        'PhoneIPBox
-        '
-        Me.PhoneIPBox.Location = New System.Drawing.Point(7, 17)
-        Me.PhoneIPBox.Name = "PhoneIPBox"
-        Me.PhoneIPBox.Size = New System.Drawing.Size(194, 20)
-        Me.PhoneIPBox.TabIndex = 13
-        '
-        'Label1
-        '
-        Me.Label1.AutoSize = True
-        Me.Label1.Location = New System.Drawing.Point(4, 1)
-        Me.Label1.Name = "Label1"
-        Me.Label1.Size = New System.Drawing.Size(51, 13)
-        Me.Label1.TabIndex = 12
-        Me.Label1.Text = "Phone IP"
-        '
-        'Button4
-        '
-        Me.Button4.Font = New System.Drawing.Font("Microsoft Sans Serif", 15.75!, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
-        Me.Button4.Location = New System.Drawing.Point(4, 304)
-        Me.Button4.Name = "Button4"
-        Me.Button4.Size = New System.Drawing.Size(199, 50)
-        Me.Button4.TabIndex = 11
-        Me.Button4.Text = "Save"
-        Me.Button4.UseVisualStyleBackColor = True
-        '
-        'WebBrowser1
-        '
-        Me.WebBrowser1.Location = New System.Drawing.Point(10000, 0)
-        Me.WebBrowser1.MinimumSize = New System.Drawing.Size(20, 20)
-        Me.WebBrowser1.Name = "WebBrowser1"
-        Me.WebBrowser1.Size = New System.Drawing.Size(20, 168)
-        Me.WebBrowser1.TabIndex = 0
-        '
-        'Button2
-        '
-        Me.Button2.Font = New System.Drawing.Font("Microsoft Sans Serif", 15.75!, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
-        Me.Button2.Location = New System.Drawing.Point(3, 241)
-        Me.Button2.Name = "Button2"
-        Me.Button2.Size = New System.Drawing.Size(199, 50)
-        Me.Button2.TabIndex = 10
-        Me.Button2.Text = "Test"
-        Me.Button2.UseVisualStyleBackColor = True
         '
         'IPLabel
         '
@@ -408,6 +245,183 @@ Partial Class Form1
         Me.BottomPanel.Size = New System.Drawing.Size(230, 58)
         Me.BottomPanel.TabIndex = 26
         '
+        'Button2
+        '
+        Me.Button2.Font = New System.Drawing.Font("Microsoft Sans Serif", 15.75!, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
+        Me.Button2.Location = New System.Drawing.Point(3, 211)
+        Me.Button2.Name = "Button2"
+        Me.Button2.Size = New System.Drawing.Size(199, 50)
+        Me.Button2.TabIndex = 10
+        Me.Button2.Text = "Test"
+        Me.Button2.UseVisualStyleBackColor = True
+        '
+        'Button4
+        '
+        Me.Button4.Font = New System.Drawing.Font("Microsoft Sans Serif", 15.75!, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
+        Me.Button4.Location = New System.Drawing.Point(4, 304)
+        Me.Button4.Name = "Button4"
+        Me.Button4.Size = New System.Drawing.Size(199, 50)
+        Me.Button4.TabIndex = 11
+        Me.Button4.Text = "Save"
+        Me.Button4.UseVisualStyleBackColor = True
+        '
+        'Label1
+        '
+        Me.Label1.AutoSize = True
+        Me.Label1.Location = New System.Drawing.Point(4, 1)
+        Me.Label1.Name = "Label1"
+        Me.Label1.Size = New System.Drawing.Size(51, 13)
+        Me.Label1.TabIndex = 12
+        Me.Label1.Text = "Phone IP"
+        '
+        'PhoneIPBox
+        '
+        Me.PhoneIPBox.Location = New System.Drawing.Point(7, 17)
+        Me.PhoneIPBox.Name = "PhoneIPBox"
+        Me.PhoneIPBox.Size = New System.Drawing.Size(194, 20)
+        Me.PhoneIPBox.TabIndex = 13
+        '
+        'Label2
+        '
+        Me.Label2.AutoSize = True
+        Me.Label2.Location = New System.Drawing.Point(4, 40)
+        Me.Label2.Name = "Label2"
+        Me.Label2.Size = New System.Drawing.Size(65, 13)
+        Me.Label2.TabIndex = 14
+        Me.Label2.Text = "Sip Account"
+        '
+        'SipAccountBox
+        '
+        Me.SipAccountBox.Location = New System.Drawing.Point(6, 56)
+        Me.SipAccountBox.Name = "SipAccountBox"
+        Me.SipAccountBox.Size = New System.Drawing.Size(195, 20)
+        Me.SipAccountBox.TabIndex = 15
+        '
+        'Label3
+        '
+        Me.Label3.AutoSize = True
+        Me.Label3.Location = New System.Drawing.Point(4, 79)
+        Me.Label3.Name = "Label3"
+        Me.Label3.Size = New System.Drawing.Size(73, 13)
+        Me.Label3.TabIndex = 16
+        Me.Label3.Text = "Sip Username"
+        '
+        'SipUsernameBox
+        '
+        Me.SipUsernameBox.Location = New System.Drawing.Point(6, 95)
+        Me.SipUsernameBox.Name = "SipUsernameBox"
+        Me.SipUsernameBox.Size = New System.Drawing.Size(195, 20)
+        Me.SipUsernameBox.TabIndex = 17
+        '
+        'Label4
+        '
+        Me.Label4.AutoSize = True
+        Me.Label4.Location = New System.Drawing.Point(4, 118)
+        Me.Label4.Name = "Label4"
+        Me.Label4.Size = New System.Drawing.Size(71, 13)
+        Me.Label4.TabIndex = 18
+        Me.Label4.Text = "Sip Password"
+        '
+        'SipPasswordBox
+        '
+        Me.SipPasswordBox.Location = New System.Drawing.Point(6, 134)
+        Me.SipPasswordBox.Name = "SipPasswordBox"
+        Me.SipPasswordBox.Size = New System.Drawing.Size(195, 20)
+        Me.SipPasswordBox.TabIndex = 19
+        Me.SipPasswordBox.UseSystemPasswordChar = True
+        '
+        'PhoneConfigBox
+        '
+        Me.PhoneConfigBox.Location = New System.Drawing.Point(3, 3)
+        Me.PhoneConfigBox.Name = "PhoneConfigBox"
+        Me.PhoneConfigBox.ScrollBars = System.Windows.Forms.RichTextBoxScrollBars.None
+        Me.PhoneConfigBox.Size = New System.Drawing.Size(199, 112)
+        Me.PhoneConfigBox.TabIndex = 9
+        Me.PhoneConfigBox.Text = "PHONEIP=192.168.1.100" & Global.Microsoft.VisualBasic.ChrW(10) & "SIPACCOUNT=10@192.168.1.1" & Global.Microsoft.VisualBasic.ChrW(10) & "USERNAME=admin" & Global.Microsoft.VisualBasic.ChrW(10) & "PASSWORD=admin" & Global.Microsoft.VisualBasic.ChrW(10) & "aut" &
+    "oclose=true" & Global.Microsoft.VisualBasic.ChrW(10) & "closedelay=8" & Global.Microsoft.VisualBasic.ChrW(10) & "autodial=false" & Global.Microsoft.VisualBasic.ChrW(10) & "dialdelay=3"
+        Me.PhoneConfigBox.Visible = False
+        '
+        'AutoCloseCheckBox
+        '
+        Me.AutoCloseCheckBox.AutoSize = True
+        Me.AutoCloseCheckBox.Checked = True
+        Me.AutoCloseCheckBox.CheckState = System.Windows.Forms.CheckState.Checked
+        Me.AutoCloseCheckBox.Location = New System.Drawing.Point(6, 161)
+        Me.AutoCloseCheckBox.Name = "AutoCloseCheckBox"
+        Me.AutoCloseCheckBox.Size = New System.Drawing.Size(73, 17)
+        Me.AutoCloseCheckBox.TabIndex = 20
+        Me.AutoCloseCheckBox.Text = "Autoclose"
+        Me.AutoCloseCheckBox.UseVisualStyleBackColor = True
+        '
+        'AutoDialCheckBox
+        '
+        Me.AutoDialCheckBox.AutoSize = True
+        Me.AutoDialCheckBox.Location = New System.Drawing.Point(6, 184)
+        Me.AutoDialCheckBox.Name = "AutoDialCheckBox"
+        Me.AutoDialCheckBox.Size = New System.Drawing.Size(64, 17)
+        Me.AutoDialCheckBox.TabIndex = 21
+        Me.AutoDialCheckBox.Text = "Autodial"
+        Me.AutoDialCheckBox.UseVisualStyleBackColor = True
+        '
+        'AutoCloseDelayBox
+        '
+        Me.AutoCloseDelayBox.Location = New System.Drawing.Point(166, 160)
+        Me.AutoCloseDelayBox.Name = "AutoCloseDelayBox"
+        Me.AutoCloseDelayBox.Size = New System.Drawing.Size(35, 20)
+        Me.AutoCloseDelayBox.TabIndex = 22
+        '
+        'AutoDialDelayBox
+        '
+        Me.AutoDialDelayBox.Location = New System.Drawing.Point(166, 185)
+        Me.AutoDialDelayBox.Name = "AutoDialDelayBox"
+        Me.AutoDialDelayBox.Size = New System.Drawing.Size(35, 20)
+        Me.AutoDialDelayBox.TabIndex = 23
+        '
+        'Button1
+        '
+        Me.Button1.Font = New System.Drawing.Font("Microsoft Sans Serif", 12.0!, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
+        Me.Button1.Location = New System.Drawing.Point(4, 267)
+        Me.Button1.Name = "Button1"
+        Me.Button1.Size = New System.Drawing.Size(95, 31)
+        Me.Button1.TabIndex = 24
+        Me.Button1.Text = "Import"
+        Me.Button1.UseVisualStyleBackColor = True
+        '
+        'Button3
+        '
+        Me.Button3.Font = New System.Drawing.Font("Microsoft Sans Serif", 12.0!, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
+        Me.Button3.Location = New System.Drawing.Point(108, 267)
+        Me.Button3.Name = "Button3"
+        Me.Button3.Size = New System.Drawing.Size(95, 31)
+        Me.Button3.TabIndex = 25
+        Me.Button3.Text = "Export"
+        Me.Button3.UseVisualStyleBackColor = True
+        '
+        'SettingsPanel
+        '
+        Me.SettingsPanel.Controls.Add(Me.Button3)
+        Me.SettingsPanel.Controls.Add(Me.Button1)
+        Me.SettingsPanel.Controls.Add(Me.AutoDialDelayBox)
+        Me.SettingsPanel.Controls.Add(Me.AutoCloseDelayBox)
+        Me.SettingsPanel.Controls.Add(Me.AutoDialCheckBox)
+        Me.SettingsPanel.Controls.Add(Me.AutoCloseCheckBox)
+        Me.SettingsPanel.Controls.Add(Me.PhoneConfigBox)
+        Me.SettingsPanel.Controls.Add(Me.SipPasswordBox)
+        Me.SettingsPanel.Controls.Add(Me.Label4)
+        Me.SettingsPanel.Controls.Add(Me.SipUsernameBox)
+        Me.SettingsPanel.Controls.Add(Me.Label3)
+        Me.SettingsPanel.Controls.Add(Me.SipAccountBox)
+        Me.SettingsPanel.Controls.Add(Me.Label2)
+        Me.SettingsPanel.Controls.Add(Me.PhoneIPBox)
+        Me.SettingsPanel.Controls.Add(Me.Label1)
+        Me.SettingsPanel.Controls.Add(Me.Button4)
+        Me.SettingsPanel.Controls.Add(Me.Button2)
+        Me.SettingsPanel.Location = New System.Drawing.Point(11, 5)
+        Me.SettingsPanel.Name = "SettingsPanel"
+        Me.SettingsPanel.Size = New System.Drawing.Size(391, 377)
+        Me.SettingsPanel.TabIndex = 4
+        Me.SettingsPanel.Visible = False
+        '
         'Form1
         '
         Me.AutoScaleDimensions = New System.Drawing.SizeF(6.0!, 13.0!)
@@ -434,25 +448,20 @@ Partial Class Form1
         Me.Name = "Form1"
         Me.Text = " Yealink Dialer"
         Me.TopMost = True
-        Me.SettingsPanel.ResumeLayout(False)
-        Me.SettingsPanel.PerformLayout()
-        CType(Me.AutoDialDelayBox, System.ComponentModel.ISupportInitialize).EndInit()
-        CType(Me.AutoCloseDelayBox, System.ComponentModel.ISupportInitialize).EndInit()
         Me.BottomPanel.ResumeLayout(False)
         Me.BottomPanel.PerformLayout()
+        CType(Me.AutoCloseDelayBox, System.ComponentModel.ISupportInitialize).EndInit()
+        CType(Me.AutoDialDelayBox, System.ComponentModel.ISupportInitialize).EndInit()
+        Me.SettingsPanel.ResumeLayout(False)
+        Me.SettingsPanel.PerformLayout()
         Me.ResumeLayout(False)
         Me.PerformLayout()
 
     End Sub
-    Friend WithEvents SettingsPanel As Panel
-    Friend WithEvents WebBrowser1 As WebBrowser
     Friend WithEvents IPLabel As Label
     Friend WithEvents CallButton As Button
     Friend WithEvents CloseTimer As Timer
     Friend WithEvents CallDelay As Timer
-    Friend WithEvents PhoneConfigBox As RichTextBox
-    Friend WithEvents Button2 As Button
-    Friend WithEvents Button4 As Button
     Friend WithEvents Dial1 As Button
     Friend WithEvents Dial2 As Button
     Friend WithEvents Dial3 As Button
@@ -468,16 +477,22 @@ Partial Class Form1
     Friend WithEvents TelNumberBox As TextBox
     Friend WithEvents SettingsLabel As Label
     Friend WithEvents BottomPanel As Panel
-    Friend WithEvents SipAccountBox As TextBox
-    Friend WithEvents Label2 As Label
-    Friend WithEvents PhoneIPBox As TextBox
+    Friend WithEvents Button2 As Button
+    Friend WithEvents Button4 As Button
     Friend WithEvents Label1 As Label
+    Friend WithEvents PhoneIPBox As TextBox
+    Friend WithEvents Label2 As Label
+    Friend WithEvents SipAccountBox As TextBox
     Friend WithEvents Label3 As Label
-    Friend WithEvents SipPasswordBox As TextBox
-    Friend WithEvents Label4 As Label
     Friend WithEvents SipUsernameBox As TextBox
-    Friend WithEvents AutoDialCheckBox As CheckBox
+    Friend WithEvents Label4 As Label
+    Friend WithEvents SipPasswordBox As TextBox
+    Friend WithEvents PhoneConfigBox As RichTextBox
     Friend WithEvents AutoCloseCheckBox As CheckBox
-    Friend WithEvents AutoDialDelayBox As NumericUpDown
+    Friend WithEvents AutoDialCheckBox As CheckBox
     Friend WithEvents AutoCloseDelayBox As NumericUpDown
+    Friend WithEvents AutoDialDelayBox As NumericUpDown
+    Friend WithEvents Button1 As Button
+    Friend WithEvents Button3 As Button
+    Friend WithEvents SettingsPanel As Panel
 End Class
