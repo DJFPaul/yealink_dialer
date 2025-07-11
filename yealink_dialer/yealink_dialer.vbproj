@@ -133,6 +133,10 @@
     <None Include="App.config" />
   </ItemGroup>
   <ItemGroup>
+    <None Include="Resources\LockedCross.png" />
+    <None Include="Resources\Unlocked.png" />
+    <None Include="Resources\UnlockedCross.png" />
+    <None Include="Resources\Locked.png" />
     <Content Include="telephone_green.ico" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.VisualBasic.targets" />

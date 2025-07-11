@@ -50,9 +50,9 @@ Partial Class Form1
         Me.Label2 = New System.Windows.Forms.Label()
         Me.SipAccountBox = New System.Windows.Forms.TextBox()
         Me.Label3 = New System.Windows.Forms.Label()
-        Me.SipUsernameBox = New System.Windows.Forms.TextBox()
+        Me.WebUsernameBox = New System.Windows.Forms.TextBox()
         Me.Label4 = New System.Windows.Forms.Label()
-        Me.SipPasswordBox = New System.Windows.Forms.TextBox()
+        Me.WebPasswordBox = New System.Windows.Forms.TextBox()
         Me.PhoneConfigBox = New System.Windows.Forms.RichTextBox()
         Me.AutoCloseCheckBox = New System.Windows.Forms.CheckBox()
         Me.AutoDialCheckBox = New System.Windows.Forms.CheckBox()
@@ -302,40 +302,40 @@ Partial Class Form1
         Me.Label3.AutoSize = True
         Me.Label3.Location = New System.Drawing.Point(4, 79)
         Me.Label3.Name = "Label3"
-        Me.Label3.Size = New System.Drawing.Size(73, 13)
+        Me.Label3.Size = New System.Drawing.Size(92, 13)
         Me.Label3.TabIndex = 16
-        Me.Label3.Text = "Sip Username"
+        Me.Label3.Text = "WebUI Username"
         '
-        'SipUsernameBox
+        'WebUsernameBox
         '
-        Me.SipUsernameBox.Location = New System.Drawing.Point(6, 95)
-        Me.SipUsernameBox.Name = "SipUsernameBox"
-        Me.SipUsernameBox.Size = New System.Drawing.Size(195, 20)
-        Me.SipUsernameBox.TabIndex = 17
+        Me.WebUsernameBox.Location = New System.Drawing.Point(6, 95)
+        Me.WebUsernameBox.Name = "WebUsernameBox"
+        Me.WebUsernameBox.Size = New System.Drawing.Size(195, 20)
+        Me.WebUsernameBox.TabIndex = 17
         '
         'Label4
         '
         Me.Label4.AutoSize = True
         Me.Label4.Location = New System.Drawing.Point(4, 118)
         Me.Label4.Name = "Label4"
-        Me.Label4.Size = New System.Drawing.Size(71, 13)
+        Me.Label4.Size = New System.Drawing.Size(90, 13)
         Me.Label4.TabIndex = 18
-        Me.Label4.Text = "Sip Password"
+        Me.Label4.Text = "WebUI Password"
         '
-        'SipPasswordBox
+        'WebPasswordBox
         '
-        Me.SipPasswordBox.Location = New System.Drawing.Point(6, 134)
-        Me.SipPasswordBox.Name = "SipPasswordBox"
-        Me.SipPasswordBox.Size = New System.Drawing.Size(195, 20)
-        Me.SipPasswordBox.TabIndex = 19
-        Me.SipPasswordBox.UseSystemPasswordChar = True
+        Me.WebPasswordBox.Location = New System.Drawing.Point(6, 134)
+        Me.WebPasswordBox.Name = "WebPasswordBox"
+        Me.WebPasswordBox.Size = New System.Drawing.Size(195, 20)
+        Me.WebPasswordBox.TabIndex = 19
+        Me.WebPasswordBox.UseSystemPasswordChar = True
         '
         'PhoneConfigBox
         '
-        Me.PhoneConfigBox.Location = New System.Drawing.Point(3, 3)
+        Me.PhoneConfigBox.Location = New System.Drawing.Point(6, 230)
         Me.PhoneConfigBox.Name = "PhoneConfigBox"
         Me.PhoneConfigBox.ScrollBars = System.Windows.Forms.RichTextBoxScrollBars.None
-        Me.PhoneConfigBox.Size = New System.Drawing.Size(199, 112)
+        Me.PhoneConfigBox.Size = New System.Drawing.Size(199, 110)
         Me.PhoneConfigBox.TabIndex = 9
         Me.PhoneConfigBox.Text = "PHONEIP=192.168.1.100" & Global.Microsoft.VisualBasic.ChrW(10) & "SIPACCOUNT=10@192.168.1.1" & Global.Microsoft.VisualBasic.ChrW(10) & "USERNAME=admin" & Global.Microsoft.VisualBasic.ChrW(10) & "PASSWORD=admin" & Global.Microsoft.VisualBasic.ChrW(10) & "aut" &
     "oclose=true" & Global.Microsoft.VisualBasic.ChrW(10) & "closedelay=8" & Global.Microsoft.VisualBasic.ChrW(10) & "autodial=false" & Global.Microsoft.VisualBasic.ChrW(10) & "dialdelay=3"
@@ -399,16 +399,16 @@ Partial Class Form1
         '
         'SettingsPanel
         '
+        Me.SettingsPanel.Controls.Add(Me.PhoneConfigBox)
         Me.SettingsPanel.Controls.Add(Me.Button3)
         Me.SettingsPanel.Controls.Add(Me.Button1)
         Me.SettingsPanel.Controls.Add(Me.AutoDialDelayBox)
         Me.SettingsPanel.Controls.Add(Me.AutoCloseDelayBox)
         Me.SettingsPanel.Controls.Add(Me.AutoDialCheckBox)
         Me.SettingsPanel.Controls.Add(Me.AutoCloseCheckBox)
-        Me.SettingsPanel.Controls.Add(Me.PhoneConfigBox)
-        Me.SettingsPanel.Controls.Add(Me.SipPasswordBox)
+        Me.SettingsPanel.Controls.Add(Me.WebPasswordBox)
         Me.SettingsPanel.Controls.Add(Me.Label4)
-        Me.SettingsPanel.Controls.Add(Me.SipUsernameBox)
+        Me.SettingsPanel.Controls.Add(Me.WebUsernameBox)
         Me.SettingsPanel.Controls.Add(Me.Label3)
         Me.SettingsPanel.Controls.Add(Me.SipAccountBox)
         Me.SettingsPanel.Controls.Add(Me.Label2)
@@ -484,9 +484,9 @@ Partial Class Form1
     Friend WithEvents Label2 As Label
     Friend WithEvents SipAccountBox As TextBox
     Friend WithEvents Label3 As Label
-    Friend WithEvents SipUsernameBox As TextBox
+    Friend WithEvents WebUsernameBox As TextBox
     Friend WithEvents Label4 As Label
-    Friend WithEvents SipPasswordBox As TextBox
+    Friend WithEvents WebPasswordBox As TextBox
     Friend WithEvents PhoneConfigBox As RichTextBox
     Friend WithEvents AutoCloseCheckBox As CheckBox
     Friend WithEvents AutoDialCheckBox As CheckBox
