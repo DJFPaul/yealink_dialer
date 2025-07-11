@@ -58,14 +58,16 @@ Partial Class Form1
         Me.AutoDialCheckBox = New System.Windows.Forms.CheckBox()
         Me.AutoCloseDelayBox = New System.Windows.Forms.NumericUpDown()
         Me.AutoDialDelayBox = New System.Windows.Forms.NumericUpDown()
-        Me.Button1 = New System.Windows.Forms.Button()
-        Me.Button3 = New System.Windows.Forms.Button()
         Me.SettingsPanel = New System.Windows.Forms.Panel()
+        Me.PictureBox1 = New System.Windows.Forms.PictureBox()
+        Me.PWShowLockCheckbox = New System.Windows.Forms.CheckBox()
+        Me.SetupWizardLabel = New System.Windows.Forms.Label()
         Me.ConfigInfoToolTip = New System.Windows.Forms.ToolTip(Me.components)
         Me.BottomPanel.SuspendLayout()
         CType(Me.AutoCloseDelayBox, System.ComponentModel.ISupportInitialize).BeginInit()
         CType(Me.AutoDialDelayBox, System.ComponentModel.ISupportInitialize).BeginInit()
         Me.SettingsPanel.SuspendLayout()
+        CType(Me.PictureBox1, System.ComponentModel.ISupportInitialize).BeginInit()
         Me.SuspendLayout()
         '
         'IPLabel
@@ -250,9 +252,9 @@ Partial Class Form1
         'Button2
         '
         Me.Button2.Font = New System.Drawing.Font("Microsoft Sans Serif", 15.75!, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
-        Me.Button2.Location = New System.Drawing.Point(14, 216)
+        Me.Button2.Location = New System.Drawing.Point(17, 165)
         Me.Button2.Name = "Button2"
-        Me.Button2.Size = New System.Drawing.Size(199, 50)
+        Me.Button2.Size = New System.Drawing.Size(195, 50)
         Me.Button2.TabIndex = 10
         Me.Button2.Text = "Test"
         Me.Button2.UseVisualStyleBackColor = True
@@ -338,13 +340,14 @@ Partial Class Form1
         '
         'PhoneConfigBox
         '
-        Me.PhoneConfigBox.Location = New System.Drawing.Point(17, 235)
+        Me.PhoneConfigBox.AccessibleRole = System.Windows.Forms.AccessibleRole.None
+        Me.PhoneConfigBox.Location = New System.Drawing.Point(12, 359)
         Me.PhoneConfigBox.Name = "PhoneConfigBox"
         Me.PhoneConfigBox.ScrollBars = System.Windows.Forms.RichTextBoxScrollBars.None
-        Me.PhoneConfigBox.Size = New System.Drawing.Size(199, 110)
+        Me.PhoneConfigBox.Size = New System.Drawing.Size(223, 124)
         Me.PhoneConfigBox.TabIndex = 9
         Me.PhoneConfigBox.Text = "PHONEIP=192.168.1.100" & Global.Microsoft.VisualBasic.ChrW(10) & "SIPACCOUNT=10@192.168.1.1" & Global.Microsoft.VisualBasic.ChrW(10) & "USERNAME=admin" & Global.Microsoft.VisualBasic.ChrW(10) & "PASSWORD=admin" & Global.Microsoft.VisualBasic.ChrW(10) & "aut" &
-    "oclose=true" & Global.Microsoft.VisualBasic.ChrW(10) & "closedelay=8" & Global.Microsoft.VisualBasic.ChrW(10) & "autodial=false" & Global.Microsoft.VisualBasic.ChrW(10) & "dialdelay=3"
+    "oclose=true" & Global.Microsoft.VisualBasic.ChrW(10) & "closedelay=8" & Global.Microsoft.VisualBasic.ChrW(10) & "autodial=false" & Global.Microsoft.VisualBasic.ChrW(10) & "dialdelay=3" & Global.Microsoft.VisualBasic.ChrW(10) & "pwreveallock=false"
         Me.PhoneConfigBox.Visible = False
         '
         'AutoCloseCheckBox
@@ -352,7 +355,7 @@ Partial Class Form1
         Me.AutoCloseCheckBox.AutoSize = True
         Me.AutoCloseCheckBox.Checked = True
         Me.AutoCloseCheckBox.CheckState = System.Windows.Forms.CheckState.Checked
-        Me.AutoCloseCheckBox.Location = New System.Drawing.Point(18, 168)
+        Me.AutoCloseCheckBox.Location = New System.Drawing.Point(18, 231)
         Me.AutoCloseCheckBox.Name = "AutoCloseCheckBox"
         Me.AutoCloseCheckBox.Size = New System.Drawing.Size(73, 17)
         Me.AutoCloseCheckBox.TabIndex = 20
@@ -364,7 +367,7 @@ Partial Class Form1
         'AutoDialCheckBox
         '
         Me.AutoDialCheckBox.AutoSize = True
-        Me.AutoDialCheckBox.Location = New System.Drawing.Point(18, 190)
+        Me.AutoDialCheckBox.Location = New System.Drawing.Point(18, 253)
         Me.AutoDialCheckBox.Name = "AutoDialCheckBox"
         Me.AutoDialCheckBox.Size = New System.Drawing.Size(64, 17)
         Me.AutoDialCheckBox.TabIndex = 21
@@ -375,43 +378,23 @@ Partial Class Form1
         '
         'AutoCloseDelayBox
         '
-        Me.AutoCloseDelayBox.Location = New System.Drawing.Point(177, 165)
+        Me.AutoCloseDelayBox.Location = New System.Drawing.Point(177, 228)
         Me.AutoCloseDelayBox.Name = "AutoCloseDelayBox"
         Me.AutoCloseDelayBox.Size = New System.Drawing.Size(35, 20)
         Me.AutoCloseDelayBox.TabIndex = 22
         '
         'AutoDialDelayBox
         '
-        Me.AutoDialDelayBox.Location = New System.Drawing.Point(177, 190)
+        Me.AutoDialDelayBox.Location = New System.Drawing.Point(177, 253)
         Me.AutoDialDelayBox.Name = "AutoDialDelayBox"
         Me.AutoDialDelayBox.Size = New System.Drawing.Size(35, 20)
         Me.AutoDialDelayBox.TabIndex = 23
         '
-        'Button1
-        '
-        Me.Button1.Font = New System.Drawing.Font("Microsoft Sans Serif", 12.0!, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
-        Me.Button1.Location = New System.Drawing.Point(15, 272)
-        Me.Button1.Name = "Button1"
-        Me.Button1.Size = New System.Drawing.Size(95, 31)
-        Me.Button1.TabIndex = 24
-        Me.Button1.Text = "Import"
-        Me.Button1.UseVisualStyleBackColor = True
-        '
-        'Button3
-        '
-        Me.Button3.Font = New System.Drawing.Font("Microsoft Sans Serif", 12.0!, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
-        Me.Button3.Location = New System.Drawing.Point(119, 272)
-        Me.Button3.Name = "Button3"
-        Me.Button3.Size = New System.Drawing.Size(95, 31)
-        Me.Button3.TabIndex = 25
-        Me.Button3.Text = "Export"
-        Me.Button3.UseVisualStyleBackColor = True
-        '
         'SettingsPanel
         '
-        Me.SettingsPanel.Controls.Add(Me.PhoneConfigBox)
-        Me.SettingsPanel.Controls.Add(Me.Button3)
-        Me.SettingsPanel.Controls.Add(Me.Button1)
+        Me.SettingsPanel.Controls.Add(Me.PictureBox1)
+        Me.SettingsPanel.Controls.Add(Me.PWShowLockCheckbox)
+        Me.SettingsPanel.Controls.Add(Me.SetupWizardLabel)
         Me.SettingsPanel.Controls.Add(Me.AutoDialDelayBox)
         Me.SettingsPanel.Controls.Add(Me.AutoCloseDelayBox)
         Me.SettingsPanel.Controls.Add(Me.AutoDialCheckBox)
@@ -426,15 +409,53 @@ Partial Class Form1
         Me.SettingsPanel.Controls.Add(Me.Label1)
         Me.SettingsPanel.Controls.Add(Me.Button4)
         Me.SettingsPanel.Controls.Add(Me.Button2)
+        Me.SettingsPanel.Controls.Add(Me.PhoneConfigBox)
         Me.SettingsPanel.Location = New System.Drawing.Point(0, 0)
         Me.SettingsPanel.Name = "SettingsPanel"
-        Me.SettingsPanel.Size = New System.Drawing.Size(230, 10)
+        Me.SettingsPanel.Size = New System.Drawing.Size(230, 382)
         Me.SettingsPanel.TabIndex = 4
         Me.SettingsPanel.Visible = False
         '
+        'PictureBox1
+        '
+        Me.PictureBox1.BackgroundImage = Global.yealink_dialer.My.Resources.Resources.EyeGrayedOut
+        Me.PictureBox1.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Zoom
+        Me.PictureBox1.Cursor = System.Windows.Forms.Cursors.Hand
+        Me.PictureBox1.Location = New System.Drawing.Point(188, 124)
+        Me.PictureBox1.Name = "PictureBox1"
+        Me.PictureBox1.Size = New System.Drawing.Size(24, 13)
+        Me.PictureBox1.TabIndex = 28
+        Me.PictureBox1.TabStop = False
+        Me.ConfigInfoToolTip.SetToolTip(Me.PictureBox1, resources.GetString("PictureBox1.ToolTip"))
+        '
+        'PWShowLockCheckbox
+        '
+        Me.PWShowLockCheckbox.AutoSize = True
+        Me.PWShowLockCheckbox.Checked = True
+        Me.PWShowLockCheckbox.CheckState = System.Windows.Forms.CheckState.Checked
+        Me.PWShowLockCheckbox.Location = New System.Drawing.Point(18, 276)
+        Me.PWShowLockCheckbox.Name = "PWShowLockCheckbox"
+        Me.PWShowLockCheckbox.Size = New System.Drawing.Size(142, 17)
+        Me.PWShowLockCheckbox.TabIndex = 27
+        Me.PWShowLockCheckbox.Text = "Password reveal lockout"
+        Me.ConfigInfoToolTip.SetToolTip(Me.PWShowLockCheckbox, resources.GetString("PWShowLockCheckbox.ToolTip"))
+        Me.PWShowLockCheckbox.UseVisualStyleBackColor = True
+        '
+        'SetupWizardLabel
+        '
+        Me.SetupWizardLabel.AutoSize = True
+        Me.SetupWizardLabel.Cursor = System.Windows.Forms.Cursors.Hand
+        Me.SetupWizardLabel.Font = New System.Drawing.Font("Microsoft Sans Serif", 8.25!, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
+        Me.SetupWizardLabel.ForeColor = System.Drawing.Color.RoyalBlue
+        Me.SetupWizardLabel.Location = New System.Drawing.Point(126, 6)
+        Me.SetupWizardLabel.Name = "SetupWizardLabel"
+        Me.SetupWizardLabel.Size = New System.Drawing.Size(91, 13)
+        Me.SetupWizardLabel.TabIndex = 26
+        Me.SetupWizardLabel.Text = "(Setup Wizard)"
+        '
         'ConfigInfoToolTip
         '
-        Me.ConfigInfoToolTip.AutoPopDelay = 30000
+        Me.ConfigInfoToolTip.AutoPopDelay = 32000
         Me.ConfigInfoToolTip.InitialDelay = 500
         Me.ConfigInfoToolTip.ReshowDelay = 100
         '
@@ -470,6 +491,7 @@ Partial Class Form1
         CType(Me.AutoDialDelayBox, System.ComponentModel.ISupportInitialize).EndInit()
         Me.SettingsPanel.ResumeLayout(False)
         Me.SettingsPanel.PerformLayout()
+        CType(Me.PictureBox1, System.ComponentModel.ISupportInitialize).EndInit()
         Me.ResumeLayout(False)
         Me.PerformLayout()
 
@@ -503,13 +525,14 @@ Partial Class Form1
     Friend WithEvents WebUsernameBox As TextBox
     Friend WithEvents Label4 As Label
     Friend WithEvents WebPasswordBox As TextBox
-    Friend WithEvents PhoneConfigBox As RichTextBox
     Friend WithEvents AutoCloseCheckBox As CheckBox
     Friend WithEvents AutoDialCheckBox As CheckBox
     Friend WithEvents AutoCloseDelayBox As NumericUpDown
     Friend WithEvents AutoDialDelayBox As NumericUpDown
-    Friend WithEvents Button1 As Button
-    Friend WithEvents Button3 As Button
     Friend WithEvents SettingsPanel As Panel
     Friend WithEvents ConfigInfoToolTip As ToolTip
+    Friend WithEvents SetupWizardLabel As Label
+    Friend WithEvents PhoneConfigBox As RichTextBox
+    Friend WithEvents PWShowLockCheckbox As CheckBox
+    Friend WithEvents PictureBox1 As PictureBox
 End Class

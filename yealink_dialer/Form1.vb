@@ -16,6 +16,7 @@ Public Class Form1
     Dim CTime As Integer = 8
     Dim DTime As Integer = 3
     Dim CRDTA As String
+    Dim PWRevealLock As Boolean = False
     Private Sub Form1_Load(sender As Object, e As EventArgs) Handles MyBase.Load
 
         'Read config secret key.
@@ -87,7 +88,7 @@ Public Class Form1
             'If launched with callto link, this button instead is the CALL button and initiates the call once pressed.
             DIAL = TelNumberBox.Text
             CloseTimer.Stop()
-            SendRequestToPhone(APIUSERNAME, APIPASSWORD, PHONEIP & "/servlet?key=number=" & DIAL & "&outgoing_uri=" & SIPACCOUNT & "")
+            SendRequestToPhone(APIUSERNAME, APIPASSWORD, PHONEIP & "/servlet?key=number=" & "012345678910" & "&outgoing_uri=" & SipAccountBox.Text & "")
         End If
     End Sub
 
@@ -108,22 +109,15 @@ Public Class Form1
 
     Private Sub Button2_Click(sender As Object, e As EventArgs) Handles Button2.Click
 
-        'Assemble config file
-        PhoneConfigBox.Text = "PHONEIP=" & PhoneIPBox.Text & vbNewLine & "SIPACCOUNT=" & SipAccountBox.Text & vbNewLine & "USERNAME=" & WebUsernameBox.Text & vbNewLine & "PASSWORD=" & WebPasswordBox.Text & vbNewLine & "autoclose=" & AutoCloseCheckBox.Checked & vbNewLine & "closedelay=" & AutoCloseDelayBox.Value & vbNewLine & "autodial=" & AutoDialCheckBox.Checked & vbNewLine & "dialdelay=" & AutoDialDelayBox.Value & vbNewLine
 
         'Test Call Button
-
         Dim Buttons As MessageBoxButtons = MessageBoxButtons.YesNo
         Dim Result As DialogResult
         Result = MessageBox.Show("Initiate test call?" & vbNewLine & "(Calls 01234567890)" & vbNewLine & vbNewLine & "Phone IP: " & PhoneIPBox.Text & vbNewLine & "Account: " & SipAccountBox.Text & vbNewLine & "Username: " & WebUsernameBox.Text & vbNewLine & "Password: " & WebPasswordBox.Text, "Test call?", Buttons, MessageBoxIcon.Information)
 
         If Result = DialogResult.Yes Then
-            PHONEIP = PhoneConfigBox.Lines(0).Replace("PHONEIP=", "")
-            SIPACCOUNT = PhoneConfigBox.Lines(1).Replace("SIPACCOUNT=", "")
-            APIUSERNAME = PhoneConfigBox.Lines(2).Replace("USERNAME=", "")
-            APIPASSWORD = PhoneConfigBox.Lines(3).Replace("PASSWORD=", "")
 
-            SendRequestToPhone(APIUSERNAME, APIPASSWORD, PHONEIP & "/servlet?key=number=" & DIAL & "&outgoing_uri=" & SIPACCOUNT & "")
+            SendRequestToPhone(WebUsernameBox.Text, WebPasswordBox.Text, PhoneIPBox.Text & "/servlet?key=number=" & DIAL & "&outgoing_uri=" & SIPACCOUNT & "")
 
         End If
     End Sub
@@ -144,9 +138,13 @@ Public Class Form1
 
     'Load config and configure app with their data.
     Private Function LoadConfigFile(ByVal FileToLoad As String, ByVal SecretToUse As String)
+        'Create temporary variables used for clearer code structuring.
+        Dim AutoCloseTemp As Boolean = True
+        Dim AutoDialTemp As Boolean = False
+        Dim PWRevealLockTemp As Boolean = True
         Try
+            'Load application settings.
             Dim PhoneContent As String = My.Computer.FileSystem.ReadAllText(FileToLoad)
-
             Dim rd As New RijndaelManaged
             Dim rijndaelIvLength As Integer = 16
             Dim md5 As New MD5CryptoServiceProvider
@@ -166,32 +164,27 @@ Public Class Form1
             rd.Clear()
             PhoneConfigBox.Text = CRDTA
 
-            'Load application settings.
-            CTime = PhoneConfigBox.Lines(5).Replace("closedelay=", "")
-            DTime = PhoneConfigBox.Lines(7).Replace("dialdelay=", "")
+            'Append 8 empty lines to prevent possible old / bad config exceptions.
+            PhoneConfigBox.Text = PhoneConfigBox.Text & vbNewLine & vbNewLine & vbNewLine & vbNewLine & vbNewLine & vbNewLine & vbNewLine & vbNewLine
 
-            If PhoneConfigBox.Lines(4).Replace("autoclose=", "") = "True" Then
-                AutoCloseCheckBox.Checked = True
-            Else
-                AutoCloseCheckBox.Checked = False
-            End If
-            If PhoneConfigBox.Lines(6).Replace("autodial=", "") = "True" Then
-                AutoDialCheckBox.Checked = True
-            Else
-                AutoDialCheckBox.Checked = False
-            End If
+            'Setup Variables from config file.
+            PHONEIP = PhoneConfigBox.Lines(0).Replace("PHONEIP=", "")
+            SIPACCOUNT = PhoneConfigBox.Lines(1).Replace("SIPACCOUNT=", "")
+            APIUSERNAME = PhoneConfigBox.Lines(2).Replace("USERNAME=", "")
+            APIPASSWORD = PhoneConfigBox.Lines(3).Replace("PASSWORD=", "")
+            AutoCloseTemp = PhoneConfigBox.Lines(4).Replace("autoclose=", "")
+            CTime = PhoneConfigBox.Lines(5).Replace("closedelay=", "")
+            AutoDialTemp = PhoneConfigBox.Lines(6).Replace("autodial=", "")
+            DTime = PhoneConfigBox.Lines(7).Replace("dialdelay=", "")
+            PWRevealLockTemp = PhoneConfigBox.Lines(8).Replace("pwreveallock=", "")
         Catch ex As Exception
+            MsgBox(ex.Message)
             NormalMode()
             SettingsPanel.Show()
         Finally
         End Try
 
-        'Configure parameters
-        PHONEIP = PhoneConfigBox.Lines(0).Replace("PHONEIP=", "")
-        SIPACCOUNT = PhoneConfigBox.Lines(1).Replace("SIPACCOUNT=", "")
-        APIUSERNAME = PhoneConfigBox.Lines(2).Replace("USERNAME=", "")
-        APIPASSWORD = PhoneConfigBox.Lines(3).Replace("PASSWORD=", "")
-
+        'Configure app UI states
         PhoneIPBox.Text = PHONEIP
         SipAccountBox.Text = SIPACCOUNT
         WebUsernameBox.Text = APIUSERNAME
@@ -200,11 +193,30 @@ Public Class Form1
         AutoCloseDelayBox.Value = CTime
         AutoDialDelayBox.Value = DTime
         CallDelay.Interval = DTime * 1000
+
+        If AutoCloseTemp = True Then
+            AutoCloseCheckBox.Checked = True
+        Else
+            AutoCloseCheckBox.Checked = False
+        End If
+
+        If AutoDialTemp = True Then
+            AutoDialCheckBox.Checked = True
+        Else
+            AutoDialCheckBox.Checked = False
+        End If
+
+        If PWRevealLockTemp = True Then
+            PWShowLockCheckbox.Checked = True
+            PWRevealLock = True
+        Else
+            PWShowLockCheckbox.Checked = False
+            PWRevealLock = False
+        End If
     End Function
 
     Private Function SaveConfigFile(ByVal FileToSave As String, ByVal SecretToUse As String)
-        'Assemble config file.
-        PhoneConfigBox.Text = "PHONEIP=" & PhoneIPBox.Text & vbNewLine & "SIPACCOUNT=" & SipAccountBox.Text & vbNewLine & "USERNAME=" & WebUsernameBox.Text & vbNewLine & "PASSWORD=" & WebPasswordBox.Text & vbNewLine & "autoclose=" & AutoCloseCheckBox.Checked & vbNewLine & "closedelay=" & AutoCloseDelayBox.Value & vbNewLine & "autodial=" & AutoDialCheckBox.Checked & vbNewLine & "dialdelay=" & AutoDialDelayBox.Value & vbNewLine
+        AssembleConfigFile()
 
         'Encrypt config with secret.
         Dim rd As New RijndaelManaged
@@ -248,7 +260,6 @@ Public Class Form1
     End Sub
 
     Private Sub Button4_Click(sender As Object, e As EventArgs) Handles Button4.Click
-
         'Generate new random crypto secret and save it.
         CFGSecret = RandomString(250, 256)
         Using writer As New System.IO.StreamWriter(Application.StartupPath() & "\data\secret.cfg")
@@ -260,6 +271,14 @@ Public Class Form1
         'Save config with new secret
         SaveConfigFile(Application.StartupPath() & "\data\phone.cfg", CFGSecret)
         SettingsPanel.Hide()
+
+        'Set new vairables
+        PHONEIP = PhoneConfigBox.Lines(0).Replace("PHONEIP=", "")
+        SIPACCOUNT = PhoneConfigBox.Lines(1).Replace("SIPACCOUNT=", "")
+        APIUSERNAME = PhoneConfigBox.Lines(2).Replace("USERNAME=", "")
+        APIPASSWORD = PhoneConfigBox.Lines(3).Replace("PASSWORD=", "")
+
+
     End Sub
 
     Private Sub TextBox1_TextChanged(sender As Object, e As EventArgs) Handles TelNumberBox.TextChanged
@@ -319,21 +338,16 @@ Public Class Form1
         TelNumberBox.Text = TelNumberBox.Text & "+"
     End Sub
 
+    Private Function AssembleConfigFile()
+        PhoneConfigBox.Text = "PHONEIP=" & PhoneIPBox.Text & vbNewLine & "SIPACCOUNT=" & SipAccountBox.Text & vbNewLine & "USERNAME=" & WebUsernameBox.Text & vbNewLine & "PASSWORD=" & WebPasswordBox.Text & vbNewLine & "autoclose=" & AutoCloseCheckBox.Checked & vbNewLine & "closedelay=" & AutoCloseDelayBox.Value & vbNewLine & "autodial=" & AutoDialCheckBox.Checked & vbNewLine & "dialdelay=" & AutoDialDelayBox.Value & vbNewLine & "pwreveallock=" & PWShowLockCheckbox.Checked & vbNewLine
+    End Function
     Private Sub SettingsLabel_Click(sender As Object, e As EventArgs) Handles SettingsLabel.Click
+        PWRevealStateConfigure()
         NormalMode()
         SettingsPanel.Show()
         CallDelay.Stop()
         CloseTimer.Stop()
     End Sub
-
-    Private Sub Button1_Click(sender As Object, e As EventArgs) Handles Button1.Click
-        'LoadConfigFile(Application.StartupPath() & "\data\phone.cfg", CFGSecret)
-    End Sub
-
-    Private Sub Button3_Click_1(sender As Object, e As EventArgs) Handles Button3.Click
-        'SaveConfigFile(Application.StartupPath() & "\data\phone.cfg", CFGSecret)
-    End Sub
-
     Private Function SendRequestToPhone(ByVal SENDSIPUSER As String, ByVal SENDSIPPASSWORD As String, ByVal APIURL As String)
         'Make a Webrequest to the phones API URL
         Try
@@ -357,4 +371,48 @@ Public Class Form1
             MsgBox(ex.Message)
         End Try
     End Function
+    Public Function ProxySendRequestToPhone(ByVal SENDSIPUSER As String, ByVal SENDSIPPASSWORD As String, ByVal APIURL As String)
+        SendRequestToPhone(SENDSIPUSER, SENDSIPPASSWORD, APIURL)
+    End Function
+
+    Private Sub SetupWizardLabel_Click(sender As Object, e As EventArgs) Handles SetupWizardLabel.Click
+        Me.Hide()
+        SetupWizard.ShowDialog()
+        Me.Show()
+    End Sub
+
+    Private Sub PWShowLockCheckbox_CheckedChanged(sender As Object, e As EventArgs) Handles PWShowLockCheckbox.CheckedChanged
+        If PWRevealLock = True Then
+            WebPasswordBox.Text = ""
+            WebPasswordBox.Enabled = True
+            PWRevealLock = False
+            PictureBox1.BackgroundImage = My.Resources.EyeGrayedOut
+        End If
+    End Sub
+
+    Private Function PWRevealStateConfigure()
+        If PWShowLockCheckbox.Checked = True Then
+            PWRevealLock = True
+            WebPasswordBox.UseSystemPasswordChar = True
+            'WebPasswordBox.Enabled = False
+            PictureBox1.BackgroundImage = My.Resources.EyeGrayedOutCrossedOut
+        Else
+            PWRevealLock = False
+            'WebPasswordBox.Enabled = True
+            WebPasswordBox.UseSystemPasswordChar = True
+            PictureBox1.BackgroundImage = My.Resources.EyeGrayedOut
+        End If
+    End Function
+
+    Private Sub PictureBox1_Click(sender As Object, e As EventArgs) Handles PictureBox1.Click
+        If WebPasswordBox.UseSystemPasswordChar = True Then
+            If PWRevealLock = False Then
+                WebPasswordBox.UseSystemPasswordChar = False
+                PictureBox1.BackgroundImage = My.Resources.EyeOn
+            End If
+        Else
+            WebPasswordBox.UseSystemPasswordChar = True
+            PictureBox1.BackgroundImage = My.Resources.EyeGrayedOut
+        End If
+    End Sub
 End Class

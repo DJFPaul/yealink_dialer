@@ -59,5 +59,35 @@ Namespace My.Resources
                 resourceCulture = value
             End Set
         End Property
+        
+        '''<summary>
+        '''  Sucht eine lokalisierte Ressource vom Typ System.Drawing.Bitmap.
+        '''</summary>
+        Friend ReadOnly Property EyeGrayedOut() As System.Drawing.Bitmap
+            Get
+                Dim obj As Object = ResourceManager.GetObject("EyeGrayedOut", resourceCulture)
+                Return CType(obj,System.Drawing.Bitmap)
+            End Get
+        End Property
+        
+        '''<summary>
+        '''  Sucht eine lokalisierte Ressource vom Typ System.Drawing.Bitmap.
+        '''</summary>
+        Friend ReadOnly Property EyeGrayedOutCrossedOut() As System.Drawing.Bitmap
+            Get
+                Dim obj As Object = ResourceManager.GetObject("EyeGrayedOutCrossedOut", resourceCulture)
+                Return CType(obj,System.Drawing.Bitmap)
+            End Get
+        End Property
+        
+        '''<summary>
+        '''  Sucht eine lokalisierte Ressource vom Typ System.Drawing.Bitmap.
+        '''</summary>
+        Friend ReadOnly Property EyeOn() As System.Drawing.Bitmap
+            Get
+                Dim obj As Object = ResourceManager.GetObject("EyeOn", resourceCulture)
+                Return CType(obj,System.Drawing.Bitmap)
+            End Get
+        End Property
     End Module
 End Namespace
