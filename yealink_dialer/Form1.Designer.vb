@@ -61,6 +61,7 @@ Partial Class Form1
         Me.Button1 = New System.Windows.Forms.Button()
         Me.Button3 = New System.Windows.Forms.Button()
         Me.SettingsPanel = New System.Windows.Forms.Panel()
+        Me.ConfigInfoToolTip = New System.Windows.Forms.ToolTip(Me.components)
         Me.BottomPanel.SuspendLayout()
         CType(Me.AutoCloseDelayBox, System.ComponentModel.ISupportInitialize).BeginInit()
         CType(Me.AutoDialDelayBox, System.ComponentModel.ISupportInitialize).BeginInit()
@@ -69,8 +70,9 @@ Partial Class Form1
         '
         'IPLabel
         '
+        Me.IPLabel.Font = New System.Drawing.Font("Consolas", 8.25!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
         Me.IPLabel.ImageAlign = System.Drawing.ContentAlignment.MiddleLeft
-        Me.IPLabel.Location = New System.Drawing.Point(15, 39)
+        Me.IPLabel.Location = New System.Drawing.Point(13, 39)
         Me.IPLabel.Name = "IPLabel"
         Me.IPLabel.Size = New System.Drawing.Size(150, 15)
         Me.IPLabel.TabIndex = 7
@@ -248,7 +250,7 @@ Partial Class Form1
         'Button2
         '
         Me.Button2.Font = New System.Drawing.Font("Microsoft Sans Serif", 15.75!, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
-        Me.Button2.Location = New System.Drawing.Point(3, 211)
+        Me.Button2.Location = New System.Drawing.Point(14, 216)
         Me.Button2.Name = "Button2"
         Me.Button2.Size = New System.Drawing.Size(199, 50)
         Me.Button2.TabIndex = 10
@@ -258,7 +260,7 @@ Partial Class Form1
         'Button4
         '
         Me.Button4.Font = New System.Drawing.Font("Microsoft Sans Serif", 15.75!, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
-        Me.Button4.Location = New System.Drawing.Point(4, 304)
+        Me.Button4.Location = New System.Drawing.Point(15, 309)
         Me.Button4.Name = "Button4"
         Me.Button4.Size = New System.Drawing.Size(199, 50)
         Me.Button4.TabIndex = 11
@@ -268,15 +270,16 @@ Partial Class Form1
         'Label1
         '
         Me.Label1.AutoSize = True
-        Me.Label1.Location = New System.Drawing.Point(4, 1)
+        Me.Label1.Location = New System.Drawing.Point(15, 6)
         Me.Label1.Name = "Label1"
         Me.Label1.Size = New System.Drawing.Size(51, 13)
         Me.Label1.TabIndex = 12
         Me.Label1.Text = "Phone IP"
+        Me.ConfigInfoToolTip.SetToolTip(Me.Label1, "IP where the phones web interface can be reached." & Global.Microsoft.VisualBasic.ChrW(13) & Global.Microsoft.VisualBasic.ChrW(10))
         '
         'PhoneIPBox
         '
-        Me.PhoneIPBox.Location = New System.Drawing.Point(7, 17)
+        Me.PhoneIPBox.Location = New System.Drawing.Point(18, 22)
         Me.PhoneIPBox.Name = "PhoneIPBox"
         Me.PhoneIPBox.Size = New System.Drawing.Size(194, 20)
         Me.PhoneIPBox.TabIndex = 13
@@ -284,15 +287,16 @@ Partial Class Form1
         'Label2
         '
         Me.Label2.AutoSize = True
-        Me.Label2.Location = New System.Drawing.Point(4, 40)
+        Me.Label2.Location = New System.Drawing.Point(15, 45)
         Me.Label2.Name = "Label2"
         Me.Label2.Size = New System.Drawing.Size(65, 13)
         Me.Label2.TabIndex = 14
         Me.Label2.Text = "Sip Account"
+        Me.ConfigInfoToolTip.SetToolTip(Me.Label2, resources.GetString("Label2.ToolTip"))
         '
         'SipAccountBox
         '
-        Me.SipAccountBox.Location = New System.Drawing.Point(6, 56)
+        Me.SipAccountBox.Location = New System.Drawing.Point(17, 61)
         Me.SipAccountBox.Name = "SipAccountBox"
         Me.SipAccountBox.Size = New System.Drawing.Size(195, 20)
         Me.SipAccountBox.TabIndex = 15
@@ -300,15 +304,16 @@ Partial Class Form1
         'Label3
         '
         Me.Label3.AutoSize = True
-        Me.Label3.Location = New System.Drawing.Point(4, 79)
+        Me.Label3.Location = New System.Drawing.Point(15, 84)
         Me.Label3.Name = "Label3"
         Me.Label3.Size = New System.Drawing.Size(92, 13)
         Me.Label3.TabIndex = 16
         Me.Label3.Text = "WebUI Username"
+        Me.ConfigInfoToolTip.SetToolTip(Me.Label3, "Username used to login to the WebUI.")
         '
         'WebUsernameBox
         '
-        Me.WebUsernameBox.Location = New System.Drawing.Point(6, 95)
+        Me.WebUsernameBox.Location = New System.Drawing.Point(17, 100)
         Me.WebUsernameBox.Name = "WebUsernameBox"
         Me.WebUsernameBox.Size = New System.Drawing.Size(195, 20)
         Me.WebUsernameBox.TabIndex = 17
@@ -316,15 +321,16 @@ Partial Class Form1
         'Label4
         '
         Me.Label4.AutoSize = True
-        Me.Label4.Location = New System.Drawing.Point(4, 118)
+        Me.Label4.Location = New System.Drawing.Point(15, 123)
         Me.Label4.Name = "Label4"
         Me.Label4.Size = New System.Drawing.Size(90, 13)
         Me.Label4.TabIndex = 18
         Me.Label4.Text = "WebUI Password"
+        Me.ConfigInfoToolTip.SetToolTip(Me.Label4, "Password used to login to the WebUI.")
         '
         'WebPasswordBox
         '
-        Me.WebPasswordBox.Location = New System.Drawing.Point(6, 134)
+        Me.WebPasswordBox.Location = New System.Drawing.Point(17, 139)
         Me.WebPasswordBox.Name = "WebPasswordBox"
         Me.WebPasswordBox.Size = New System.Drawing.Size(195, 20)
         Me.WebPasswordBox.TabIndex = 19
@@ -332,7 +338,7 @@ Partial Class Form1
         '
         'PhoneConfigBox
         '
-        Me.PhoneConfigBox.Location = New System.Drawing.Point(6, 230)
+        Me.PhoneConfigBox.Location = New System.Drawing.Point(17, 235)
         Me.PhoneConfigBox.Name = "PhoneConfigBox"
         Me.PhoneConfigBox.ScrollBars = System.Windows.Forms.RichTextBoxScrollBars.None
         Me.PhoneConfigBox.Size = New System.Drawing.Size(199, 110)
@@ -346,33 +352,37 @@ Partial Class Form1
         Me.AutoCloseCheckBox.AutoSize = True
         Me.AutoCloseCheckBox.Checked = True
         Me.AutoCloseCheckBox.CheckState = System.Windows.Forms.CheckState.Checked
-        Me.AutoCloseCheckBox.Location = New System.Drawing.Point(6, 161)
+        Me.AutoCloseCheckBox.Location = New System.Drawing.Point(18, 168)
         Me.AutoCloseCheckBox.Name = "AutoCloseCheckBox"
         Me.AutoCloseCheckBox.Size = New System.Drawing.Size(73, 17)
         Me.AutoCloseCheckBox.TabIndex = 20
         Me.AutoCloseCheckBox.Text = "Autoclose"
+        Me.ConfigInfoToolTip.SetToolTip(Me.AutoCloseCheckBox, "Only when the app is launched trough call links." & Global.Microsoft.VisualBasic.ChrW(13) & Global.Microsoft.VisualBasic.ChrW(10) & Global.Microsoft.VisualBasic.ChrW(13) & Global.Microsoft.VisualBasic.ChrW(10) & "Automatically closes the Yeal" &
+        "ink Dialer window after x seconds.")
         Me.AutoCloseCheckBox.UseVisualStyleBackColor = True
         '
         'AutoDialCheckBox
         '
         Me.AutoDialCheckBox.AutoSize = True
-        Me.AutoDialCheckBox.Location = New System.Drawing.Point(6, 184)
+        Me.AutoDialCheckBox.Location = New System.Drawing.Point(18, 190)
         Me.AutoDialCheckBox.Name = "AutoDialCheckBox"
         Me.AutoDialCheckBox.Size = New System.Drawing.Size(64, 17)
         Me.AutoDialCheckBox.TabIndex = 21
         Me.AutoDialCheckBox.Text = "Autodial"
+        Me.ConfigInfoToolTip.SetToolTip(Me.AutoDialCheckBox, "Only when the app is launched trough call links." & Global.Microsoft.VisualBasic.ChrW(13) & Global.Microsoft.VisualBasic.ChrW(10) & Global.Microsoft.VisualBasic.ChrW(13) & Global.Microsoft.VisualBasic.ChrW(10) & "Automatically dials a clicked" &
+        " number after x seconds." & Global.Microsoft.VisualBasic.ChrW(13) & Global.Microsoft.VisualBasic.ChrW(10) & "Please use this function with absolute caution!")
         Me.AutoDialCheckBox.UseVisualStyleBackColor = True
         '
         'AutoCloseDelayBox
         '
-        Me.AutoCloseDelayBox.Location = New System.Drawing.Point(166, 160)
+        Me.AutoCloseDelayBox.Location = New System.Drawing.Point(177, 165)
         Me.AutoCloseDelayBox.Name = "AutoCloseDelayBox"
         Me.AutoCloseDelayBox.Size = New System.Drawing.Size(35, 20)
         Me.AutoCloseDelayBox.TabIndex = 22
         '
         'AutoDialDelayBox
         '
-        Me.AutoDialDelayBox.Location = New System.Drawing.Point(166, 185)
+        Me.AutoDialDelayBox.Location = New System.Drawing.Point(177, 190)
         Me.AutoDialDelayBox.Name = "AutoDialDelayBox"
         Me.AutoDialDelayBox.Size = New System.Drawing.Size(35, 20)
         Me.AutoDialDelayBox.TabIndex = 23
@@ -380,7 +390,7 @@ Partial Class Form1
         'Button1
         '
         Me.Button1.Font = New System.Drawing.Font("Microsoft Sans Serif", 12.0!, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
-        Me.Button1.Location = New System.Drawing.Point(4, 267)
+        Me.Button1.Location = New System.Drawing.Point(15, 272)
         Me.Button1.Name = "Button1"
         Me.Button1.Size = New System.Drawing.Size(95, 31)
         Me.Button1.TabIndex = 24
@@ -390,7 +400,7 @@ Partial Class Form1
         'Button3
         '
         Me.Button3.Font = New System.Drawing.Font("Microsoft Sans Serif", 12.0!, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
-        Me.Button3.Location = New System.Drawing.Point(108, 267)
+        Me.Button3.Location = New System.Drawing.Point(119, 272)
         Me.Button3.Name = "Button3"
         Me.Button3.Size = New System.Drawing.Size(95, 31)
         Me.Button3.TabIndex = 25
@@ -416,11 +426,17 @@ Partial Class Form1
         Me.SettingsPanel.Controls.Add(Me.Label1)
         Me.SettingsPanel.Controls.Add(Me.Button4)
         Me.SettingsPanel.Controls.Add(Me.Button2)
-        Me.SettingsPanel.Location = New System.Drawing.Point(11, 5)
+        Me.SettingsPanel.Location = New System.Drawing.Point(0, 0)
         Me.SettingsPanel.Name = "SettingsPanel"
-        Me.SettingsPanel.Size = New System.Drawing.Size(391, 377)
+        Me.SettingsPanel.Size = New System.Drawing.Size(230, 10)
         Me.SettingsPanel.TabIndex = 4
         Me.SettingsPanel.Visible = False
+        '
+        'ConfigInfoToolTip
+        '
+        Me.ConfigInfoToolTip.AutoPopDelay = 30000
+        Me.ConfigInfoToolTip.InitialDelay = 500
+        Me.ConfigInfoToolTip.ReshowDelay = 100
         '
         'Form1
         '
@@ -495,4 +511,5 @@ Partial Class Form1
     Friend WithEvents Button1 As Button
     Friend WithEvents Button3 As Button
     Friend WithEvents SettingsPanel As Panel
+    Friend WithEvents ConfigInfoToolTip As ToolTip
 End Class

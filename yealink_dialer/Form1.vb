@@ -43,10 +43,10 @@ Public Class Form1
             DIAL = "012345678910"
             NormalMode()
         Finally
-            IPLabel.Text = "Phone IP: " & PHONEIP
+            IPLabel.Text = "IP: " & PHONEIP
         End Try
-        SettingsPanel.Location = New Point(12, 12)
-        SettingsPanel.Size = New Size(205, 364)
+        SettingsPanel.Location = New Point(0, 0)
+        SettingsPanel.Size = New Size(230, 382)
     End Sub
     Private Function SmallMode()
         BottomPanel.Location = New Point(0, 44)
