@@ -59,6 +59,8 @@ Partial Class Form1
         Me.AutoCloseDelayBox = New System.Windows.Forms.NumericUpDown()
         Me.AutoDialDelayBox = New System.Windows.Forms.NumericUpDown()
         Me.SettingsPanel = New System.Windows.Forms.Panel()
+        Me.SkipCertCheckCheckbox = New System.Windows.Forms.CheckBox()
+        Me.UseSSLCheckbox = New System.Windows.Forms.CheckBox()
         Me.PictureBox1 = New System.Windows.Forms.PictureBox()
         Me.PWShowLockCheckbox = New System.Windows.Forms.CheckBox()
         Me.SetupWizardLabel = New System.Windows.Forms.Label()
@@ -252,7 +254,7 @@ Partial Class Form1
         'Button2
         '
         Me.Button2.Font = New System.Drawing.Font("Microsoft Sans Serif", 15.75!, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
-        Me.Button2.Location = New System.Drawing.Point(17, 165)
+        Me.Button2.Location = New System.Drawing.Point(17, 191)
         Me.Button2.Name = "Button2"
         Me.Button2.Size = New System.Drawing.Size(195, 50)
         Me.Button2.TabIndex = 10
@@ -262,7 +264,7 @@ Partial Class Form1
         'Button4
         '
         Me.Button4.Font = New System.Drawing.Font("Microsoft Sans Serif", 15.75!, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
-        Me.Button4.Location = New System.Drawing.Point(15, 309)
+        Me.Button4.Location = New System.Drawing.Point(15, 316)
         Me.Button4.Name = "Button4"
         Me.Button4.Size = New System.Drawing.Size(199, 50)
         Me.Button4.TabIndex = 11
@@ -289,7 +291,7 @@ Partial Class Form1
         'Label2
         '
         Me.Label2.AutoSize = True
-        Me.Label2.Location = New System.Drawing.Point(15, 45)
+        Me.Label2.Location = New System.Drawing.Point(15, 71)
         Me.Label2.Name = "Label2"
         Me.Label2.Size = New System.Drawing.Size(65, 13)
         Me.Label2.TabIndex = 14
@@ -298,7 +300,7 @@ Partial Class Form1
         '
         'SipAccountBox
         '
-        Me.SipAccountBox.Location = New System.Drawing.Point(17, 61)
+        Me.SipAccountBox.Location = New System.Drawing.Point(17, 87)
         Me.SipAccountBox.Name = "SipAccountBox"
         Me.SipAccountBox.Size = New System.Drawing.Size(195, 20)
         Me.SipAccountBox.TabIndex = 15
@@ -306,7 +308,7 @@ Partial Class Form1
         'Label3
         '
         Me.Label3.AutoSize = True
-        Me.Label3.Location = New System.Drawing.Point(15, 84)
+        Me.Label3.Location = New System.Drawing.Point(15, 110)
         Me.Label3.Name = "Label3"
         Me.Label3.Size = New System.Drawing.Size(92, 13)
         Me.Label3.TabIndex = 16
@@ -315,7 +317,7 @@ Partial Class Form1
         '
         'WebUsernameBox
         '
-        Me.WebUsernameBox.Location = New System.Drawing.Point(17, 100)
+        Me.WebUsernameBox.Location = New System.Drawing.Point(17, 126)
         Me.WebUsernameBox.Name = "WebUsernameBox"
         Me.WebUsernameBox.Size = New System.Drawing.Size(195, 20)
         Me.WebUsernameBox.TabIndex = 17
@@ -323,7 +325,7 @@ Partial Class Form1
         'Label4
         '
         Me.Label4.AutoSize = True
-        Me.Label4.Location = New System.Drawing.Point(15, 123)
+        Me.Label4.Location = New System.Drawing.Point(15, 149)
         Me.Label4.Name = "Label4"
         Me.Label4.Size = New System.Drawing.Size(90, 13)
         Me.Label4.TabIndex = 18
@@ -332,7 +334,7 @@ Partial Class Form1
         '
         'WebPasswordBox
         '
-        Me.WebPasswordBox.Location = New System.Drawing.Point(17, 139)
+        Me.WebPasswordBox.Location = New System.Drawing.Point(17, 165)
         Me.WebPasswordBox.Name = "WebPasswordBox"
         Me.WebPasswordBox.Size = New System.Drawing.Size(195, 20)
         Me.WebPasswordBox.TabIndex = 19
@@ -341,13 +343,14 @@ Partial Class Form1
         'PhoneConfigBox
         '
         Me.PhoneConfigBox.AccessibleRole = System.Windows.Forms.AccessibleRole.None
-        Me.PhoneConfigBox.Location = New System.Drawing.Point(12, 359)
+        Me.PhoneConfigBox.Location = New System.Drawing.Point(12, 10)
         Me.PhoneConfigBox.Name = "PhoneConfigBox"
         Me.PhoneConfigBox.ScrollBars = System.Windows.Forms.RichTextBoxScrollBars.None
-        Me.PhoneConfigBox.Size = New System.Drawing.Size(223, 124)
+        Me.PhoneConfigBox.Size = New System.Drawing.Size(223, 153)
         Me.PhoneConfigBox.TabIndex = 9
         Me.PhoneConfigBox.Text = "PHONEIP=192.168.1.100" & Global.Microsoft.VisualBasic.ChrW(10) & "SIPACCOUNT=10@192.168.1.1" & Global.Microsoft.VisualBasic.ChrW(10) & "USERNAME=admin" & Global.Microsoft.VisualBasic.ChrW(10) & "PASSWORD=admin" & Global.Microsoft.VisualBasic.ChrW(10) & "aut" &
-    "oclose=true" & Global.Microsoft.VisualBasic.ChrW(10) & "closedelay=8" & Global.Microsoft.VisualBasic.ChrW(10) & "autodial=false" & Global.Microsoft.VisualBasic.ChrW(10) & "dialdelay=3" & Global.Microsoft.VisualBasic.ChrW(10) & "pwreveallock=false"
+    "oclose=true" & Global.Microsoft.VisualBasic.ChrW(10) & "closedelay=8" & Global.Microsoft.VisualBasic.ChrW(10) & "autodial=false" & Global.Microsoft.VisualBasic.ChrW(10) & "dialdelay=3" & Global.Microsoft.VisualBasic.ChrW(10) & "pwreveallock=false" & Global.Microsoft.VisualBasic.ChrW(10) & "usessl=tr" &
+    "ue" & Global.Microsoft.VisualBasic.ChrW(10) & "ignorecert=true"
         Me.PhoneConfigBox.Visible = False
         '
         'AutoCloseCheckBox
@@ -355,7 +358,7 @@ Partial Class Form1
         Me.AutoCloseCheckBox.AutoSize = True
         Me.AutoCloseCheckBox.Checked = True
         Me.AutoCloseCheckBox.CheckState = System.Windows.Forms.CheckState.Checked
-        Me.AutoCloseCheckBox.Location = New System.Drawing.Point(18, 231)
+        Me.AutoCloseCheckBox.Location = New System.Drawing.Point(18, 247)
         Me.AutoCloseCheckBox.Name = "AutoCloseCheckBox"
         Me.AutoCloseCheckBox.Size = New System.Drawing.Size(73, 17)
         Me.AutoCloseCheckBox.TabIndex = 20
@@ -367,7 +370,7 @@ Partial Class Form1
         'AutoDialCheckBox
         '
         Me.AutoDialCheckBox.AutoSize = True
-        Me.AutoDialCheckBox.Location = New System.Drawing.Point(18, 253)
+        Me.AutoDialCheckBox.Location = New System.Drawing.Point(18, 269)
         Me.AutoDialCheckBox.Name = "AutoDialCheckBox"
         Me.AutoDialCheckBox.Size = New System.Drawing.Size(64, 17)
         Me.AutoDialCheckBox.TabIndex = 21
@@ -378,20 +381,22 @@ Partial Class Form1
         '
         'AutoCloseDelayBox
         '
-        Me.AutoCloseDelayBox.Location = New System.Drawing.Point(177, 228)
+        Me.AutoCloseDelayBox.Location = New System.Drawing.Point(177, 244)
         Me.AutoCloseDelayBox.Name = "AutoCloseDelayBox"
         Me.AutoCloseDelayBox.Size = New System.Drawing.Size(35, 20)
         Me.AutoCloseDelayBox.TabIndex = 22
         '
         'AutoDialDelayBox
         '
-        Me.AutoDialDelayBox.Location = New System.Drawing.Point(177, 253)
+        Me.AutoDialDelayBox.Location = New System.Drawing.Point(177, 269)
         Me.AutoDialDelayBox.Name = "AutoDialDelayBox"
         Me.AutoDialDelayBox.Size = New System.Drawing.Size(35, 20)
         Me.AutoDialDelayBox.TabIndex = 23
         '
         'SettingsPanel
         '
+        Me.SettingsPanel.Controls.Add(Me.SkipCertCheckCheckbox)
+        Me.SettingsPanel.Controls.Add(Me.UseSSLCheckbox)
         Me.SettingsPanel.Controls.Add(Me.PictureBox1)
         Me.SettingsPanel.Controls.Add(Me.PWShowLockCheckbox)
         Me.SettingsPanel.Controls.Add(Me.SetupWizardLabel)
@@ -416,12 +421,40 @@ Partial Class Form1
         Me.SettingsPanel.TabIndex = 4
         Me.SettingsPanel.Visible = False
         '
+        'SkipCertCheckCheckbox
+        '
+        Me.SkipCertCheckCheckbox.AutoSize = True
+        Me.SkipCertCheckCheckbox.Checked = True
+        Me.SkipCertCheckCheckbox.CheckState = System.Windows.Forms.CheckState.Checked
+        Me.SkipCertCheckCheckbox.Location = New System.Drawing.Point(82, 48)
+        Me.SkipCertCheckCheckbox.Name = "SkipCertCheckCheckbox"
+        Me.SkipCertCheckCheckbox.Size = New System.Drawing.Size(138, 17)
+        Me.SkipCertCheckCheckbox.TabIndex = 30
+        Me.SkipCertCheckCheckbox.Text = "Ignore certificate check"
+        Me.ConfigInfoToolTip.SetToolTip(Me.SkipCertCheckCheckbox, "When checked, ignores the SSL certificate validation." & Global.Microsoft.VisualBasic.ChrW(13) & Global.Microsoft.VisualBasic.ChrW(10) & Global.Microsoft.VisualBasic.ChrW(13) & Global.Microsoft.VisualBasic.ChrW(10) & "This for example means i" &
+        "t will accept self signed certificates.")
+        Me.SkipCertCheckCheckbox.UseVisualStyleBackColor = True
+        '
+        'UseSSLCheckbox
+        '
+        Me.UseSSLCheckbox.AutoSize = True
+        Me.UseSSLCheckbox.Checked = True
+        Me.UseSSLCheckbox.CheckState = System.Windows.Forms.CheckState.Checked
+        Me.UseSSLCheckbox.Location = New System.Drawing.Point(18, 48)
+        Me.UseSSLCheckbox.Name = "UseSSLCheckbox"
+        Me.UseSSLCheckbox.Size = New System.Drawing.Size(68, 17)
+        Me.UseSSLCheckbox.TabIndex = 29
+        Me.UseSSLCheckbox.Text = "Use SSL"
+        Me.ConfigInfoToolTip.SetToolTip(Me.UseSSLCheckbox, "Uses the HTTPS endpoint on the phone." & Global.Microsoft.VisualBasic.ChrW(13) & Global.Microsoft.VisualBasic.ChrW(10) & Global.Microsoft.VisualBasic.ChrW(13) & Global.Microsoft.VisualBasic.ChrW(10) & "Note: Most phones have a self signed/off" &
+        "line certificate." & Global.Microsoft.VisualBasic.ChrW(13) & Global.Microsoft.VisualBasic.ChrW(10) & "This will require the certificate check to be ignored.")
+        Me.UseSSLCheckbox.UseVisualStyleBackColor = True
+        '
         'PictureBox1
         '
         Me.PictureBox1.BackgroundImage = Global.yealink_dialer.My.Resources.Resources.EyeGrayedOut
         Me.PictureBox1.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Zoom
         Me.PictureBox1.Cursor = System.Windows.Forms.Cursors.Hand
-        Me.PictureBox1.Location = New System.Drawing.Point(188, 124)
+        Me.PictureBox1.Location = New System.Drawing.Point(188, 150)
         Me.PictureBox1.Name = "PictureBox1"
         Me.PictureBox1.Size = New System.Drawing.Size(24, 13)
         Me.PictureBox1.TabIndex = 28
@@ -433,7 +466,7 @@ Partial Class Form1
         Me.PWShowLockCheckbox.AutoSize = True
         Me.PWShowLockCheckbox.Checked = True
         Me.PWShowLockCheckbox.CheckState = System.Windows.Forms.CheckState.Checked
-        Me.PWShowLockCheckbox.Location = New System.Drawing.Point(18, 276)
+        Me.PWShowLockCheckbox.Location = New System.Drawing.Point(18, 292)
         Me.PWShowLockCheckbox.Name = "PWShowLockCheckbox"
         Me.PWShowLockCheckbox.Size = New System.Drawing.Size(142, 17)
         Me.PWShowLockCheckbox.TabIndex = 27
@@ -535,4 +568,6 @@ Partial Class Form1
     Friend WithEvents PhoneConfigBox As RichTextBox
     Friend WithEvents PWShowLockCheckbox As CheckBox
     Friend WithEvents PictureBox1 As PictureBox
+    Friend WithEvents UseSSLCheckbox As CheckBox
+    Friend WithEvents SkipCertCheckCheckbox As CheckBox
 End Class

@@ -99,6 +99,7 @@
     <Import Include="System.Threading.Tasks" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="ApplicationEvents.vb" />
     <Compile Include="Form1.vb">
       <SubType>Form</SubType>
     </Compile>
@@ -191,6 +192,9 @@
   </ItemGroup>
   <ItemGroup>
     <None Include="Resources\EyeOn.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\ActionURIExample.png" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.VisualBasic.targets" />
 </Project>

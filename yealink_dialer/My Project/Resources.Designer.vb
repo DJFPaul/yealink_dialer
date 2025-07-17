@@ -63,6 +63,16 @@ Namespace My.Resources
         '''<summary>
         '''  Sucht eine lokalisierte Ressource vom Typ System.Drawing.Bitmap.
         '''</summary>
+        Friend ReadOnly Property ActionURIExample() As System.Drawing.Bitmap
+            Get
+                Dim obj As Object = ResourceManager.GetObject("ActionURIExample", resourceCulture)
+                Return CType(obj,System.Drawing.Bitmap)
+            End Get
+        End Property
+        
+        '''<summary>
+        '''  Sucht eine lokalisierte Ressource vom Typ System.Drawing.Bitmap.
+        '''</summary>
         Friend ReadOnly Property EyeGrayedOut() As System.Drawing.Bitmap
             Get
                 Dim obj As Object = ResourceManager.GetObject("EyeGrayedOut", resourceCulture)

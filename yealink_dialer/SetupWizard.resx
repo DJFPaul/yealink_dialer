@@ -117,6 +117,88 @@
   <resheader name="writer">
     <value>System.Resources.ResXResourceWriter, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </resheader>
+  <data name="Label1.Text" xml:space="preserve">
+    <value>Input your phones IP address here.
+By default no port is needed, but can be additionally specified if nesseary.
+You can also specify if you want to use SSL and to ignore the certificate check. (Most phones will need this)
+
+Example: 192.168.1.100</value>
+  </data>
+  <data name="Label2.Text" xml:space="preserve">
+    <value>Here you can specify the SIP account to use for outgoing calls trough this app and the SIP Servers IP address. (Optional)
+The format for this is: SIPUSERNAME@SIPSERVERIP
+
+Example: JOHNDOE@192.168.1.1
+</value>
+  </data>
+  <data name="Label6.Text" xml:space="preserve">
+    <value>This Wizard will guide you trough the setup for using this app.
+
+
+The following things are nesseary for configuring Yealink Dialer.
+
+
+Phone IP
+Sip account username
+Sip server IP
+WebUI Username
+WebUI Password 
+
+
+Click [Next] to proceed to the next step.</value>
+  </data>
+  <data name="Label7.Text" xml:space="preserve">
+    <value>Before the app can communicate
+with the phone, you need to setup
+the Action URI Allow IP List.
+
+
+1.
+Login to your phones web interface.
+
+
+2.
+The image on the right shows you
+where to find the correct page.
+
+
+3.
+Input your / all computer IP's from
+which you might want to make API
+requests from.
+
+You can specify multiple IP's or use
+wildcards (*) to specify IP / Subnet
+ranges.
+
+A wildcard is used in the example
+thus allowing the IP range from
+192.168.1.1 up until 192.168.1.255
+to make requests to the phone.
+
+
+4.
+Make sure you click [Confirm]
+Then proceed onto the next step.</value>
+  </data>
+  <data name="Label10.Text" xml:space="preserve">
+    <value>If you confingured everything right, we should now be able to test the phone connection.
+
+The first time you send a request to your phone, or if certain phone settings have been updated.
+The phones screen will show you a information text, asking you to confirm the remote connection.
+
+Hit the test button, and watch your phone screen.
+If you see the info text Yealink Dialer successfully send the request to your phone.
+Confirm the message so the phone accepts it's connection.
+
+Hitting test again should now initiate a test call to a invalid number.
+
+
+
+If successfull, you can proceed to the next page.
+Should you not have received any confirmation message and the phone does nothing.
+Please go back 1 page and check your data again.</value>
+  </data>
   <assembly alias="System.Drawing" name="System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a" />
   <data name="$this.Icon" type="System.Drawing.Icon, System.Drawing" mimetype="application/x-microsoft.net.object.bytearray.base64">
     <value>

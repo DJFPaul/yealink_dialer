@@ -126,6 +126,9 @@
   <metadata name="ConfigInfoToolTip.TrayLocation" type="System.Drawing.Point, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a">
     <value>232, 17</value>
   </metadata>
+  <metadata name="ConfigInfoToolTip.TrayLocation" type="System.Drawing.Point, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a">
+    <value>232, 17</value>
+  </metadata>
   <data name="Label2.ToolTip" xml:space="preserve">
     <value>Sip account to be used for outgoing calls.
 
@@ -145,13 +148,17 @@ Be aware that this will clear the password field as a safety measure.</value>
   <data name="PWShowLockCheckbox.ToolTip" xml:space="preserve">
     <value>When checked, unmasking the password field will be locked after load.
 
+You can check that it is currently locked by the striked out lock icon.
+
 This removes the potential leak risk the reveal feature introduced.
 If saved with this checked, unchecking will force clear the password field.
-You can check that it is locked by the striked out lock icon.
 
 Clearing only happens once, this prevents accidental nuking during setup.
 This is also reflected by the striked out icon not reappearing until saving again.
-It will nuke again the next time, if it was saved with this on again.</value>
+It will nuke again the next time, if it was saved with this on again.
+
+Exception case is if the WebUI Password field was empty.
+In that case the checkbox will start checked, but the reveal function is unlocked.</value>
   </data>
   <assembly alias="System.Drawing" name="System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a" />
   <data name="$this.Icon" type="System.Drawing.Icon, System.Drawing" mimetype="application/x-microsoft.net.object.bytearray.base64">
