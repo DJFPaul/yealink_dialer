@@ -57,18 +57,18 @@ Partial Class SetupWizard
         Me.Button7 = New System.Windows.Forms.Button()
         Me.Button8 = New System.Windows.Forms.Button()
         Me.TabPage5 = New System.Windows.Forms.TabPage()
-        Me.Button9 = New System.Windows.Forms.Button()
-        Me.Button10 = New System.Windows.Forms.Button()
         Me.GroupBox3 = New System.Windows.Forms.GroupBox()
-        Me.Label12 = New System.Windows.Forms.Label()
+        Me.Label14 = New System.Windows.Forms.Label()
+        Me.Label13 = New System.Windows.Forms.Label()
+        Me.Label11 = New System.Windows.Forms.Label()
         Me.PWShowLockCheckbox = New System.Windows.Forms.CheckBox()
         Me.AutoDialDelayBox = New System.Windows.Forms.NumericUpDown()
         Me.AutoCloseDelayBox = New System.Windows.Forms.NumericUpDown()
         Me.AutoDialCheckBox = New System.Windows.Forms.CheckBox()
         Me.AutoCloseCheckBox = New System.Windows.Forms.CheckBox()
-        Me.Label11 = New System.Windows.Forms.Label()
-        Me.Label13 = New System.Windows.Forms.Label()
-        Me.Label14 = New System.Windows.Forms.Label()
+        Me.Label12 = New System.Windows.Forms.Label()
+        Me.Button9 = New System.Windows.Forms.Button()
+        Me.Button10 = New System.Windows.Forms.Button()
         Me.WizardTaps.SuspendLayout()
         Me.TabPage1.SuspendLayout()
         Me.TabPage2.SuspendLayout()
@@ -171,7 +171,7 @@ Partial Class SetupWizard
         '
         Me.Label7.AutoSize = True
         Me.Label7.Font = New System.Drawing.Font("Microsoft Sans Serif", 8.25!, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
-        Me.Label7.Location = New System.Drawing.Point(3, 3)
+        Me.Label7.Location = New System.Drawing.Point(2, 3)
         Me.Label7.Name = "Label7"
         Me.Label7.Size = New System.Drawing.Size(211, 416)
         Me.Label7.TabIndex = 5
@@ -442,24 +442,6 @@ Partial Class SetupWizard
         Me.TabPage5.TabIndex = 4
         Me.TabPage5.Text = "TabPage5"
         '
-        'Button9
-        '
-        Me.Button9.Location = New System.Drawing.Point(722, 424)
-        Me.Button9.Name = "Button9"
-        Me.Button9.Size = New System.Drawing.Size(75, 23)
-        Me.Button9.TabIndex = 49
-        Me.Button9.Text = "Finish"
-        Me.Button9.UseVisualStyleBackColor = True
-        '
-        'Button10
-        '
-        Me.Button10.Location = New System.Drawing.Point(3, 424)
-        Me.Button10.Name = "Button10"
-        Me.Button10.Size = New System.Drawing.Size(75, 23)
-        Me.Button10.TabIndex = 48
-        Me.Button10.Text = "Back"
-        Me.Button10.UseVisualStyleBackColor = True
-        '
         'GroupBox3
         '
         Me.GroupBox3.Controls.Add(Me.Label14)
@@ -476,15 +458,37 @@ Partial Class SetupWizard
         Me.GroupBox3.TabIndex = 59
         Me.GroupBox3.TabStop = False
         '
-        'Label12
+        'Label14
         '
-        Me.Label12.AutoSize = True
-        Me.Label12.Font = New System.Drawing.Font("Microsoft Sans Serif", 12.0!, CType((System.Drawing.FontStyle.Bold Or System.Drawing.FontStyle.Underline), System.Drawing.FontStyle), System.Drawing.GraphicsUnit.Point, CType(0, Byte))
-        Me.Label12.Location = New System.Drawing.Point(299, 9)
-        Me.Label12.Name = "Label12"
-        Me.Label12.Size = New System.Drawing.Size(163, 20)
-        Me.Label12.TabIndex = 58
-        Me.Label12.Text = "Additional settings."
+        Me.Label14.AutoSize = True
+        Me.Label14.Font = New System.Drawing.Font("Microsoft Sans Serif", 12.0!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
+        Me.Label14.Location = New System.Drawing.Point(18, 216)
+        Me.Label14.Name = "Label14"
+        Me.Label14.Size = New System.Drawing.Size(555, 120)
+        Me.Label14.TabIndex = 35
+        Me.Label14.Text = resources.GetString("Label14.Text")
+        '
+        'Label13
+        '
+        Me.Label13.AutoSize = True
+        Me.Label13.Font = New System.Drawing.Font("Microsoft Sans Serif", 12.0!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
+        Me.Label13.Location = New System.Drawing.Point(19, 112)
+        Me.Label13.Name = "Label13"
+        Me.Label13.Size = New System.Drawing.Size(568, 40)
+        Me.Label13.TabIndex = 34
+        Me.Label13.Text = "Automatically dial a clicked number after x seconds when launched by a call link." &
+    "" & Global.Microsoft.VisualBasic.ChrW(13) & Global.Microsoft.VisualBasic.ChrW(10) & "Please use this function with absolute caution!"
+        '
+        'Label11
+        '
+        Me.Label11.AutoSize = True
+        Me.Label11.Font = New System.Drawing.Font("Microsoft Sans Serif", 12.0!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
+        Me.Label11.Location = New System.Drawing.Point(19, 25)
+        Me.Label11.Name = "Label11"
+        Me.Label11.Size = New System.Drawing.Size(663, 20)
+        Me.Label11.TabIndex = 33
+        Me.Label11.Text = "Automatically close the Yealink Dialer window after x seconds when launched troug" &
+    "h call links"
         '
         'PWShowLockCheckbox
         '
@@ -534,37 +538,33 @@ Partial Class SetupWizard
         Me.AutoCloseCheckBox.Text = "Autoclose"
         Me.AutoCloseCheckBox.UseVisualStyleBackColor = True
         '
-        'Label11
+        'Label12
         '
-        Me.Label11.AutoSize = True
-        Me.Label11.Font = New System.Drawing.Font("Microsoft Sans Serif", 12.0!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
-        Me.Label11.Location = New System.Drawing.Point(19, 25)
-        Me.Label11.Name = "Label11"
-        Me.Label11.Size = New System.Drawing.Size(663, 20)
-        Me.Label11.TabIndex = 33
-        Me.Label11.Text = "Automatically close the Yealink Dialer window after x seconds when launched troug" &
-    "h call links"
+        Me.Label12.AutoSize = True
+        Me.Label12.Font = New System.Drawing.Font("Microsoft Sans Serif", 12.0!, CType((System.Drawing.FontStyle.Bold Or System.Drawing.FontStyle.Underline), System.Drawing.FontStyle), System.Drawing.GraphicsUnit.Point, CType(0, Byte))
+        Me.Label12.Location = New System.Drawing.Point(299, 9)
+        Me.Label12.Name = "Label12"
+        Me.Label12.Size = New System.Drawing.Size(163, 20)
+        Me.Label12.TabIndex = 58
+        Me.Label12.Text = "Additional settings."
         '
-        'Label13
+        'Button9
         '
-        Me.Label13.AutoSize = True
-        Me.Label13.Font = New System.Drawing.Font("Microsoft Sans Serif", 12.0!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
-        Me.Label13.Location = New System.Drawing.Point(19, 112)
-        Me.Label13.Name = "Label13"
-        Me.Label13.Size = New System.Drawing.Size(568, 40)
-        Me.Label13.TabIndex = 34
-        Me.Label13.Text = "Automatically dial a clicked number after x seconds when launched by a call link." &
-    "" & Global.Microsoft.VisualBasic.ChrW(13) & Global.Microsoft.VisualBasic.ChrW(10) & "Please use this function with absolute caution!"
+        Me.Button9.Location = New System.Drawing.Point(722, 424)
+        Me.Button9.Name = "Button9"
+        Me.Button9.Size = New System.Drawing.Size(75, 23)
+        Me.Button9.TabIndex = 49
+        Me.Button9.Text = "Finish"
+        Me.Button9.UseVisualStyleBackColor = True
         '
-        'Label14
+        'Button10
         '
-        Me.Label14.AutoSize = True
-        Me.Label14.Font = New System.Drawing.Font("Microsoft Sans Serif", 12.0!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
-        Me.Label14.Location = New System.Drawing.Point(18, 216)
-        Me.Label14.Name = "Label14"
-        Me.Label14.Size = New System.Drawing.Size(555, 120)
-        Me.Label14.TabIndex = 35
-        Me.Label14.Text = resources.GetString("Label14.Text")
+        Me.Button10.Location = New System.Drawing.Point(3, 424)
+        Me.Button10.Name = "Button10"
+        Me.Button10.Size = New System.Drawing.Size(75, 23)
+        Me.Button10.TabIndex = 48
+        Me.Button10.Text = "Back"
+        Me.Button10.UseVisualStyleBackColor = True
         '
         'SetupWizard
         '
