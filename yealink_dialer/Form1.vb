@@ -29,16 +29,8 @@ Public Class Form1
         Private Notify As Boolean
     End Structure
     Private Sub Form1_Load(sender As Object, e As EventArgs) Handles MyBase.Load
-
-        'Read config secret key.
-        Try
-            CFGSecret = My.Computer.FileSystem.ReadAllText(Application.StartupPath() & "\data\secret.cfg")
-        Catch ex As Exception
-            CFGSecret = "SJKGSLD3529ASDGksgjsdlkgjSFASF!%!"
-        End Try
-
         'Load phone configuration file and decrypt it.
-        LoadConfigFile(Application.StartupPath() & "\data\phone.cfg", CFGSecret)
+        LoadConfigFile(Application.StartupPath() & "\data\phone.cfg")
 
         'Grab command line args and sanitize them.
         Try
@@ -121,7 +113,7 @@ Public Class Form1
         Next
         Return sb.ToString()
     End Function
-    Private Function LoadConfigFile(ByVal FileToLoad As String, ByVal SecretToUse As String)
+    Private Function LoadConfigFile(ByVal FileToLoad As String)
         'Load config and configure app with their data.
 
         'Create temporary variables used for clearer code structuring.
@@ -132,6 +124,7 @@ Public Class Form1
         Dim SkipCertCheckTemp As String = "False"
         Dim TryErrorCount As Integer = 0
         Dim TryErrorLog As Array = {TryErrorCount, "", True}
+        Dim HasMigrated As Boolean = False
         Try
             'Load application settings.
             Dim PhoneContent As String = My.Computer.FileSystem.ReadAllText(FileToLoad)
@@ -141,7 +134,7 @@ Public Class Form1
             Dim rd As New RijndaelManaged
             Dim rijndaelIvLength As Integer = 16
             Dim md5 As New MD5CryptoServiceProvider
-            Dim key() As Byte = md5.ComputeHash(Encoding.UTF8.GetBytes(SecretToUse))
+            Dim key() As Byte = md5.ComputeHash(Encoding.UTF8.GetBytes(My.Computer.FileSystem.ReadAllText(Application.StartupPath() & "\data\secret.cfg")))
             md5.Clear()
             TryErrorLog = {TryErrorCount, "Past decryption prep", False} : TryErrorCount += 1
             Dim encdata() As Byte = Convert.FromBase64String(PhoneContent)
@@ -156,23 +149,27 @@ Public Class Form1
             CRDTA = System.Text.Encoding.UTF8.GetString(data, 0, i)
             cs.Close()
             rd.Clear()
+
             TryErrorLog = {TryErrorCount, "Past decryption", True} : TryErrorCount += 1
 
             'Write data to configbox
             PhoneConfigBox.Text = CRDTA
+
             TryErrorLog = {TryErrorCount, "Past configbox setting", True} : TryErrorCount += 1
 
             'Append 8 empty lines to prevent possible old / bad config exceptions.
             PhoneConfigBox.Text = PhoneConfigBox.Text & vbNewLine & vbNewLine & vbNewLine & vbNewLine & vbNewLine & vbNewLine & vbNewLine & vbNewLine & vbNewLine & vbNewLine
 
-            'Define temporary variables for version check.
-            Dim MinV0Temp As Integer = PhoneConfigBox.Lines(0).Replace("MINVERSION=", "").Split(".")(0)
-            Dim MinV1Temp As Integer = PhoneConfigBox.Lines(0).Replace("MINVERSION=", "").Split(".")(1)
             'Check if config file is older than the min version verification and migrate it.
             If PhoneConfigBox.Lines(0).Contains("PHONEIP") Then
                 PhoneConfigBox.Text = "MINVERSION=" & MINIMUMVERSION(0) & "." & MINIMUMVERSION(1) & vbNewLine & PhoneConfigBox.Text
                 MessageBox.Show("Settings have been imported from older version." & vbNewLine & "Please check and save your settings with the current version.", "Migration notice", MessageBoxButtons.OK, MessageBoxIcon.Information)
+                HasMigrated = True
             End If
+
+            'Define temporary variables for version check.
+            Dim MinV0Temp As Integer = PhoneConfigBox.Lines(0).Replace("MINVERSION=", "").Split(".")(0)
+            Dim MinV1Temp As Integer = PhoneConfigBox.Lines(0).Replace("MINVERSION=", "").Split(".")(1)
 
             'Check if current version is at least min versions, else abort load and show settings page.
             If MinV0Temp > APPVERSION(0) Then
@@ -184,6 +181,8 @@ Public Class Form1
                     End If
                 End If
             End If
+
+            TryErrorLog = {TryErrorCount, "Past min version check.", True} : TryErrorCount += 1
 
             'Setup Variables from config file.
             PHONEIP = PhoneConfigBox.Lines(1).Replace("PHONEIP=", "")
@@ -212,11 +211,18 @@ Public Class Form1
             TryErrorLog = {TryErrorCount, "Past migration mitigations", True} : TryErrorCount += 1
 
         Catch ex As Exception
-            If TryErrorLog(2) = True Then MsgBox("Loading state: " & TryErrorLog(0) & vbNewLine & ex.Message)
-            NormalMode()
-            SettingsPanel.Show()
-        Finally
+            'Check if config file exists, if not then show first launch Setup Wizard else handle load error normally.
+            If My.Computer.FileSystem.FileExists(Application.StartupPath() & "\data\phone.cfg") Then
+                If TryErrorLog(2) = True Then MsgBox("Loading state: " & TryErrorLog(0) & " - " & TryErrorLog(1) & vbNewLine & ex.Message)
+                OpenSettings()
+                Exit Function
+            Else
+                OpenSettings()
+                TriggerSetupWizard()
+                Exit Function
+            End If
         End Try
+        TryErrorLog = {TryErrorCount, "Past main Try/Catch block", True} : TryErrorCount += 1
 
         'Configure app UI states.
         PhoneIPBox.Text = PHONEIP
@@ -263,15 +269,28 @@ Public Class Form1
             SkipCertCheckCheckbox.Checked = False
             SKIPCERTCHECK = False
         End If
+        TryErrorLog = {TryErrorCount, "Past ui state config.", True} : TryErrorCount += 1
+
+        If HasMigrated = True Then
+            OpenSettings()
+        End If
     End Function
 
-    Private Function SaveConfigFile(ByVal FileToSave As String, ByVal SecretToUse As String)
+    Private Function SaveConfigFile()
         AssembleConfigFile()
+
+        'Generate new random crypto secret and save it.
+        CFGSecret = RandomString(250, 256)
+        Using writer As New System.IO.StreamWriter(Application.StartupPath() & "\data\secret.cfg")
+            For Each line In "A"
+                writer.Write(CFGSecret)
+            Next
+        End Using
 
         'Encrypt config with secret.
         Dim rd As New RijndaelManaged
         Dim md5 As New MD5CryptoServiceProvider
-        Dim key() As Byte = md5.ComputeHash(Encoding.UTF8.GetBytes(SecretToUse))
+        Dim key() As Byte = md5.ComputeHash(Encoding.UTF8.GetBytes(CFGSecret))
         md5.Clear()
         rd.Key = key
         rd.GenerateIV()
@@ -288,7 +307,7 @@ Public Class Form1
         rd.Clear()
 
         'Save encrypted data.
-        Using writer As New System.IO.StreamWriter(FileToSave)
+        Using writer As New System.IO.StreamWriter(Application.StartupPath() & "\data\phone.cfg")
             For Each line In "A"
                 writer.Write(CRDTA)
             Next
@@ -399,17 +418,11 @@ Public Class Form1
     End Sub
     Private Sub Button4_Click(sender As Object, e As EventArgs) Handles Button4.Click
         'Settings save button.
-
-        'Generate new random crypto secret and save it.
-        CFGSecret = RandomString(250, 256)
-        Using writer As New System.IO.StreamWriter(Application.StartupPath() & "\data\secret.cfg")
-            For Each line In "A"
-                writer.Write(CFGSecret)
-            Next
-        End Using
-
-        'Save config with new secret
-        SaveConfigFile(Application.StartupPath() & "\data\phone.cfg", CFGSecret)
+        SaveSettings()
+    End Sub
+    Private Function SaveSettings()
+        'Called to save new settings and updated varibales to use them in the current app session.
+        SaveConfigFile()
         SettingsPanel.Hide()
 
         'Set new vairables
@@ -419,21 +432,46 @@ Public Class Form1
         APIPASSWORD = PhoneConfigBox.Lines(4).Replace("WEBPASSWORD=", "")
         USESSL = UseSSLCheckbox.Checked
         SKIPCERTCHECK = SkipCertCheckCheckbox.Checked
-    End Sub
+    End Function
     Private Sub SettingsLabel_Click(sender As Object, e As EventArgs) Handles SettingsLabel.Click
+        OpenSettings()
+    End Sub
+    Private Function OpenSettings()
         'Configure UI and show the settings page.
         PWRevealStateConfigure()
         NormalMode()
         SettingsPanel.Show()
-    End Sub
+    End Function
     Private Sub SetupWizardLabel_Click(sender As Object, e As EventArgs) Handles SetupWizardLabel.Click
-        Me.Hide()
-        SetupWizard.ShowDialog()
-        Me.Show()
+        TriggerSetupWizard()
     End Sub
+    Private Function TriggerSetupWizard()
+        Me.Hide()
+        Dim result = SetupWizard.ShowDialog
+        If result = DialogResult.OK Then
+            'SetupWizard was completed successfully.
+            PWShowLockCheckbox.Checked = SetupWizard.PWShowLockCheckbox.Checked
+            PWRevealLock = PWShowLockCheckbox.Checked
+            PhoneIPBox.Text = SetupWizard.PhoneIPBox.Text
+            SipAccountBox.Text = SetupWizard.SipAccountBox.Text
+            WebUsernameBox.Text = SetupWizard.WebUsernameBox.Text
+            WebPasswordBox.Text = SetupWizard.WebPasswordBox.Text
+            UseSSLCheckbox.Checked = SetupWizard.UseSSLCheckbox.Checked
+            SkipCertCheckCheckbox.Checked = SetupWizard.SkipCertCheckCheckbox.Checked
+            AutoCloseCheckBox.Checked = SetupWizard.AutoCloseCheckBox.Checked
+            AutoCloseDelayBox.Value = SetupWizard.AutoCloseDelayBox.Value
+            AutoDialCheckBox.Checked = SetupWizard.AutoDialCheckBox.Checked
+            AutoDialDelayBox.Value = SetupWizard.AutoDialDelayBox.Value
+            'SaveSettings()
+        Else
+            'SetupWizard was aborted.
+            MsgBox("Wizard was aborted." & vbNewLine & "Nothing was saved.", MsgBoxStyle.Exclamation)
+        End If
+        SetupWizard.ResetWizard()
+        Me.Show()
+    End Function
     Private Sub PictureBox1_Click(sender As Object, e As EventArgs) Handles PictureBox1.Click
         'Show/reveal icon on the web password text field.
-
         If WebPasswordBox.UseSystemPasswordChar = True Then
             If PWRevealLock = False Then
                 WebPasswordBox.UseSystemPasswordChar = False
@@ -446,7 +484,6 @@ Public Class Form1
     End Sub
     Private Sub PWShowLockCheckbox_CheckedChanged(sender As Object, e As EventArgs) Handles PWShowLockCheckbox.CheckedChanged
         'Enforce a password wipe if config was saved with lockout flag on to prevent leaking.
-
         If PWRevealLock = True Then
             WebPasswordBox.Text = ""
             WebPasswordBox.Enabled = True
@@ -459,52 +496,38 @@ Public Class Form1
     Private Sub Dial1_Click(sender As Object, e As EventArgs) Handles Dial1.Click
         TelNumberBox.Text = TelNumberBox.Text & "1"
     End Sub
-
     Private Sub Button5_Click(sender As Object, e As EventArgs) Handles Dial2.Click
         TelNumberBox.Text = TelNumberBox.Text & "2"
     End Sub
-
     Private Sub Button6_Click(sender As Object, e As EventArgs) Handles Dial3.Click
         TelNumberBox.Text = TelNumberBox.Text & "3"
     End Sub
-
     Private Sub Dial4_Click(sender As Object, e As EventArgs) Handles Dial4.Click
         TelNumberBox.Text = TelNumberBox.Text & "4"
     End Sub
-
     Private Sub Button8_Click(sender As Object, e As EventArgs) Handles Dial5.Click
         TelNumberBox.Text = TelNumberBox.Text & "5"
     End Sub
-
     Private Sub Dial6_Click(sender As Object, e As EventArgs) Handles Dial6.Click
         TelNumberBox.Text = TelNumberBox.Text & "6"
     End Sub
-
     Private Sub Dial7_Click(sender As Object, e As EventArgs) Handles Dial7.Click
         TelNumberBox.Text = TelNumberBox.Text & "7"
     End Sub
-
     Private Sub Dial8_Click(sender As Object, e As EventArgs) Handles Dial8.Click
         TelNumberBox.Text = TelNumberBox.Text & "8"
     End Sub
-
     Private Sub Dial9_Click(sender As Object, e As EventArgs) Handles Dial9.Click
         TelNumberBox.Text = TelNumberBox.Text & "9"
     End Sub
-
     Private Sub Dial0_Click(sender As Object, e As EventArgs) Handles Dial0.Click
         TelNumberBox.Text = TelNumberBox.Text & "0"
     End Sub
-
     Private Sub Button15_Click(sender As Object, e As EventArgs) Handles DialErase.Click
         If TelNumberBox.Text.Length > 0 Then TelNumberBox.Text = TelNumberBox.Text.Substring(0, TelNumberBox.Text.Length - 1)
     End Sub
     Private Sub Button13_Click(sender As Object, e As EventArgs) Handles DialPlus.Click
         TelNumberBox.Text = TelNumberBox.Text & "+"
-    End Sub
-
-    Private Sub SettingsPanel_Paint(sender As Object, e As PaintEventArgs) Handles SettingsPanel.Paint
-
     End Sub
 #End Region
 #End Region

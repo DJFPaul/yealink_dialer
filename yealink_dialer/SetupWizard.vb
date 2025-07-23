@@ -1,5 +1,8 @@
 ﻿Public Class SetupWizard
     Private Sub SetupWizard_Load(sender As Object, e As EventArgs) Handles MyBase.Load
+        ResetWizard()
+    End Sub
+    Function ResetWizard()
         WizardTaps.Location = New Point(-4, -22)
         WizardTaps.SelectedIndex = 0
         PhoneIPBox.Text = ""
@@ -8,7 +11,13 @@
         WebPasswordBox.Text = ""
         UseSSLCheckbox.Checked = True
         SkipCertCheckCheckbox.Checked = True
-    End Sub
+        AutoCloseCheckBox.Checked = True
+        AutoCloseDelayBox.Value = 8
+        AutoDialCheckBox.Checked = False
+        AutoDialDelayBox.Value = 3
+        PWShowLockCheckbox.Checked = True
+    End Function
+#Region "NavigationButtons"
     Private Sub Button1_Click(sender As Object, e As EventArgs) Handles Button1.Click
         WizardTaps.SelectedIndex = 1
     End Sub
@@ -39,14 +48,13 @@
     Private Sub Button10_Click(sender As Object, e As EventArgs) Handles Button10.Click
         WizardTaps.SelectedIndex = 3
     End Sub
-
+#End Region
     Private Sub Button9_Click(sender As Object, e As EventArgs) Handles Button9.Click
-        'finish button?
+        'Finish button
+        Me.DialogResult = DialogResult.OK
     End Sub
-
     Private Sub PictureBox2_Click(sender As Object, e As EventArgs) Handles PictureBox2.Click
         'Show/reveal icon on the web password text field.
-
         If WebPasswordBox.UseSystemPasswordChar = True Then
             WebPasswordBox.UseSystemPasswordChar = False
             PictureBox2.BackgroundImage = My.Resources.EyeOn
@@ -55,7 +63,6 @@
             PictureBox2.BackgroundImage = My.Resources.EyeGrayedOut
         End If
     End Sub
-
     Private Sub Button3_Click_1(sender As Object, e As EventArgs) Handles Button3.Click
         'Test button
         Dim Buttons As MessageBoxButtons = MessageBoxButtons.YesNo

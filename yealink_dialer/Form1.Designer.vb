@@ -235,11 +235,11 @@ Partial Class Form1
         Me.SettingsLabel.Cursor = System.Windows.Forms.Cursors.Hand
         Me.SettingsLabel.Font = New System.Drawing.Font("Microsoft Sans Serif", 8.25!, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
         Me.SettingsLabel.ForeColor = System.Drawing.Color.RoyalBlue
-        Me.SettingsLabel.Location = New System.Drawing.Point(164, 39)
+        Me.SettingsLabel.Location = New System.Drawing.Point(160, 39)
         Me.SettingsLabel.Name = "SettingsLabel"
-        Me.SettingsLabel.Size = New System.Drawing.Size(53, 13)
+        Me.SettingsLabel.Size = New System.Drawing.Size(61, 13)
         Me.SettingsLabel.TabIndex = 25
-        Me.SettingsLabel.Text = "Settings"
+        Me.SettingsLabel.Text = "[Settings]"
         '
         'BottomPanel
         '
@@ -348,9 +348,9 @@ Partial Class Form1
         Me.PhoneConfigBox.ScrollBars = System.Windows.Forms.RichTextBoxScrollBars.None
         Me.PhoneConfigBox.Size = New System.Drawing.Size(223, 153)
         Me.PhoneConfigBox.TabIndex = 9
-        Me.PhoneConfigBox.Text = "PHONEIP=192.168.1.100" & Global.Microsoft.VisualBasic.ChrW(10) & "SIPACCOUNT=10@192.168.1.1" & Global.Microsoft.VisualBasic.ChrW(10) & "USERNAME=admin" & Global.Microsoft.VisualBasic.ChrW(10) & "PASSWORD=admin" & Global.Microsoft.VisualBasic.ChrW(10) & "aut" &
-    "oclose=true" & Global.Microsoft.VisualBasic.ChrW(10) & "closedelay=8" & Global.Microsoft.VisualBasic.ChrW(10) & "autodial=false" & Global.Microsoft.VisualBasic.ChrW(10) & "dialdelay=3" & Global.Microsoft.VisualBasic.ChrW(10) & "pwreveallock=false" & Global.Microsoft.VisualBasic.ChrW(10) & "usessl=tr" &
-    "ue" & Global.Microsoft.VisualBasic.ChrW(10) & "ignorecert=true"
+        Me.PhoneConfigBox.Text = "MINVERSION=3.0" & Global.Microsoft.VisualBasic.ChrW(10) & "PHONEIP=192.168.1.100" & Global.Microsoft.VisualBasic.ChrW(10) & "SIPACCOUNT=10@192.168.1.1" & Global.Microsoft.VisualBasic.ChrW(10) & "USERNAME=admin" & Global.Microsoft.VisualBasic.ChrW(10) & "PAS" &
+    "SWORD=admin" & Global.Microsoft.VisualBasic.ChrW(10) & "autoclose=true" & Global.Microsoft.VisualBasic.ChrW(10) & "closedelay=8" & Global.Microsoft.VisualBasic.ChrW(10) & "autodial=false" & Global.Microsoft.VisualBasic.ChrW(10) & "dialdelay=3" & Global.Microsoft.VisualBasic.ChrW(10) & "pwreveallock=" &
+    "false" & Global.Microsoft.VisualBasic.ChrW(10) & "usessl=true" & Global.Microsoft.VisualBasic.ChrW(10) & "ignorecert=true"
         Me.PhoneConfigBox.Visible = False
         '
         'AutoCloseCheckBox
@@ -385,6 +385,7 @@ Partial Class Form1
         Me.AutoCloseDelayBox.Name = "AutoCloseDelayBox"
         Me.AutoCloseDelayBox.Size = New System.Drawing.Size(35, 20)
         Me.AutoCloseDelayBox.TabIndex = 22
+        Me.AutoCloseDelayBox.Value = New Decimal(New Integer() {8, 0, 0, 0})
         '
         'AutoDialDelayBox
         '
@@ -392,6 +393,7 @@ Partial Class Form1
         Me.AutoDialDelayBox.Name = "AutoDialDelayBox"
         Me.AutoDialDelayBox.Size = New System.Drawing.Size(35, 20)
         Me.AutoDialDelayBox.TabIndex = 23
+        Me.AutoDialDelayBox.Value = New Decimal(New Integer() {3, 0, 0, 0})
         '
         'SettingsPanel
         '
@@ -417,7 +419,7 @@ Partial Class Form1
         Me.SettingsPanel.Controls.Add(Me.PhoneConfigBox)
         Me.SettingsPanel.Location = New System.Drawing.Point(0, 0)
         Me.SettingsPanel.Name = "SettingsPanel"
-        Me.SettingsPanel.Size = New System.Drawing.Size(230, 382)
+        Me.SettingsPanel.Size = New System.Drawing.Size(230, 369)
         Me.SettingsPanel.TabIndex = 4
         Me.SettingsPanel.Visible = False
         '
@@ -480,11 +482,11 @@ Partial Class Form1
         Me.SetupWizardLabel.Cursor = System.Windows.Forms.Cursors.Hand
         Me.SetupWizardLabel.Font = New System.Drawing.Font("Microsoft Sans Serif", 8.25!, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
         Me.SetupWizardLabel.ForeColor = System.Drawing.Color.RoyalBlue
-        Me.SetupWizardLabel.Location = New System.Drawing.Point(126, 6)
+        Me.SetupWizardLabel.Location = New System.Drawing.Point(125, 6)
         Me.SetupWizardLabel.Name = "SetupWizardLabel"
         Me.SetupWizardLabel.Size = New System.Drawing.Size(91, 13)
         Me.SetupWizardLabel.TabIndex = 26
-        Me.SetupWizardLabel.Text = "(Setup Wizard)"
+        Me.SetupWizardLabel.Text = "[Setup Wizard]"
         '
         'ConfigInfoToolTip
         '

@@ -9,10 +9,10 @@ Imports System.Runtime.InteropServices
 ' Werte der Assemblyattribute überprüfen
 
 <Assembly: AssemblyTitle("Yealink Dialer")>
-<Assembly: AssemblyDescription("Yealink SIP phone dialer tool by Martin A.")>
+<Assembly: AssemblyDescription("Yealink SIP phone dialer tool by FPaul")>
 <Assembly: AssemblyCompany("")>
 <Assembly: AssemblyProduct("Yealink Dialer")>
-<Assembly: AssemblyCopyright("Copyright ©  2020")>
+<Assembly: AssemblyCopyright("Copyright ©  2025")>
 <Assembly: AssemblyTrademark("")>
 
 <Assembly: ComVisible(False)>

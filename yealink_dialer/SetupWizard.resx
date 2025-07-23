@@ -117,19 +117,13 @@
   <resheader name="writer">
     <value>System.Resources.ResXResourceWriter, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </resheader>
-  <data name="Label1.Text" xml:space="preserve">
-    <value>Input your phones IP address here.
-By default no port is needed, but can be additionally specified if nesseary.
-You can also specify if you want to use SSL and to ignore the certificate check. (Most phones will need this)
+  <data name="Label14.Text" xml:space="preserve">
+    <value>Password reveal lockout will cause the password field to be locked after load.
+If saved with this checked, unchecking will force clear the password field.
 
-Example: 192.168.1.100</value>
-  </data>
-  <data name="Label2.Text" xml:space="preserve">
-    <value>Here you can specify the SIP account to use for outgoing calls trough this app and the SIP Servers IP address. (Optional)
-The format for this is: SIPUSERNAME@SIPSERVERIP
-
-Example: JOHNDOE@192.168.1.1
-</value>
+Clearing only happens once, this prevents accidental nuking during setup.
+This is also reflected by the striked out icon not reappearing until saving again.
+It will nuke again the next time, if it was saved with this on again.</value>
   </data>
   <data name="Label6.Text" xml:space="preserve">
     <value>This Wizard will guide you trough the setup for using this app.
@@ -180,6 +174,20 @@ to make requests to the phone.
 4.
 Make sure you click [Confirm]
 Then proceed onto the next step.</value>
+  </data>
+  <data name="Label1.Text" xml:space="preserve">
+    <value>Input your phones IP address here.
+By default no port is needed, but can be additionally specified if nesseary.
+You can also specify if you want to use SSL and to ignore the certificate check. (Most phones will need this)
+
+Example: 192.168.1.100</value>
+  </data>
+  <data name="Label2.Text" xml:space="preserve">
+    <value>Here you can specify the SIP account to use for outgoing calls trough this app and the SIP Servers IP address. (Optional)
+The format for this is: SIPUSERNAME@SIPSERVERIP
+
+Example: JOHNDOE@192.168.1.1
+</value>
   </data>
   <data name="Label10.Text" xml:space="preserve">
     <value>If you confingured everything right, we should now be able to test the phone connection.

@@ -59,6 +59,16 @@ Partial Class SetupWizard
         Me.TabPage5 = New System.Windows.Forms.TabPage()
         Me.Button9 = New System.Windows.Forms.Button()
         Me.Button10 = New System.Windows.Forms.Button()
+        Me.GroupBox3 = New System.Windows.Forms.GroupBox()
+        Me.Label12 = New System.Windows.Forms.Label()
+        Me.PWShowLockCheckbox = New System.Windows.Forms.CheckBox()
+        Me.AutoDialDelayBox = New System.Windows.Forms.NumericUpDown()
+        Me.AutoCloseDelayBox = New System.Windows.Forms.NumericUpDown()
+        Me.AutoDialCheckBox = New System.Windows.Forms.CheckBox()
+        Me.AutoCloseCheckBox = New System.Windows.Forms.CheckBox()
+        Me.Label11 = New System.Windows.Forms.Label()
+        Me.Label13 = New System.Windows.Forms.Label()
+        Me.Label14 = New System.Windows.Forms.Label()
         Me.WizardTaps.SuspendLayout()
         Me.TabPage1.SuspendLayout()
         Me.TabPage2.SuspendLayout()
@@ -69,6 +79,9 @@ Partial Class SetupWizard
         Me.TabPage4.SuspendLayout()
         Me.GroupBox2.SuspendLayout()
         Me.TabPage5.SuspendLayout()
+        Me.GroupBox3.SuspendLayout()
+        CType(Me.AutoDialDelayBox, System.ComponentModel.ISupportInitialize).BeginInit()
+        CType(Me.AutoCloseDelayBox, System.ComponentModel.ISupportInitialize).BeginInit()
         Me.SuspendLayout()
         '
         'WizardTaps
@@ -219,7 +232,7 @@ Partial Class SetupWizard
         Me.SkipCertCheckCheckbox.AutoSize = True
         Me.SkipCertCheckCheckbox.Checked = True
         Me.SkipCertCheckCheckbox.CheckState = System.Windows.Forms.CheckState.Checked
-        Me.SkipCertCheckCheckbox.Location = New System.Drawing.Point(198, 117)
+        Me.SkipCertCheckCheckbox.Location = New System.Drawing.Point(205, 117)
         Me.SkipCertCheckCheckbox.Name = "SkipCertCheckCheckbox"
         Me.SkipCertCheckCheckbox.Size = New System.Drawing.Size(138, 17)
         Me.SkipCertCheckCheckbox.TabIndex = 57
@@ -392,11 +405,11 @@ Partial Class SetupWizard
         '
         Me.Label9.AutoSize = True
         Me.Label9.Font = New System.Drawing.Font("Microsoft Sans Serif", 12.0!, CType((System.Drawing.FontStyle.Bold Or System.Drawing.FontStyle.Underline), System.Drawing.FontStyle), System.Drawing.GraphicsUnit.Point, CType(0, Byte))
-        Me.Label9.Location = New System.Drawing.Point(286, 9)
+        Me.Label9.Location = New System.Drawing.Point(296, 9)
         Me.Label9.Name = "Label9"
-        Me.Label9.Size = New System.Drawing.Size(198, 20)
+        Me.Label9.Size = New System.Drawing.Size(194, 20)
         Me.Label9.TabIndex = 56
-        Me.Label9.Text = "Test and extra settings."
+        Me.Label9.Text = "Phone connection test."
         '
         'Button7
         '
@@ -419,6 +432,8 @@ Partial Class SetupWizard
         'TabPage5
         '
         Me.TabPage5.BackColor = System.Drawing.SystemColors.Control
+        Me.TabPage5.Controls.Add(Me.GroupBox3)
+        Me.TabPage5.Controls.Add(Me.Label12)
         Me.TabPage5.Controls.Add(Me.Button9)
         Me.TabPage5.Controls.Add(Me.Button10)
         Me.TabPage5.Location = New System.Drawing.Point(4, 22)
@@ -444,6 +459,112 @@ Partial Class SetupWizard
         Me.Button10.TabIndex = 48
         Me.Button10.Text = "Back"
         Me.Button10.UseVisualStyleBackColor = True
+        '
+        'GroupBox3
+        '
+        Me.GroupBox3.Controls.Add(Me.Label14)
+        Me.GroupBox3.Controls.Add(Me.Label13)
+        Me.GroupBox3.Controls.Add(Me.Label11)
+        Me.GroupBox3.Controls.Add(Me.PWShowLockCheckbox)
+        Me.GroupBox3.Controls.Add(Me.AutoDialDelayBox)
+        Me.GroupBox3.Controls.Add(Me.AutoCloseDelayBox)
+        Me.GroupBox3.Controls.Add(Me.AutoDialCheckBox)
+        Me.GroupBox3.Controls.Add(Me.AutoCloseCheckBox)
+        Me.GroupBox3.Location = New System.Drawing.Point(16, 32)
+        Me.GroupBox3.Name = "GroupBox3"
+        Me.GroupBox3.Size = New System.Drawing.Size(756, 377)
+        Me.GroupBox3.TabIndex = 59
+        Me.GroupBox3.TabStop = False
+        '
+        'Label12
+        '
+        Me.Label12.AutoSize = True
+        Me.Label12.Font = New System.Drawing.Font("Microsoft Sans Serif", 12.0!, CType((System.Drawing.FontStyle.Bold Or System.Drawing.FontStyle.Underline), System.Drawing.FontStyle), System.Drawing.GraphicsUnit.Point, CType(0, Byte))
+        Me.Label12.Location = New System.Drawing.Point(299, 9)
+        Me.Label12.Name = "Label12"
+        Me.Label12.Size = New System.Drawing.Size(163, 20)
+        Me.Label12.TabIndex = 58
+        Me.Label12.Text = "Additional settings."
+        '
+        'PWShowLockCheckbox
+        '
+        Me.PWShowLockCheckbox.AutoSize = True
+        Me.PWShowLockCheckbox.Checked = True
+        Me.PWShowLockCheckbox.CheckState = System.Windows.Forms.CheckState.Checked
+        Me.PWShowLockCheckbox.Location = New System.Drawing.Point(23, 339)
+        Me.PWShowLockCheckbox.Name = "PWShowLockCheckbox"
+        Me.PWShowLockCheckbox.Size = New System.Drawing.Size(142, 17)
+        Me.PWShowLockCheckbox.TabIndex = 32
+        Me.PWShowLockCheckbox.Text = "Password reveal lockout"
+        Me.PWShowLockCheckbox.UseVisualStyleBackColor = True
+        '
+        'AutoDialDelayBox
+        '
+        Me.AutoDialDelayBox.Location = New System.Drawing.Point(92, 154)
+        Me.AutoDialDelayBox.Name = "AutoDialDelayBox"
+        Me.AutoDialDelayBox.Size = New System.Drawing.Size(35, 20)
+        Me.AutoDialDelayBox.TabIndex = 31
+        '
+        'AutoCloseDelayBox
+        '
+        Me.AutoCloseDelayBox.Location = New System.Drawing.Point(92, 47)
+        Me.AutoCloseDelayBox.Name = "AutoCloseDelayBox"
+        Me.AutoCloseDelayBox.Size = New System.Drawing.Size(35, 20)
+        Me.AutoCloseDelayBox.TabIndex = 30
+        '
+        'AutoDialCheckBox
+        '
+        Me.AutoDialCheckBox.AutoSize = True
+        Me.AutoDialCheckBox.Location = New System.Drawing.Point(23, 155)
+        Me.AutoDialCheckBox.Name = "AutoDialCheckBox"
+        Me.AutoDialCheckBox.Size = New System.Drawing.Size(64, 17)
+        Me.AutoDialCheckBox.TabIndex = 29
+        Me.AutoDialCheckBox.Text = "Autodial"
+        Me.AutoDialCheckBox.UseVisualStyleBackColor = True
+        '
+        'AutoCloseCheckBox
+        '
+        Me.AutoCloseCheckBox.AutoSize = True
+        Me.AutoCloseCheckBox.Checked = True
+        Me.AutoCloseCheckBox.CheckState = System.Windows.Forms.CheckState.Checked
+        Me.AutoCloseCheckBox.Location = New System.Drawing.Point(22, 48)
+        Me.AutoCloseCheckBox.Name = "AutoCloseCheckBox"
+        Me.AutoCloseCheckBox.Size = New System.Drawing.Size(73, 17)
+        Me.AutoCloseCheckBox.TabIndex = 28
+        Me.AutoCloseCheckBox.Text = "Autoclose"
+        Me.AutoCloseCheckBox.UseVisualStyleBackColor = True
+        '
+        'Label11
+        '
+        Me.Label11.AutoSize = True
+        Me.Label11.Font = New System.Drawing.Font("Microsoft Sans Serif", 12.0!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
+        Me.Label11.Location = New System.Drawing.Point(19, 25)
+        Me.Label11.Name = "Label11"
+        Me.Label11.Size = New System.Drawing.Size(663, 20)
+        Me.Label11.TabIndex = 33
+        Me.Label11.Text = "Automatically close the Yealink Dialer window after x seconds when launched troug" &
+    "h call links"
+        '
+        'Label13
+        '
+        Me.Label13.AutoSize = True
+        Me.Label13.Font = New System.Drawing.Font("Microsoft Sans Serif", 12.0!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
+        Me.Label13.Location = New System.Drawing.Point(19, 112)
+        Me.Label13.Name = "Label13"
+        Me.Label13.Size = New System.Drawing.Size(568, 40)
+        Me.Label13.TabIndex = 34
+        Me.Label13.Text = "Automatically dial a clicked number after x seconds when launched by a call link." &
+    "" & Global.Microsoft.VisualBasic.ChrW(13) & Global.Microsoft.VisualBasic.ChrW(10) & "Please use this function with absolute caution!"
+        '
+        'Label14
+        '
+        Me.Label14.AutoSize = True
+        Me.Label14.Font = New System.Drawing.Font("Microsoft Sans Serif", 12.0!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
+        Me.Label14.Location = New System.Drawing.Point(18, 216)
+        Me.Label14.Name = "Label14"
+        Me.Label14.Size = New System.Drawing.Size(555, 120)
+        Me.Label14.TabIndex = 35
+        Me.Label14.Text = resources.GetString("Label14.Text")
         '
         'SetupWizard
         '
@@ -472,6 +593,11 @@ Partial Class SetupWizard
         Me.GroupBox2.ResumeLayout(False)
         Me.GroupBox2.PerformLayout()
         Me.TabPage5.ResumeLayout(False)
+        Me.TabPage5.PerformLayout()
+        Me.GroupBox3.ResumeLayout(False)
+        Me.GroupBox3.PerformLayout()
+        CType(Me.AutoDialDelayBox, System.ComponentModel.ISupportInitialize).EndInit()
+        CType(Me.AutoCloseDelayBox, System.ComponentModel.ISupportInitialize).EndInit()
         Me.ResumeLayout(False)
 
     End Sub
@@ -512,4 +638,14 @@ Partial Class SetupWizard
     Friend WithEvents Button10 As Button
     Friend WithEvents UseSSLCheckbox As CheckBox
     Friend WithEvents SkipCertCheckCheckbox As CheckBox
+    Friend WithEvents GroupBox3 As GroupBox
+    Friend WithEvents Label12 As Label
+    Friend WithEvents PWShowLockCheckbox As CheckBox
+    Friend WithEvents AutoDialDelayBox As NumericUpDown
+    Friend WithEvents AutoCloseDelayBox As NumericUpDown
+    Friend WithEvents AutoDialCheckBox As CheckBox
+    Friend WithEvents AutoCloseCheckBox As CheckBox
+    Friend WithEvents Label14 As Label
+    Friend WithEvents Label13 As Label
+    Friend WithEvents Label11 As Label
 End Class
