@@ -424,6 +424,8 @@ Public Class Form1
         'Called to save new settings and updated varibales to use them in the current app session.
         SaveConfigFile()
         SettingsPanel.Hide()
+        WebPasswordBox.UseSystemPasswordChar = True
+        PictureBox1.BackgroundImage = My.Resources.EyeGrayedOut
 
         'Set new vairables
         PHONEIP = PhoneConfigBox.Lines(1).Replace("PHONEIP=", "")
@@ -468,6 +470,7 @@ Public Class Form1
             MsgBox("Wizard was aborted." & vbNewLine & "Nothing was saved.", MsgBoxStyle.Exclamation)
         End If
         SetupWizard.ResetWizard()
+        OpenSettings()
         Me.Show()
     End Function
     Private Sub PictureBox1_Click(sender As Object, e As EventArgs) Handles PictureBox1.Click
