@@ -434,6 +434,7 @@ Public Class Form1
         APIPASSWORD = PhoneConfigBox.Lines(4).Replace("WEBPASSWORD=", "")
         USESSL = UseSSLCheckbox.Checked
         SKIPCERTCHECK = SkipCertCheckCheckbox.Checked
+        IPLabel.Text = "IP: " & PHONEIP
     End Function
     Private Sub SettingsLabel_Click(sender As Object, e As EventArgs) Handles SettingsLabel.Click
         OpenSettings()

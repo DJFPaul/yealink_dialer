@@ -419,7 +419,7 @@ Partial Class Form1
         Me.SettingsPanel.Controls.Add(Me.PhoneConfigBox)
         Me.SettingsPanel.Location = New System.Drawing.Point(0, 0)
         Me.SettingsPanel.Name = "SettingsPanel"
-        Me.SettingsPanel.Size = New System.Drawing.Size(230, 369)
+        Me.SettingsPanel.Size = New System.Drawing.Size(230, 382)
         Me.SettingsPanel.TabIndex = 4
         Me.SettingsPanel.Visible = False
         '
