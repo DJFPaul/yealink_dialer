@@ -21,9 +21,16 @@ This will setup all necessary registry entries to handle the callto links <br>
 If you ever move the folder, run this again to update the paths. <br>
 <br>
 After running `register.bat`, Yealink Dialer should open it self. <br>
-When launching for the first time, the settings menu should automatically open. <br>
-If not then you can find them at the bottom right of the call window.<br>
-![image](https://github.com/user-attachments/assets/6ff2caba-6642-4ab6-8074-6dde44db2ff9)
+When launching for the first time, the Setup Wizard should automatically open. <br>
+This will guide you trough the setup process nesseary for using this tool. <br>
+Make sure to hit save after you are done! <br>
+<br>
+If it does not open, you should be greeted with the general settings page where you can launch it manually at the top right. <br>
+<br>
+Should the Setup Wizard not work for you or you want to use the normal settings, you can follow the next instructions from here as well. <br>
+If the settings did not automatically open, you can find them at the bottom right of the call window.<br>
+<br>
+<img width="229" height="412" alt="image" src="https://github.com/user-attachments/assets/cfd64a68-f26b-46e2-afed-ce5307605229" />
 <br>
 <br>
 Change these settings to reflect the correct settings of your Yealink device. <br>
