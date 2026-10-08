@@ -232,6 +232,7 @@ pub fn run() {
             let settings_path = dir.join("settings.json");
             let history_path = dir.join("history.json");
             let saved = settings::load(&settings_path);
+            let autostart = saved.autostart;
             let launch = launch::parse_args(std::env::args());
             let hide = launch.autostart && saved.setup_complete && !launch.should_surface();
             app.manage(AppState {
@@ -261,6 +262,12 @@ pub fn run() {
             push_phone_events(app.handle().clone());
             install_tray(app.handle())?;
             install_close_to_tray(app.handle());
+            if autostart && !dev_binary() {
+                // Repair the startup entry so it points at this installed program.
+                if let Err(err) = apply_autostart(app.handle(), true) {
+                    eprintln!("autostart: {err}");
+                }
+            }
             if !hide {
                 show_main(app.handle());
             }
@@ -274,31 +281,69 @@ pub fn run() {
 }
 
 fn push_phone_events(app: tauri::AppHandle) {
-    tauri::async_runtime::spawn(async move {
-        let state = app.state::<AppState>();
-        let settings = lock(&state.settings).clone();
-        let info = callback_from(&state);
-        if !settings.setup_complete || info.incoming_url.is_empty() {
-            eprintln!("action urls skipped port={} address={}", info.port, info.address);
-            return;
-        }
-        let cfg = notify::action_cfg(&info.address, info.port);
-        match tauri::async_runtime::spawn_blocking(move || phone::upload_action_cfg(&settings, &cfg)).await {
-            Ok(Ok(note)) => eprintln!("action urls: {note}"),
-            Ok(Err(err)) => eprintln!("action urls: {err}"),
-            Err(err) => eprintln!("action urls: {err}"),
-        }
-    });
+    // At Windows logon the network and the phone web UI are often not ready yet.
+    // Keep trying in the background; a failure here must not surface a window.
+    std::thread::Builder::new()
+        .name("yealink-action-urls".into())
+        .spawn(move || {
+            const WAITS_SECS: [u64; 5] = [0, 8, 20, 45, 90];
+            for (index, wait) in WAITS_SECS.iter().enumerate() {
+                if *wait > 0 {
+                    std::thread::sleep(std::time::Duration::from_secs(*wait));
+                }
+                let state = app.state::<AppState>();
+                let settings = lock(&state.settings).clone();
+                let info = callback_from(&state);
+                if !settings.setup_complete {
+                    return;
+                }
+                if info.incoming_url.is_empty() {
+                    if index + 1 == WAITS_SECS.len() {
+                        eprintln!("action urls skipped port={} address={}", info.port, info.address);
+                    }
+                    continue;
+                }
+                let cfg = notify::action_cfg(&info.address, info.port);
+                match phone::upload_action_cfg(&settings, &cfg) {
+                    Ok(note) => {
+                        eprintln!("action urls: {note}");
+                        return;
+                    }
+                    Err(err) if index + 1 < WAITS_SECS.len() && phone::transient_upload_error(&err) => {}
+                    Err(err) => {
+                        eprintln!("action urls: {err}");
+                        return;
+                    }
+                }
+            }
+        })
+        .ok();
 }
 
 fn apply_autostart(app: &tauri::AppHandle, enabled: bool) -> Result<(), String> {
     use tauri_plugin_autostart::ManagerExt;
+    // A debug build is a console program. Writing it into Windows startup is what
+    // opened the black window and closed the whole app when that window was closed.
+    if enabled && dev_binary() {
+        return Ok(());
+    }
     let launcher = app.autolaunch();
     if enabled {
         launcher.enable().map_err(|err| format!("اجرای خودکار ثبت نشد: {err}"))
     } else {
         launcher.disable().map_err(|err| format!("اجرای خودکار برداشته نشد: {err}"))
     }
+}
+
+fn dev_binary() -> bool {
+    let Ok(exe) = std::env::current_exe() else {
+        return false;
+    };
+    let path = exe.to_string_lossy().to_ascii_lowercase().replace('/', "\\");
+    path.contains("\\target\\debug\\")
+        || path.contains("\\target\\release\\")
+        || path.contains("\\cursor-sandbox-cache\\")
+        || path.contains("\\temp\\")
 }
 
 fn register_links(app: &tauri::AppHandle) -> Result<(), String> {

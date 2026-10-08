@@ -263,12 +263,29 @@ fn phone_rejected(body: &str) -> bool {
 
 fn brief_phone_error(body: &str) -> String {
     let compact = body.split_whitespace().collect::<Vec<_>>().join(" ");
+    let lower = compact.to_ascii_lowercase();
+    if lower.contains("<html") || lower.contains("<!doctype") || lower.contains("<script") || lower.contains("idlock") {
+        return "تلفن صفحه ورود وب را برگرداند و نشست ورود ساخته نشد".into();
+    }
     let compact = if compact.chars().count() > 80 {
         compact.chars().take(80).collect()
     } else {
         compact
     };
     if compact.is_empty() { "بدون توضیح".into() } else { compact }
+}
+
+pub fn transient_upload_error(err: &str) -> bool {
+    if err.contains("نام کاربری یا رمز") {
+        return false;
+    }
+    err.contains("صفحه ورود")
+        || err.contains("اتصال")
+        || err.contains("برقرار نشد")
+        || err.contains("خوانده نشد")
+        || err.contains("ارسال به تلفن")
+        || err.contains("https:")
+        || err.to_ascii_lowercase().contains("timed out")
 }
 
 fn http_exchange(
@@ -412,5 +429,15 @@ mod tests {
             ..Settings::default()
         };
         assert_eq!(endpoint(&settings).unwrap(), ("10.1.1.5".into(), 8080));
+    }
+
+    #[test]
+    fn login_page_html_stays_out_of_the_message() {
+        let body = "<html> <head> <style type=\"text/css\"> #idlock { cursor:text; } </style> <script";
+        let message = brief_phone_error(body);
+        assert!(!message.contains('<'));
+        assert!(message.contains("صفحه ورود"));
+        assert!(transient_upload_error(&format!("ورود به وب تلفن نشد ({message})")));
+        assert!(!transient_upload_error("نام کاربری یا رمز وب تلفن پذیرفته نشد."));
     }
 }

@@ -61,7 +61,7 @@ npm run tauri build
 
 نسخه بسته از `desktop/src-tauri/tauri.conf.json` می‌آید. کلید خصوصی و رمزش خارج از مخزن است. گم شدن آن‌ها یعنی نسخه‌های نصب‌شده آپدیت بعدی را رد می‌کنند. کلید عمومی داخل `tauri.conf.json` است.
 
-خروجی ساخت `YDialer_<نسخه>_x64-setup.exe` و فایل `.sig` کنار آن است. برای انتشار، هر دو در `phonebook/data/releases` قرار می‌گیرند و `phonebook/data/latest.json` به آدرس https فایل نصب اشاره می‌کند. شکل JSON در `desktop/README.md` است.
+خروجی ساخت `YDialer_<نسخه>_x64-setup.exe` و فایل `.sig` کنار آن است. برای انتشار، هر دو در `phonebook/data/releases` قرار می‌گیرند و `phonebook/data/latest.json` به آدرس https فایل نصب اشاره می‌کند. مراحل نصب و شکل JSON در `README.md` ریشه مخزن است.
 
 بستن پنجره برنامه را خارج نمی‌کند؛ خروج از آیکن کنار ساعت است. اجرای همراه ویندوز از تنظیمات ثبت می‌شود. لینک‌های `tel`، `callto`، `sip` و `phone` به همین برنامه می‌رسند.
 
@@ -84,6 +84,8 @@ npm run tauri build
 ## سرور دفترچه
 
 `phonebook/server.js` این مسیرها را بدون رمز پنل عمومی می‌کند: XML دفترچه، `GET /updates/latest.json`، و `GET /updates/files/<نام>` فقط برای فایل `.exe` و `.sig`. بقیه API پنل اگر `ADMIN_PASSWORD` گذاشته شده باشد رمز می‌خواهد. دامنه عمومی در `PUBLIC_BASE_URL` است و پشت Caddy باید https باشد.
+
+پنل مدیریت با SvelteKit در `phonebook/src` است. `npm run build` خروجی را در `phonebook/public` می‌سازد و همین سرور آن را سرو می‌کند. در توسعه، `npm run dev` سرور و رابط را با هم بالا می‌آورد.
 
 ## وقتی چیزی عوض می‌شود
 
