@@ -169,6 +169,7 @@ button { cursor: pointer; }
   font-size: 13px;
 }
 .banner.ok { background: #14352d; color: #d8ffef; }
+.banner.update { display: flex; flex-direction: column; align-items: flex-start; gap: 8px; }
 
 .list { display: flex; flex-direction: column; gap: 8px; }
 .list button, .history {

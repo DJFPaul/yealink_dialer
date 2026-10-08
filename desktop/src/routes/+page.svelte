@@ -2,12 +2,15 @@
   import { listen } from "@tauri-apps/api/event";
   import { onMount } from "svelte";
   import {
+    appVersion,
     callbackInfo,
+    checkUpdate,
     dial,
     fetchContacts,
     finishLastCall,
     getSettings,
     importLegacy,
+    installUpdate,
     listHistory,
     listModels,
     phoneAction,
@@ -20,7 +23,8 @@
     type HistoryEntry,
     type Launch,
     type PhoneModel,
-    type Settings
+    type Settings,
+    type UpdateNotice
   } from "$lib/api";
 
   const keys = ["1", "2", "3", "4", "5", "6", "7", "8", "9", "*", "0", "#"];
@@ -50,6 +54,8 @@
   let legacyFolder = $state("");
   let showPassword = $state(false);
   let callback = $state<CallbackInfo | null>(null);
+  let appVersionLabel = $state("");
+  let update = $state<UpdateNotice | null>(null);
 
   let modelLabel = $derived(models.find((model) => model.id === settings.phoneModel)?.label ?? "تلفن");
   let filtered = $derived(
@@ -79,17 +85,26 @@
     window.addEventListener("keydown", onKey);
     const timer = setInterval(() => refreshContacts(true), 5 * 60 * 1000);
     let unlisten = () => {};
+    let unlistenProgress = () => {};
     (async () => {
       settings = await getSettings();
       draft = { ...settings };
       phonebookUrl = settings.contactsUrl;
       callback = await callbackInfo().catch(() => null);
+      appVersionLabel = await appVersion().catch(() => "");
       models = await listModels();
       history = await listHistory();
       view = settings.setupComplete ? "dial" : "setup";
       unlisten = await listen<Launch>("launch", (event) => applyLaunch(event.payload));
+      unlistenProgress = await listen<{ received: number; total: number | null }>("update-progress", (event) => {
+        const total = event.payload.total;
+        notice = total
+          ? `در حال دریافت نسخه جدید، ${Math.min(100, Math.round((event.payload.received / total) * 100))} درصد`
+          : "در حال دریافت نسخه جدید...";
+      });
       applyLaunch(await takeLaunch());
       refreshContacts(true);
+      update = await checkUpdate(true).catch(() => null);
     })().catch((reason) => {
       error = explain(reason);
     });
@@ -97,6 +112,7 @@
       window.removeEventListener("keydown", onKey);
       clearInterval(timer);
       unlisten();
+      unlistenProgress();
     };
   });
 
@@ -445,6 +461,33 @@
     view = "dial";
   }
 
+  async function lookForUpdate() {
+    busy = true;
+    error = "";
+    notice = "";
+    try {
+      update = await checkUpdate(false);
+      notice = update ? `نسخه ${update.version} آماده نصب است.` : "همین نسخه آخرین نسخه است.";
+    } catch (reason) {
+      error = explain(reason);
+    } finally {
+      busy = false;
+    }
+  }
+
+  async function applyUpdate() {
+    busy = true;
+    error = "";
+    notice = "در حال دریافت نسخه جدید...";
+    try {
+      await installUpdate();
+      notice = "نصب شروع شد. برنامه بسته می‌شود و دوباره باز می‌شود.";
+    } catch (reason) {
+      error = explain(reason);
+      busy = false;
+    }
+  }
+
   function statusClass() {
     if (phase === "ringing" || phase === "calling" || phase === "held") return phase === "held" ? "ring" : phase === "calling" ? "call" : "ring";
     if (phase === "active") return "live";
@@ -464,6 +507,12 @@
 
   {#if error}<div class="banner">{error}</div>{/if}
   {#if notice}<div class="banner ok">{notice}</div>{/if}
+  {#if update}
+    <div class="banner ok update">
+      <span>نسخه {update.version} آماده نصب است.{update.notes ? ` ${update.notes}` : ""}</span>
+      <button class="text-btn" type="button" disabled={busy} onclick={applyUpdate}>نصب و باز کردن دوباره</button>
+    </div>
+  {/if}
 
   <section class="stage">
     {#if view === "setup" || view === "settings"}
@@ -495,7 +544,9 @@
           <div class="row">
             <button class="text-btn" type="button" disabled={busy} onclick={testCall}>تماس آزمایشی</button>
             <button class="text-btn" type="button" disabled={busy} onclick={syncPhone}>ثبت رویدادها</button>
+            <button class="text-btn" type="button" disabled={busy} onclick={lookForUpdate}>بررسی به‌روزرسانی</button>
           </div>
+          {#if appVersionLabel}<p class="muted">نسخه {appVersionLabel}</p>{/if}
           <label class="field">پوشه data برنامه قبلی
             <div class="row">
               <input class="ltr" bind:value={legacyFolder} placeholder="C:\YDialer\data" />

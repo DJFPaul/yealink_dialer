@@ -14,6 +14,9 @@ fn main() {
             "remember_call",
             "finish_last_call",
             "import_legacy",
+            "app_version",
+            "check_update",
+            "install_update",
         ]),
     );
     tauri_build::try_build(attributes).expect("failed to run tauri-build");

@@ -6,6 +6,7 @@ mod notify;
 mod phone;
 mod profiles;
 mod settings;
+mod updates;
 
 use std::fs;
 use std::path::PathBuf;
@@ -128,6 +129,34 @@ fn import_legacy(folder: String) -> Result<Settings, String> {
     legacy::import_folder(std::path::Path::new(&folder))
 }
 
+#[tauri::command]
+fn app_version(app: tauri::AppHandle) -> String {
+    app.package_info().version.to_string()
+}
+
+#[tauri::command]
+async fn check_update(
+    app: tauri::AppHandle,
+    state: tauri::State<'_, AppState>,
+    quiet: bool,
+) -> Result<Option<updates::UpdateNotice>, String> {
+    let settings = lock(&state.settings).clone();
+    match updates::check(&app, &settings).await {
+        Ok(notice) => Ok(notice),
+        Err(err) if quiet => {
+            eprintln!("update check: {err}");
+            Ok(None)
+        }
+        Err(err) => Err(err),
+    }
+}
+
+#[tauri::command]
+async fn install_update(app: tauri::AppHandle, state: tauri::State<'_, AppState>) -> Result<(), String> {
+    let settings = lock(&state.settings).clone();
+    updates::install(&app, &settings).await
+}
+
 #[derive(serde::Serialize)]
 #[serde(rename_all = "camelCase")]
 struct ModelInfo {
@@ -178,6 +207,7 @@ pub fn run() {
             Some(vec!["--autostart"]),
         ))
         .plugin(tauri_plugin_opener::init())
+        .plugin(tauri_plugin_updater::Builder::new().build())
         .invoke_handler(tauri::generate_handler![
             get_settings,
             save_settings,
@@ -191,7 +221,10 @@ pub fn run() {
             list_history,
             remember_call,
             finish_last_call,
-            import_legacy
+            import_legacy,
+            app_version,
+            check_update,
+            install_update
         ])
         .setup(|app| {
             let dir = app.path().app_config_dir()?;

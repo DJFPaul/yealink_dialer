@@ -33,3 +33,7 @@ export const rememberCall = (direction: string, number: string, name: string, re
   invoke<void>("remember_call", { direction, number, name, result });
 export const finishLastCall = (result: string) => invoke<boolean>("finish_last_call", { result });
 export const importLegacy = (folder: string) => invoke<Settings>("import_legacy", { folder });
+export type UpdateNotice = { version: string; notes: string };
+export const appVersion = () => invoke<string>("app_version");
+export const checkUpdate = (quiet: boolean) => invoke<UpdateNotice | null>("check_update", { quiet });
+export const installUpdate = () => invoke<void>("install_update");

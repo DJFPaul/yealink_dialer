@@ -18,6 +18,9 @@
     "allow-list-history",
     "allow-remember-call",
     "allow-finish-last-call",
-    "allow-import-legacy"
+    "allow-import-legacy",
+    "allow-app-version",
+    "allow-check-update",
+    "allow-install-update"
   ]
 }

@@ -1,6 +1,6 @@
 [package]
 name = "desktop"
-version = "0.1.0"
+version = "1.0.0"
 description = "Yealink desk phone dialer"
 authors = ["you"]
 edition = "2021"
@@ -28,6 +28,8 @@ md-5 = "0.10"
 base64 = "0.22"
 chrono = "0.4"
 quick-xml = "0.37"
+tauri-plugin-updater = "2.13.2"
+url = "2.5.8"
 
 [profile.release]
 codegen-units = 1

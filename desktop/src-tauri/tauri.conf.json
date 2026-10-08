@@ -30,19 +30,46 @@
   },
   "bundle": {
     "active": true,
-    "targets": "all",
+    "targets": ["nsis"],
+    "createUpdaterArtifacts": true,
+    "publisher": "YDialer",
+    "category": "Utility",
+    "shortDescription": "شماره‌گیر تلفن یالینک",
+    "longDescription": "شماره‌گیر دسکتاپ برای تلفن‌های SIP یالینک. تماس روی خود تلفن برقرار می‌شود.",
     "icon": [
       "icons/32x32.png",
       "icons/128x128.png",
       "icons/128x128@2x.png",
       "icons/icon.icns",
       "icons/icon.ico"
-    ]
+    ],
+    "windows": {
+      "webviewInstallMode": {
+        "type": "embedBootstrapper",
+        "silent": true
+      },
+      "nsis": {
+        "installMode": "currentUser",
+        "languages": ["Farsi", "English"],
+        "displayLanguageSelector": false,
+        "compression": "lzma",
+        "customLanguageFiles": {
+          "Farsi": "./nsis/Farsi.nsh"
+        }
+      }
+    }
   },
   "plugins": {
     "deep-link": {
       "desktop": {
         "schemes": ["tel", "callto", "sip", "phone"]
+      }
+    },
+    "updater": {
+      "pubkey": "dW50cnVzdGVkIGNvbW1lbnQ6IG1pbmlzaWduIHB1YmxpYyBrZXk6IDMxMUVCMjEzRjQyQjlDRTEKUldUaG5DdjBFN0llTWRSYXJqL2Nrb0hOa1o0Uks5TnBDN0hENTAyb0RyN09QVTlWWkw1Q0lRUHgK",
+      "endpoints": ["https://updates.invalid/latest.json"],
+      "windows": {
+        "installMode": "passive"
       }
     }
   }
