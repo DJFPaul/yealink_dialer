@@ -1,0 +1,23 @@
+{
+  "$schema": "../gen/schemas/desktop-schema.json",
+  "identifier": "default",
+  "description": "Capability for the main window",
+  "windows": ["main"],
+  "permissions": [
+    "core:default",
+    "opener:default",
+    "allow-get-settings",
+    "allow-save-settings",
+    "allow-list-models",
+    "allow-take-launch",
+    "allow-dial",
+    "allow-phone-action",
+    "allow-fetch-contacts",
+    "allow-callback-info",
+    "allow-sync-action-urls",
+    "allow-list-history",
+    "allow-remember-call",
+    "allow-finish-last-call",
+    "allow-import-legacy"
+  ]
+}

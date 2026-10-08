@@ -1,0 +1,49 @@
+{
+  "$schema": "https://schema.tauri.app/config/2",
+  "productName": "YDialer",
+  "version": "1.0.0",
+  "identifier": "com.yealink.ydialer",
+  "build": {
+    "beforeDevCommand": "npm run dev",
+    "devUrl": "http://localhost:15180",
+    "beforeBuildCommand": "npm run build",
+    "frontendDist": "../build"
+  },
+  "app": {
+    "windows": [
+      {
+        "label": "main",
+        "title": "شماره‌گیر یالینک",
+        "width": 420,
+        "height": 760,
+        "minWidth": 380,
+        "minHeight": 680,
+        "resizable": true,
+        "center": true,
+        "visible": false,
+        "backgroundColor": "#102126"
+      }
+    ],
+    "security": {
+      "csp": null
+    }
+  },
+  "bundle": {
+    "active": true,
+    "targets": "all",
+    "icon": [
+      "icons/32x32.png",
+      "icons/128x128.png",
+      "icons/128x128@2x.png",
+      "icons/icon.icns",
+      "icons/icon.ico"
+    ]
+  },
+  "plugins": {
+    "deep-link": {
+      "desktop": {
+        "schemes": ["tel", "callto", "sip", "phone"]
+      }
+    }
+  }
+}

@@ -1,0 +1,11 @@
+# Automatically generated - DO NOT EDIT!
+
+[[permission]]
+identifier = "allow-remember-call"
+description = "Enables the remember_call command without any pre-configured scope."
+commands.allow = ["remember_call"]
+
+[[permission]]
+identifier = "deny-remember-call"
+description = "Denies the remember_call command without any pre-configured scope."
+commands.deny = ["remember_call"]

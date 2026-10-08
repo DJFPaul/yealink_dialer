@@ -1,0 +1,11 @@
+# Automatically generated - DO NOT EDIT!
+
+[[permission]]
+identifier = "allow-phone-action"
+description = "Enables the phone_action command without any pre-configured scope."
+commands.allow = ["phone_action"]
+
+[[permission]]
+identifier = "deny-phone-action"
+description = "Denies the phone_action command without any pre-configured scope."
+commands.deny = ["phone_action"]

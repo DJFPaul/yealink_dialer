@@ -1,0 +1,11 @@
+# Automatically generated - DO NOT EDIT!
+
+[[permission]]
+identifier = "allow-finish-last-call"
+description = "Enables the finish_last_call command without any pre-configured scope."
+commands.allow = ["finish_last_call"]
+
+[[permission]]
+identifier = "deny-finish-last-call"
+description = "Denies the finish_last_call command without any pre-configured scope."
+commands.deny = ["finish_last_call"]

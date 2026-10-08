@@ -1,0 +1,11 @@
+# Automatically generated - DO NOT EDIT!
+
+[[permission]]
+identifier = "allow-callback-info"
+description = "Enables the callback_info command without any pre-configured scope."
+commands.allow = ["callback_info"]
+
+[[permission]]
+identifier = "deny-callback-info"
+description = "Denies the callback_info command without any pre-configured scope."
+commands.deny = ["callback_info"]

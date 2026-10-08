@@ -1,0 +1,11 @@
+# Automatically generated - DO NOT EDIT!
+
+[[permission]]
+identifier = "allow-fetch-contacts"
+description = "Enables the fetch_contacts command without any pre-configured scope."
+commands.allow = ["fetch_contacts"]
+
+[[permission]]
+identifier = "deny-fetch-contacts"
+description = "Denies the fetch_contacts command without any pre-configured scope."
+commands.deny = ["fetch_contacts"]
